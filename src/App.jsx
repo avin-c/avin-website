@@ -13,10 +13,16 @@ function App() {
         <h1>Avin Chiu</h1>
       </header>
       <main>
+        <MyButton/>
         <p>This is my existing project content!</p>
       </main>
     </>
   );
+}
+function  MyButton (){
+  return(
+    <button>I'm a button</button>
+  )
 }
 
 export default App
