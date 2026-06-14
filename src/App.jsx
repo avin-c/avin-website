@@ -1,28 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
-
+import {Sprite} from "./assets/watermelon";
+import { useState } from 'react';
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <header>
-        <h1>Avin Chiu</h1>
-      </header>
-      <main>
-        <MyButton/>
-        <p>This is my existing project content!</p>
-      </main>
-    </>
+    <div>
+      <Button/>
+      <Sprite/>
+      <br />
+      <Home></Home>
+    </div>
+  )
+}
+
+function Button(){
+    function handleClick(){
+      alert("You clicked the button");
+    }
+    return ( 
+    <button onClick={handleClick} onFocus = {handleClick}>
+      Click me
+    </button>
   );
 }
-function  MyButton (){
-  return(
-    <button>I'm a button</button>
-  )
+
+function Home() {
+  const name = "Avin Chiu";
+
+  return (
+    <h1 class = "title">{name}</h1>
+  );
 }
 
 export default App
