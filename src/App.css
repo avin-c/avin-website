@@ -1,4 +1,39 @@
-* {
+html {
     font-size: 500;
     font-family: sans-serif;
+    background-color: lemonchiffon;
+    
+}
+.greeting {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.title {
+    font-size: 2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+.signature{
+    color:black;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    margin-top: -15px;
+    margin-left: -20px;
+}
+
+html, body, *, button, a, input,
+.disabled, a:disabled, input:disabled {
+    cursor: url('/blackcircle.svg'), auto;
+}
+
+button:hover, a:hover, input:hover, .hover:hover {
+    cursor: url('/whitecircle.svg'), auto;
+}
+
+button:focus, a:focus, input:focus, .focus:focus {
+    cursor: url('/redcircle.svg'), auto;
 }

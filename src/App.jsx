@@ -1,13 +1,13 @@
 import {Sprite} from "./assets/watermelon";
 import { useState } from 'react';
+import Home from "./components/Home";
+import './App.css';
 function App() {
 
   return (
     <div>
-      <Button/>
-      <Sprite/>
       <br />
-      <Home></Home>
+      <Home/>
     </div>
   )
 }
@@ -22,13 +22,4 @@ function Button(){
     </button>
   );
 }
-
-function Home() {
-  const name = "Avin Chiu";
-
-  return (
-    <h1 class = "title">{name}</h1>
-  );
-}
-
 export default App
