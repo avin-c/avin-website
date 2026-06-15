@@ -61,7 +61,7 @@ const letters = [
 
     export default function SignatureAnimated() {
     return (
-        <svg className = "signature" viewBox="175 0 1200 600">
+        <svg className = "signature" viewBox="175 0 1200 600" alt="Avin Chiu">
         {letters.map((letter, index) => 
             {const total = letters.slice(0, index).reduce((acc, curr) => acc + curr.duration, 0);
             return (
@@ -71,7 +71,7 @@ const letters = [
                 key = {index}
                 d= {letter.d}
                 fill="none" 
-                stroke="black" 
+                stroke="black"
                 strokeWidth={15} 
                 initial={{ pathLength: 0 }} 
                 animate={{ pathLength: 1 }} 
