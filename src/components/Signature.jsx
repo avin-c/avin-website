@@ -61,7 +61,7 @@ const letters = [
 
     export default function SignatureAnimated() {
     return (
-        <svg className = "signature" viewBox="175 0 1200 600" alt="Avin Chiu">
+        <svg className = "signature" viewBox="250 0 1000 600 " alt="Avin Chiu">
         {letters.map((letter, index) => 
             {const total = letters.slice(0, index).reduce((acc, curr) => acc + curr.duration, 0);
             return (
