@@ -159,7 +159,7 @@ body {
 .content {
     box-sizing: border-box;
     max-width: 60vw;
-    text-align: justify;
+    text-align: left;
     margin-left: auto;
     margin-right: auto;
     background-color: #93B7BE;
