@@ -59,7 +59,7 @@ function CodeProgress(){
         <div className = "codeProgress">
             <div id = "progressStats">
                 <p className="statBox">{hoursAppend(codeMinutes)} spent on this website</p>
-                <p className = "statBox">Horizons Europa goal: {hoursAppend(horizonsEuropa, 0)}</p>
+                <p className = "statBox">{current} goal: {hoursAppend(horizonsEuropa, 0)}</p>
                 <p className  = "statBox">Progress on goal: {calculatePercentage(codeMinutes, horizonsEuropa, 2)}%</p>
             </div>
             <div id = "barProgress">

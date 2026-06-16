@@ -111,13 +111,13 @@ body {
     margin-right: 0%;
     margin-bottom: 5%;
     width: 100%;
+    
 
 }
 #options {
     list-style-type: none;
     row-gap: 5%;
     text-align: left;
-    justify-content: center;
     box-sizing: border-box;
     position: absolute;
     border-radius: 5px;
@@ -126,16 +126,19 @@ body {
     right: 0%;
     width:100%;
     font-size: 80%;
+    padding-left:0%;
     display: grid;
-    :hover{
-        cursor: pointer;
-    }
 }
 
 #listItems {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 5%;
+    box-sizing: border-box;
+    margin: 10%;
+    
+}
+#listItems:hover{
+    cursor: pointer;
+    background-color:#ab9726;
+    border-color:#ab9726;
 }
 #containerStyles {
     flex: 2;
