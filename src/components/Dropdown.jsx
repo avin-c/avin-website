@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 import { useRef, useEffect } from "react";
-
+import DropdownSvg from "./DropdownSvg";
 
 function DropdownMenu({options, color, current, size, onselect}){
     const [isList, setList]= useState(false);
@@ -35,7 +35,10 @@ function DropdownMenu({options, color, current, size, onselect}){
 
     return (
         <div ref = {dropdownRef} id = "dropdownBox" >
-            <button style={{backgroundColor: color}} className = "button" onClick={handleClick}>{current}</button>
+            <button style={{backgroundColor: color}} className = "button" onClick={handleClick}>
+                {current}
+                <DropdownSvg upDown={isList}/>
+            </button>
                 {isList && (
                     <ul id="options">
                         {options.map((item) => (
