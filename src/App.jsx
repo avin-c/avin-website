@@ -3,14 +3,23 @@ import { useState } from 'react';
 import Home from "./components/Home";
 import About from "./components/About";
 import Cursor from "./components/Cursor";
+import CodeProgress from "./components/CodeProgress";
+import Gallery from "./components/Gallery";
+import Projects from "./components/Projects";
 import './App.css';
 function App() {
-
+  const sectionHeaders = 
+    ["Code Progress", "About Me", "Gallery", "Projects"];
   return (
     <div>
       <Cursor/>
       <Home/>
-      <About/>
+      <div className="sections">
+        <CodeProgress name = {sectionHeaders[0]}/>
+        <About name = {sectionHeaders[1]}/>
+        <Gallery name = {sectionHeaders[2]}/>
+        <Projects name = {sectionHeaders[3]}/>
+      </div>
     </div>
   )
 }

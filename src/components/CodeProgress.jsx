@@ -3,7 +3,8 @@ import { useState , useEffect } from "react";
 import DropdownMenu from "./Dropdown";
 import { time } from "motion";
 
-function CodeProgress(){
+function CodeProgress({name}){
+
     
     const [seconds, setSeconds] = useState(35*3600);
     const [current, setCurrent] = useState("Europa");
@@ -137,12 +138,12 @@ function CodeProgress(){
     }
 
     return (
-        <div className = "codeProgress">
-            <h3 className = "header">Coding Progress</h3>
+        <div id = "codeProgress" >
+            <h3 className = "header">{name}</h3>
             <div id = "progressStats">
                 <p className="statBox">{timeStatement(goal.name)}</p>
                 <p className = "statBox">{goal.name} goal: {hoursAppend(goal.hours*3600, 0)}</p>
-                <p className  = "statBox">Progress on goal: {calculatePercentage(seconds, goal.hours*3600, 2)}%</p>
+                <p className  = "statBox">Progress on goal: {calculatePercentage(seconds, goal.hours*3600, 0)}%</p>
             </div>
             <div id = "barProgress">
                 <DropdownMenu id = "dropDown" color = {goal.color} current = {current} options = {names} onselect = {setCurrent}/>
