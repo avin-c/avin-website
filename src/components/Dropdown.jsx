@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 
-function DropdownMenu({options, current, size, onselect}){
+function DropdownMenu({options, color, current, size, onselect}){
     const [isList, setList]= useState(false);
 
     function handleClick (){
@@ -18,7 +18,7 @@ function DropdownMenu({options, current, size, onselect}){
     
     return (
         <div id = "dropdownBox" >
-            <button className = "button" onClick={handleClick}>{current}</button>
+            <button style={{backgroundColor: color}} className = "button" onClick={handleClick}>{current}</button>
                 {isList && (
                     <ul id="options">
                         {options.map((item) => (
