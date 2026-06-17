@@ -1,17 +1,30 @@
+:root{
+    --primary-color: #00798C;
+    --secondary-color: #54426B;
+    --text-color: white;
+    --dark-text-color: #271f32;
+    --accent-color: #CBDF90;
+    --accent-color-color:  #F19455 ;
+    --hightlight-color: #4e8b94;
+}
+
 ::selection {
-  color: #344346;
-  background: #FFEE93;
+  color: var(--dark-text-color);
+  background: var(--hightlight-color);
 }
 
 html {
     font-size: 20px;
     font-family: sans-serif;
-    background-color: #FFEE93;  
+    background-color: var(--primary-color);  
 }
 body {
     margin-left: auto;
     margin-right: auto;
     
+}
+a{
+    color: var(--accent-color)
 }
 
 .greeting { 
@@ -42,9 +55,10 @@ body {
     margin-left: -20px;
 }
 .codeProgress{
+font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: #FFC09F;
+    background-color: var(--secondary-color);
     max-width: 60vw;
     border-radius: 15px;
     box-sizing: border-box;
@@ -73,31 +87,33 @@ body {
     padding: 10px;
 
     font-size: 0.8rem;
-    background-color: #FFEE93;
+    background-color: var(--accent-color);
     color:#000000;
 }
 #barProgress{
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 30px;
+    gap: 15px;
     padding: 0 15px 15px 15px;
 
 }
 .button {
-    box-sizing: content-box;
-    background-color: #FFEE93;
+    box-sizing: border-box;
+    background-color: var(--accent-color-color);
     justify-content: center;
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
     font-size: 100%; 
     width: 100%;
+    height: 30px;
     
 }
+
 .button:hover{
     cursor: pointer;
-    background-color: #ab9726;
+    background-color: var(--accent-color);
 }
 
 #dropdownBox{
@@ -107,7 +123,6 @@ body {
     position: relative;
     margin: 0px;
     width: 100px;
-    
 
 }
 #options {
@@ -121,7 +136,7 @@ body {
     box-sizing: border-box;
     position: absolute;
     border-radius: 5px;
-    background-color: #FFEE93;
+    background-color: var(--accent-color);
 
 
     top: 50%;
@@ -150,7 +165,7 @@ body {
     height: 30px;
     box-sizing: border-box;
     border-radius: 5px;
-    background-color: #FFEE93;
+    background-color: var(--accent-color);
     margin: 0px;
 
 }
@@ -158,6 +173,7 @@ body {
 #fillerStyles {
     height: 100%;
     border-radius: inherit;
+    background-color: var(--accent-color-color);
 }
 
 .content {
@@ -166,7 +182,8 @@ body {
     text-align: left;
     margin-left: auto;
     margin-right: auto;
-    background-color: #93B7BE;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
     padding: 15px;
     padding-top: 5px;
     margin-top: 15px;
