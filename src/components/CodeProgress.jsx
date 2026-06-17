@@ -1,6 +1,7 @@
 import { code } from "motion/react-client";
 import { useState , useEffect } from "react";
 import DropdownMenu from "./Dropdown";
+import { time } from "motion";
 
 function CodeProgress(){
     
@@ -9,16 +10,20 @@ function CodeProgress(){
 
     const goals = [
         {
+            name: "Daily",
+            hours: 6,
+            color: "#F9AC33"
+
+        },
+        {
             name: "Europa",
-            hours: 35
+            hours: 35,
+            color: "#F97F33"
         },
         {
             name: "Total",
-            hours: 100
-        },
-        {
-            name: "Daily",
-            hours: 6
+            hours: 100,
+            color: "#f34932"
         }
 
     ]
@@ -92,7 +97,7 @@ function CodeProgress(){
     }, []);
     
 
-
+    console.log(dailySeconds);
     const codeMinutes = Math.floor(seconds/60);
     function hoursAppend(seconds){
         const minutes = Math.floor(seconds/60);
@@ -107,26 +112,40 @@ function CodeProgress(){
         
     }
     function calculatePercentage(num, den, decimals) {
-        if (goal.name = "Daily"){
-            num = dailySeconds;
+        if (goal.name == "Daily"){
+            const multiplier = 10**(decimals+2);
+            const percentage = Math.floor(dailySeconds/den * multiplier);
+            return percentage / 10**(decimals);
         }
-        const multiplier = 10**(decimals+2);
-        const percentage = Math.floor(num/den * multiplier);
-        return percentage / 10**(decimals);
+        else{
+            const multiplier = 10**(decimals+2);
+            const percentage = Math.floor(num/den * multiplier);
+            return percentage / 10**(decimals);
+        }
+
 
     }
-
+    function timeStatement(goalName){
+        if (goalName == "Daily"){
+            const hours = hoursAppend(dailySeconds);
+            return hours + " spent on this website today";
+        }
+        if (goalName == "Europa" || goalName == "Total"){
+            const hours = hoursAppend(seconds);
+            return hours + " spent on this website";
+        }
+    }
 
     return (
         <div className = "codeProgress">
             <div id = "progressStats">
-                <p className="statBox">{hoursAppend(dailySeconds)} spent on this website today</p>
-                <p className = "statBox">{current} goal: {hoursAppend(goal.hours*3600, 0)}</p>
+                <p className="statBox">{timeStatement(goal.name)}</p>
+                <p className = "statBox">{goal.name} goal: {hoursAppend(goal.hours*3600, 0)}</p>
                 <p className  = "statBox">Progress on goal: {calculatePercentage(seconds, goal.hours*3600, 2)}%</p>
             </div>
             <div id = "barProgress">
-                <DropdownMenu id = "dropDown" current = {current} options = {names} onselect = {setCurrent}/>
-                <ProgressBar bgcolor= "#93B7BE" completed = {calculatePercentage(seconds, goal.hours*3600, 2)} />
+                <DropdownMenu id = "dropDown" color = {goal.color} current = {current} options = {names} onselect = {setCurrent}/>
+                <ProgressBar bgcolor= {goal.color} completed = {calculatePercentage(seconds, goal.hours*3600, 2)} />
             </div>
         </div>
     );
