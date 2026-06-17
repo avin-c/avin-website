@@ -138,6 +138,7 @@ function CodeProgress(){
 
     return (
         <div className = "codeProgress">
+            <h3 className = "header">Coding Progress</h3>
             <div id = "progressStats">
                 <p className="statBox">{timeStatement(goal.name)}</p>
                 <p className = "statBox">{goal.name} goal: {hoursAppend(goal.hours*3600, 0)}</p>
