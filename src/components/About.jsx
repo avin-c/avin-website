@@ -3,11 +3,12 @@ import CodeProgress from "./CodeProgress";
 function About (){
 
     return(
-        <div>
+        <div id = "aboutFlow">
             <CodeProgress/>
             <div className="content" id = "content1">
-                <p>hi! i'm a high school student from Canada passionate about engineering, and i love building things! i enjoy hardware but i'm also like to dabble with making React apps!
-                                my love for making things started when i was little, from building legos to making cardboard crafts. and now i'm into woodworking, 3d printing, and electronics.
+                <h3 className="header">a little bit about me</h3>
+                <p>hi! i'm a high school student from Canada passionate about engineering, and i love building things! i enjoy hardware but i'm also like to dabble with making React apps! (yeah im larping bro this is my first React app.)
+                my love for making things started when i was little, from building legos to making cardboard crafts. and now i'm into woodworking, 3d printing, and electronics.
                 <br></br>
                 <br></br>
 
