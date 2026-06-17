@@ -15,17 +15,20 @@ function DropdownMenu({options, current, size, onselect}){
             setList(false);
     }
     }
+    
     return (
         <div id = "dropdownBox" >
             <button className = "button" onClick={handleClick}>{current}</button>
-            <ul id = "options" >
-                {isList && 
-                    options.map((item) => (
-                        <li id = "listItems" onClick={() => handleSelect(item)} key={item}>
-                            {item}</li>
-                    ))
-                }
-            </ul>
+                {isList && (
+                    <ul id="options">
+                        {options.map((item) => (
+                            <li id="listItems" onClick={() => handleSelect(item)} key={item}>
+                                {item}
+                            </li>
+                        ))}
+                </ul>
+            )}
+            
         </div>
         
         
