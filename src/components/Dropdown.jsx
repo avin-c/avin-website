@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from 'react';
+import { useRef, useEffect } from "react";
+
 
 function DropdownMenu({options, color, current, size, onselect}){
     const [isList, setList]= useState(false);
-
+    const dropdownRef = useRef(null);
     function handleClick (){
         setList(!isList);
         console.log(isList, options);
@@ -16,8 +18,23 @@ function DropdownMenu({options, color, current, size, onselect}){
     }
     }
     
+    useEffect(() => { 
+        console.log("effect ran");
+        function handleClickOutside(event) {
+            console.log("document click");
+            if (!dropdownRef.current.contains(event.target)) {
+                setList(false);
+            }
+        }
+        document.addEventListener("click", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
     return (
-        <div id = "dropdownBox" >
+        <div ref = {dropdownRef} id = "dropdownBox" >
             <button style={{backgroundColor: color}} className = "button" onClick={handleClick}>{current}</button>
                 {isList && (
                     <ul id="options">
