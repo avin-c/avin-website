@@ -41,9 +41,9 @@ function Contacts ({name}){
                         const Item = item.svg
                         console.log(item.link)
                         return (
-                        <div  href={item.link} id="contactBoxes" key = {item.platform}>
-                            <Item url={item.link}/>
-                        </div>
+                        <a  href={item.link} id="contactBoxes" key = {item.platform}>
+                            <Item url={item.link} color = "#54426B" strokeWeight = {1} side = {64}/>
+                        </a>
 
                     );
                     })}
