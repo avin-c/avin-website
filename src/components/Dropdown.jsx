@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 import { useRef, useEffect } from "react";
-import DropdownSvg from "./DropdownSvg";
+import DropdownSvg from "./svgcomponents/DropdownSvg";
 
 function DropdownMenu({options, color, current, size, onselect}){
     const [isList, setList]= useState(false);

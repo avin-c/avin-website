@@ -1,5 +1,5 @@
 import * as React from "react";
-import CodeProgress from "./CodeProgress";
+import CodeProgress from "../CodeProgress";
 const DropdownSvg = ({ upDown, ...props }) => (
     upDown? (
         <svg

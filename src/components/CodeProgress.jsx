@@ -153,8 +153,6 @@ function CodeProgress({name}){
     );
 }       
 
-
-
 function ProgressBar (props){
     const { bgcolor, completed} = props;
 
@@ -170,7 +168,6 @@ function ProgressBar (props){
         </div>
     );
 };
-
 
 
 export default CodeProgress

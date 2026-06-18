@@ -6,10 +6,11 @@ import Cursor from "./components/Cursor";
 import CodeProgress from "./components/CodeProgress";
 import Gallery from "./components/Gallery";
 import Projects from "./components/Projects";
+import Contacts from "./components/Contact";
 import './App.css';
 function App() {
   const sectionHeaders = 
-    ["Code Progress", "About Me", "Gallery", "Projects"];
+    ["Code Progress", "About Me", "Gallery", "Projects", "Contact me!"];
   return (
     <div>
       <Cursor/>
@@ -19,6 +20,7 @@ function App() {
         <About name = {sectionHeaders[1]}/>
         <Gallery name = {sectionHeaders[2]}/>
         <Projects name = {sectionHeaders[3]}/>
+        <Contacts name = {sectionHeaders[4]}/>
       </div>
     </div>
   )
