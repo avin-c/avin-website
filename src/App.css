@@ -38,7 +38,7 @@ p{
 
 
 #siteNav {
-    left: -10px;
+    left: -70px;
     top: 25%;
     position: fixed;
     border-color: var(--accent-color);
@@ -60,6 +60,14 @@ p{
     font-size: 80%;
     font-weight: 600;
 }
+.navExpand{
+    transform: translate(60px);
+    transition-duration: 200ms;
+}
+.navCollapse{
+    transform:translate(-60px);
+    transition-duration: 100ms;
+}
 .navItems{
     width: 100%;
     box-sizing: border-box;
@@ -77,6 +85,10 @@ p{
     width: 100%;
     padding: 10px;
 }
+.active{
+    background-color: var(--primary-color);
+}
+
 .greeting { 
     display: flex;
     flex-wrap: nowrap;
@@ -240,6 +252,7 @@ p{
 }
 
 .content {
+
     display: flex;
     flex-direction: column;
     gap: 15px;
