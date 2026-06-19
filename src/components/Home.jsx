@@ -1,10 +1,10 @@
 import Signature from "../components/Signature";
 import {motion} from 'motion/react'
-function Home() {
+function Home({id}) {
   const name = "Hi! I'm ";
   
   return (
-    <div className = "greeting">
+    <div className = "greeting" id = {id}>
       <h1 className = "title">{name}</h1> 
       <Signature/>
     </div>

@@ -3,7 +3,7 @@ import { useState , useEffect } from "react";
 import DropdownMenu from "./Dropdown";
 import { time } from "motion";
 
-function CodeProgress({name}){
+function CodeProgress({name, id}){
 
     
     const [seconds, setSeconds] = useState(35*3600);
@@ -138,7 +138,7 @@ function CodeProgress({name}){
     }
 
     return (
-        <div id = "codeProgress" >
+        <div className = "content" id = {id}>
             <h3 className = "header">{name}</h3>
             <div id = "progressStats">
                 <p className="statBox">{timeStatement(goal.name)}</p>

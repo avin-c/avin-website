@@ -1,6 +1,6 @@
 import React from "react";
 
-function Projects ({name}){
+function Projects ({name, id}){
     const projects = [
         {
             title: "This Website",
@@ -11,7 +11,7 @@ function Projects ({name}){
 
     ]
     return(
-        <div className="content">
+        <div className="content" id = {id}>
             <h3 className="header">
                 {name}
             </h3>

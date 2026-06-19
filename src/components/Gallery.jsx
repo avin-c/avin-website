@@ -4,7 +4,7 @@ const images = import.meta.glob(
     { eager: true }
 );
 
-function Gallery ({name}) {
+function Gallery ({name, id}) {
     const importedImages = Object.entries(images).map(([path, module]) => {
         const key = path.split("/").pop().split(".")[0];
 
@@ -48,7 +48,7 @@ function Gallery ({name}) {
     
 
     return(
-        <div className = "content" id = "gallery"> 
+        <div className = "content" id = {id}> 
             <h3 className="header">{name}</h3>
             <p>Just some cool stuff I've photographed, raw photos btw :{")"}</p>
                 {galleryImages.map((item) => {
