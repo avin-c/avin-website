@@ -8,7 +8,7 @@ const SVGComponent = (props) => (
     fill="none"
     {...props}
   >
-    <g id="SVGRepo_bgCarrier" strokeWidth={props.strokeWeight} />
+    <g id="SVGRepo_bgCarrier" strokeWidth={props.strokeweight} />
     <g
       id="SVGRepo_tracerCarrier"
       strokeLinecap="round"
@@ -18,14 +18,14 @@ const SVGComponent = (props) => (
       <path
         stroke={props.color}
         strokeLinejoin="round"
-        strokeWidth={props.strokeWeight*1.5}
+        strokeWidth={props.strokeweight*1.5}
         d="M3 9a2 2 0 012-2h22a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
       />
       <path
         stroke={props.color}
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={props.strokeWeight*1.5}
+        strokeWidth={props.strokeweight*1.5}
         d="M3 9l11.862 8.212a2 2 0 002.276 0L29 9"
       />
     </g>
