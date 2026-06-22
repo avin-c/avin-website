@@ -42,9 +42,11 @@ function Navbar (props){
             <nav>
                 <ul id = "siteNav" onMouseEnter={handleExpand} onMouseLeave={handleCollapse} className={`${isHovered ? "navExpand" : "navCollapse"}`}>
                 {sectionObject.map((item) => {
+                    const Icon = item.icon;
                     return (
                             <li className={`navItems ${activePage === item.idName ? "active" : ""}`} key = {item.label}>
                                 <a className= "navItemLinks" href={"#" + item.idName}>
+                                    <Icon className = "navIcons" side = {32} color = "#FFF"/>
                                     <span className = "navItemText">{item.label}</span>
                                 </a>
                             </li>

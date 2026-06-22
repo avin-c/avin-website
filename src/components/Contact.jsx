@@ -1,8 +1,8 @@
 import React from "react";
-import GithubSvg from "./svgcomponents/GithubSvg";
-import LinkedinSvg from "./svgcomponents/LinkedinSvg";
-import MailSvg from "./svgcomponents/MailSvg";
-import SlackSvg from "./svgcomponents/SlackSvg";
+import GithubSvg from "./svgcomponents/ContactSvgs/GithubSvg";
+import LinkedinSvg from "./svgcomponents/ContactSvgs/LinkedinSvg";
+import MailSvg from "./svgcomponents/ContactSvgs/MailSvg";
+import SlackSvg from "./svgcomponents/ContactSvgs/SlackSvg";
 function Contacts ({name, id}){
     const contactMethod = [
         {

@@ -8,28 +8,39 @@ import Gallery from "./components/Gallery";
 import Projects from "./components/Projects";
 import Contacts from "./components/Contact";
 import Navbar from "./components/Navbar";
+import ContactSvg from "./components/svgcomponents/NavSvgs/ContactSvg";
+import PhotoSvg from "./components/svgcomponents/NavSvgs/PhotoSvg";
+import AboutSvg from "./components/svgcomponents/NavSvgs/AboutSvg";
+import GallerySvg from "./components/svgcomponents/NavSvgs/GallerySvg";
+import ProjectsSvg from "./components/svgcomponents/NavSvgs/ProjectsSvg";
+import CodeProgressSvg from "./components/svgcomponents/NavSvgs/CodeProgressSvg";
 import './App.css';
 function App() {
   const sectionHeaders = [
     {
       label: "Code Progress",
-      idName: "codeprogress"
+      idName: "codeprogress",
+      icon: CodeProgressSvg
      },
     {
       label: "About Me",
-      idName: "about"
+      idName: "about",
+      icon: AboutSvg
     },
     {
       label: "Gallery",
-      idName: "gallery"
+      idName: "gallery",
+      icon: GallerySvg
     }, 
     {
       label: "Projects",
-      idName: "projects"
+      idName: "projects",
+      icon: ProjectsSvg
     }, 
     {
       label: "Contact me!",
-      idName: "contact"
+      idName: "contact",
+      icon: ContactSvg
     }
   ];
   return (
