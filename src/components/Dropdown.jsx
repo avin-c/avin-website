@@ -7,7 +7,7 @@ function DropdownMenu({options, color, current, size, onselect}){
     const [isList, setList]= useState(false);
     const dropdownRef = useRef(null);
     function handleClick (){
-        e.stopPropagation();
+        
         setList(!isList);
         console.log(isList, options);
 

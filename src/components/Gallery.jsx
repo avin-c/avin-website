@@ -62,16 +62,22 @@ function Gallery ({name, id}) {
     const lastTime = useRef(0);
 
     
+    
     function mouseDown(e){
         console.log('mousedown')
         isMouseDrag.current = true;
         initialMouseX.current = e.clientX;
         initialScrollLeft.current = containerRef.current.scrollLeft;
+        console.log("What is the containerRef.current containing?: " + containerRef.current);
+        lastX.current = e.clientX;
+        lastTime.current = Date.now();
+
+
         e.preventDefault(); 
     }
     function inertia(){
         containerRef.current.scrollLeft = containerRef.current.scrollLeft - velocity.current * 16;
-        velocity.current = velocity.current * 0.9;
+        velocity.current = velocity.current * 0.8;
         console.log("Current velocity: " + velocity.current);
         if (Math.abs(velocity.current) > 0.01) {
             requestAnimationFrame(inertia);
@@ -84,21 +90,20 @@ function Gallery ({name, id}) {
         console.log("effectran");
         
         function handleMouseDrag(e){
-            console.log("mousemovefunction")
             if (isMouseDrag.current == true){
                 const dx = e.clientX - lastX.current;
                 const dt = Date.now() - lastTime.current;
                 velocity.current = dx/dt;
+                console.log(velocity.current);
                 containerRef.current.scrollLeft = initialScrollLeft.current - ((e.clientX) - (initialMouseX.current))
-                console.log("dragging");
-                console.log(isMouseDrag.current);
+                lastX.current = e.clientX;
+                lastTime.current = Date.now();
             }
         }
         function mouseUp() {
             console.log("mouseup");
             isMouseDrag.current = false;
             inertia();
-            console.log("inertia ran");
         }
 
         window.addEventListener("mousemove", handleMouseDrag);

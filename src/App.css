@@ -84,6 +84,10 @@ p{
 .navItems:hover{
     background-color: var(--primary-color);
 }
+.navItems:active{
+    transition: scale 100ms ease;
+    scale: 90%;
+}
 .navIcons{
     flex: 0 0 32px;
     display: flex;
@@ -321,6 +325,13 @@ p{
     scrollbar-width: none;
     flex-shrink: 0;
     align-items: center;    
+}
+
+#GalleryPhotos:hover{
+    cursor: grab;
+}
+#GalleryPhotos:active{
+    cursor: grabbing;
 }
 #GalleryPhotos::-webkit-scrollbar {
     display: none; 
