@@ -61,24 +61,33 @@ function Gallery ({name, id}) {
     const lastX = useRef(0);
     const lastTime = useRef(0);
 
-    
+    const unitWidth = useRef(0);
     
     function mouseDown(e){
-        console.log('mousedown')
+        console.log("scroll width" + containerRef.current.scrollWidth);
+        console.log("client width" + containerRef.current.clientWidth);
+        
         isMouseDrag.current = true;
         initialMouseX.current = e.clientX;
         initialScrollLeft.current = containerRef.current.scrollLeft;
         console.log("What is the containerRef.current containing?: " + containerRef.current);
         lastX.current = e.clientX;
         lastTime.current = Date.now();
-
+        
 
         e.preventDefault(); 
     }
     function inertia(){
+
         containerRef.current.scrollLeft = containerRef.current.scrollLeft - velocity.current * 16;
-        velocity.current = velocity.current * 0.8;
+        velocity.current = velocity.current * 0.9;
         console.log("Current velocity: " + velocity.current);
+        if (containerRef.current.scrollLeft < unitWidth.current){
+                    containerRef.current.scrollLeft = containerRef.current.scrollLeft + unitWidth.current;
+                }
+        if (containerRef.current.scrollLeft > 2*(unitWidth.current)){
+            containerRef.current.scrollLeft = containerRef.current.scrollLeft - unitWidth.current;
+        }
         if (Math.abs(velocity.current) > 0.01) {
             requestAnimationFrame(inertia);
         console.log("animation running");
@@ -87,17 +96,27 @@ function Gallery ({name, id}) {
     
 
     useEffect(() => {
+        unitWidth.current = (containerRef.current.scrollWidth)/3;
         console.log("effectran");
         
         function handleMouseDrag(e){
             if (isMouseDrag.current == true){
+                console.log("scroll width" + containerRef.current.scrollWidth);
                 const dx = e.clientX - lastX.current;
                 const dt = Date.now() - lastTime.current;
                 velocity.current = dx/dt;
-                console.log(velocity.current);
-                containerRef.current.scrollLeft = initialScrollLeft.current - ((e.clientX) - (initialMouseX.current))
+                containerRef.current.scrollLeft = initialScrollLeft.current - ((e.clientX) - (initialMouseX.current));
+                console.log("scroll left"); 
+                console.log(containerRef.current.scrollLeft);
                 lastX.current = e.clientX;
                 lastTime.current = Date.now();
+
+                if (containerRef.current.scrollLeft < unitWidth.current){
+                    containerRef.current.scrollLeft = containerRef.current.scrollLeft + unitWidth.current;
+                }
+                if (containerRef.current.scrollLeft > 2*(unitWidth.current)){
+                    containerRef.current.scrollLeft = containerRef.current.scrollLeft - unitWidth.current;
+                }
             }
         }
         function mouseUp() {
@@ -120,9 +139,9 @@ function Gallery ({name, id}) {
             <h3 className="header">{name}</h3>
             <p>Just some cool stuff I've photographed. Lol they're not very good but i just wanted a gallery section haha</p>
                 <div id = "GalleryPhotos" ref={containerRef} onMouseDown={mouseDown}>
-                    {galleryImages.map((item) => {
+                    {infiniteImages.map((item,index) => {
                         return (
-                            <div className = "galleryitem" key={item.key}>
+                            <div className = "galleryitem" key={index}>
                                 <img   
                                     className="image"
                                     draggable="false"
