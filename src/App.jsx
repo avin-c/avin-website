@@ -45,7 +45,6 @@ function App() {
   ];
   return (
     <div>
-      <Cursor/>
       <Navbar list = {sectionHeaders}/>
       <Home/>
 
