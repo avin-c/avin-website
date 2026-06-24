@@ -120,6 +120,7 @@ p{
 .greeting { 
     display: flex;
     flex-wrap: nowrap;
+    text-wrap: nowrap;
     justify-content: center;
     max-width: 100vw;
     
@@ -137,12 +138,15 @@ p{
 }
 
 .signature{
+    resize: none; 
     color: var(--text-color);
     fill: var(--text-color);
     stroke: var(--accent-color);
     align-items: center;
     width: 200px;
     height: 100px;
+    min-height: 100px;
+    min-width: 200px;
     margin-top: 0px;
     margin-left: -20px;
 }
@@ -164,29 +168,35 @@ p{
 }
 
 
-#progressStats {    
+#progressStats { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;   
     text-align: center;
-    display: grid;
-    gap: 15px;
+    gap: 20px;
     color: var(--dark-text-color);
-    grid-template-columns: repeat(3, 1fr);
     border-radius: 15px;
+    justify-content: center;
+    align-items: center;
     
 }
 
 .statBox{
     display: flex;
-    align-items: center;
-    justify-content: center;
 
+    justify-content: center;
+    min-width: 100px;
+    width: 25%;
+    height: 60px;
+    align-items: center;
     border-radius: 5px;
     margin: 0px;
-    padding: 10px;
+    padding: 15px;
     min-height: 2rem;
 
     font-size: 0.8rem;
     background-color: var(--accent-color);
-    color: var(--dark-text-colorcolor);
+    color: var(--dark-text-color);
 
     transition: 200ms ease;
 }
