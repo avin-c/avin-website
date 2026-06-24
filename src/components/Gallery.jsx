@@ -91,12 +91,26 @@ function Gallery ({name, id}) {
         if (Math.abs(velocity.current) > 0.01) {
             requestAnimationFrame(inertia);
         console.log("animation running");
+        updateScroll();
     }
+    }
+
+    function updateScroll() {
+        unitWidth.current = containerRef.current.scrollWidth / 3;
+        // re-clamp scrollLeft in case it's now out of the safe middle range
+        if (containerRef.current.scrollLeft < unitWidth.current) {
+            containerRef.current.scrollLeft += unitWidth.current;
+        }
+        if (containerRef.current.scrollLeft > 2 * unitWidth.current) {
+            containerRef.current.scrollLeft -= unitWidth.current;
+        }
     }
     
-
+    
     useEffect(() => {
+        
         unitWidth.current = (containerRef.current.scrollWidth)/3;
+        containerRef.current.scrollLeft = unitWidth.current;
         console.log("effectran");
         
         function handleMouseDrag(e){
@@ -111,12 +125,7 @@ function Gallery ({name, id}) {
                 lastX.current = e.clientX;
                 lastTime.current = Date.now();
 
-                if (containerRef.current.scrollLeft < unitWidth.current){
-                    containerRef.current.scrollLeft = containerRef.current.scrollLeft + unitWidth.current;
-                }
-                if (containerRef.current.scrollLeft > 2*(unitWidth.current)){
-                    containerRef.current.scrollLeft = containerRef.current.scrollLeft - unitWidth.current;
-                }
+                updateScroll();
             }
         }
         function mouseUp() {
@@ -127,18 +136,17 @@ function Gallery ({name, id}) {
 
         window.addEventListener("mousemove", handleMouseDrag);
         window.addEventListener("mouseup", mouseUp);
-
         return () => {
             window.removeEventListener("mousemove", handleMouseDrag);
             window.removeEventListener("mouseup", mouseUp);
         };
     }, []);
-    
+
     return(
         <div className = "content" id = {id}> 
             <h3 className="header">{name}</h3>
             <p>Just some cool stuff I've photographed. Lol they're not very good but i just wanted a gallery section haha</p>
-                <div id = "GalleryPhotos" ref={containerRef} onMouseDown={mouseDown}>
+                <div id = "GalleryPhotos" ref={containerRef} onMouseDown={mouseDown} >
                     {infiniteImages.map((item,index) => {
                         return (
                             <div className = "galleryitem" key={index}>
