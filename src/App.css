@@ -194,11 +194,11 @@ p{
     justify-content: center;
     min-width: 100px;
     width: 25%;
-    height: 60px;
+    height: 70px;
     align-items: center;
     border-radius: 5px;
     margin: 0px;
-    padding: 15px;
+    padding: 20px;
     min-height: 2rem;
 
     font-size: var(--paragraph-size);
@@ -242,13 +242,12 @@ p{
 .button:hover{
     cursor: pointer;
     background-color: var(--accent-color);
-    width: 105%;
-    height: 50px;
+    scale: 105%;
 
 }
 .button:active{
     cursor: pointer;
-    background-color: var(--accent-color-color);
+    scale: 95%;
 }
 
 #dropdownBox{
@@ -277,7 +276,7 @@ p{
     right: 0%;
     left: 0px;
     width: inherit;
-    font-size: var(--label-size);
+    font-size: var(--paragraph-size);
     
 }
 
@@ -330,6 +329,9 @@ p{
     width: 100%;
     box-shadow: 10px 10px 10px 5px var(--dark-text-color);
 }
+#projects{
+    gap: 60px;
+}
 .projectfolder {
     background-color: var(--primary-color);
     display: flex;
@@ -345,13 +347,52 @@ p{
     text-align: center;
     padding: 10px;
     background-color: var(--secondary-color);
+    border-radius: 5px;
+    
 }
 .projectTitle a{
     font-size: var(--subheading-size);
     text-decoration-line: none;
+    color: var(--text-color);
 }
 .projectfolder strong{
     font-size: var(--label-size);
+}
+.folderbody{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: stretch;
+
+
+}
+.folderbody .bodytext{
+    flex-grow: 2;
+}
+.folderbody img {
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    flex-grow: 1;
+    flex-shrink: 1; 
+    max-width: 100%;
+    object-fit:cover;
+    display: block;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--secondary-color);
+}
+.bodytext{
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--secondary-color);
+    padding: 10px;
+    min-width: 200px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
 }
 .tab{
     border-top-left-radius: 15px;
@@ -362,9 +403,19 @@ p{
     z-index: 3;
     justify-content: center;    
     align-items: center;
-    width: 75px;
     margin-left: -10px;
     transition: height 100ms ease;
+    flex-grow: 1;
+    width: 50%;
+    
+}
+.tab h5{
+    width: 100%;
+    white-space: nowrap; /* Prevent the text from wrapping to the next line */
+    overflow: hidden; /* Hide the text that goes beyond the container's width */
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    padding: 20px;
 }
 .tab:hover{
     cursor: pointer;
@@ -380,6 +431,7 @@ p{
 }
 .tabs{
     z-index: 2;
+    width: 50%;
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -389,7 +441,7 @@ p{
     position-anchor: --myAnchor;
     align-items:center;
     bottom: anchor(top); 
-    right: calc(anchor(right) + 20px);
+    left: calc(anchor(left) + 30px);
 
 }
 .list{

@@ -10,7 +10,7 @@ function ProjectNav({currentTab, list, onselect}){
             {list.map((item) => {
                 return(
                     <div  className={`tab ${currentTab === item.index ? "activeTab" : "inActiveTab"}`} key={item.index} onClick={() => handleSelect(item.index)} >
-                        <h5 >{item.index}</h5>
+                        <h5 >{item.projectName}</h5>
                     </div>
                 );
             })}
