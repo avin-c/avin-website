@@ -3,10 +3,10 @@ import { useState , useEffect } from "react";
 import DropdownMenu from "./Dropdown";
 import { time } from "motion";
 
-function CodeProgress({name, id}){
+function CodeProgress({name, id , seconds}){
 
     
-    const [seconds, setSeconds] = useState(35*3600);
+    
     const [current, setCurrent] = useState("Europa");
 
     const goals = [
@@ -31,32 +31,7 @@ function CodeProgress({name, id}){
     const goal = goals.find(word => word.name === current);
     const names = goals.map(goal => goal.name);
 
-    
-    useEffect(() => {
-        let timeoutId;
 
-        const loop = async () => {
-            try {
-                const res = await fetch("https://hackatime.hackclub.com/api/v1/users/freshshrimp/project/avin-website");
-
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                
-                const data = await res.json();
-                console.log("Fetched data:", data);
-                setSeconds(data.total_seconds);
-            } catch (error) {
-                console.error("Failed to fetch coding progress:", error);
-            } finally {
-                // 3. This 'finally' block ensures that even if the fetch fails, 
-                // the loop tries again later. Increased to 30 seconds (30000ms).
-                timeoutId = setTimeout(loop, 30000); 
-            }
-        };
-
-        loop();
-
-        return () => clearTimeout(timeoutId);
-    }, []);
 
     const [dailySeconds, setDaily] = useState(0);
     const now = new Date();
@@ -113,15 +88,23 @@ function CodeProgress({name, id}){
         
     }
     function calculatePercentage(num, den, decimals) {
+        let percent = 0;
         if (goal.name == "Daily"){
             const multiplier = 10**(decimals+2);
             const percentage = Math.floor(dailySeconds/den * multiplier);
-            return percentage / 10**(decimals);
+            percent =  percentage / 10**(decimals);
         }
         else{
             const multiplier = 10**(decimals+2);
             const percentage = Math.floor(num/den * multiplier);
-            return percentage / 10**(decimals);
+            percent =  percentage / 10**(decimals);
+        }
+
+        if (percent <= 100){
+            return percent;
+        }
+        else{
+            return calculatePercentage(den, den, decimals)
         }
 
 
