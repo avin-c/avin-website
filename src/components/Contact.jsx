@@ -42,7 +42,7 @@ function Contacts ({name, id}){
                         console.log(item.link)
                         return (
                         <a  href={item.link} id="contactBoxes" key = {item.platform}>
-                            <Item url={item.link} color = "#54426B" strokeweight = {1.5} side = {32}/>
+                            <Item url={item.link} color = "white" strokeweight = {1.5} side = {32}/>
                         </a>
 
                     );
