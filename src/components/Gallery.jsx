@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useRef} from "react";
 const images = import.meta.glob(
     "../assets/pictures/*.JPG",
-    { eager: true }
+    {eager: true}
 );
 
 function Gallery ({name, id}) {
