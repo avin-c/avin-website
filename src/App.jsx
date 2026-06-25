@@ -1,5 +1,5 @@
 import {Sprite} from "./assets/watermelon";
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
 import Home from "./components/Home";
 import About from "./components/About";
 import Cursor from "./components/Cursor";
@@ -43,16 +43,43 @@ function App() {
       icon: ContactSvg
     }
   ];
+  const [seconds, setSeconds] = useState(35*3600);
+      
+  useEffect(() => {
+      let timeoutId;
+
+      const loop = async () => {
+        try {
+            const res = await fetch("https://hackatime.hackclub.com/api/v1/users/freshshrimp/project/avin-website");
+
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            
+            const data = await res.json();
+            console.log("Fetched data:", data);
+            setSeconds(data.total_seconds);
+        } catch (error) {
+            console.error("Failed to fetch coding progress:", error);
+        } finally {
+            // 3. This 'finally' block ensures that even if the fetch fails, 
+            // the loop tries again later. Increased to 30 seconds (30000ms).
+            timeoutId = setTimeout(loop, 30000); 
+        }
+      };
+
+      loop();
+
+      return () => clearTimeout(timeoutId);
+  }, []);
   return (
     <div>
       <Navbar list = {sectionHeaders}/>
       <Home/>
 
       <div className="sections">
-        <CodeProgress name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName}/>
+        <CodeProgress name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} seconds = {seconds}/>
         <About name = {sectionHeaders[1].label} id = {sectionHeaders[1].idName}/>
         <Gallery name = {sectionHeaders[2].label} id = {sectionHeaders[2].idName}/>
-        <Projects name =  {sectionHeaders[3].label} id =  {sectionHeaders[3].idName}/>
+        <Projects name =  {sectionHeaders[3].label} id =  {sectionHeaders[3].idName} websiteSeconds={seconds}/>
         <Contacts name = {sectionHeaders[4].label} id = {sectionHeaders[4].idName}/>
       </div>
     </div>
