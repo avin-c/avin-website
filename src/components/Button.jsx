@@ -1,6 +1,6 @@
 import shrekScare1 from "../assets/shrekScare.png";
 import shrekScare2 from "../assets/shrekScare2.png";
-import shrekAudio from "../assets/shrekaudio.mp3";
+import shrekAudio from "../assets/shrekAudio.mp3";
 import React from "react";
 import { useRef , useEffect, useState} from "react";
 function Button(){
