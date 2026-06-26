@@ -6,6 +6,8 @@
     --dark-text-color: #271f32;
     --accent-color: #CBDF90;
     --accent-color-color:  #F19455 ;
+
+    
     --hightlight-color: #4e8b94;
     --title-size: 50px;
     --heading-size: 30px;
@@ -219,7 +221,7 @@ p{
     gap: 25px;
 
 }
-.button {
+button {
     box-sizing: border-box;
     position:inherit;
     display: flex;
@@ -239,7 +241,7 @@ p{
     transition: 200ms ease;
 }
 
-.button:hover{
+button:hover{
     cursor: pointer;
     background-color: var(--accent-color);
     scale: 105%;
@@ -529,4 +531,48 @@ p{
 
   filter: blur(50px);
   transform: translate3d(0, 0, 0);
+}
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    pointer-events: none;
+    z-index: 10;
+}
+
+#shrekButton { 
+    position: fixed;
+    width: 100px;
+    bottom: 10px;
+    left: 10px;
+    pointer-events: auto;
+    background-color: var(--secondary-color);
+
+}
+.jumpscare {
+    position: fixed;
+    width: 5px;
+    height: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 10;
+    
+}
+.shrekAppear{
+    animation: grow 0.3s forwards;
+    animation-delay: 500ms;
+
+}
+@keyframes grow {
+    from {
+        transform: scale(0.00001);
+    }
+    to {
+        transform: scale(400);
+    }
 }

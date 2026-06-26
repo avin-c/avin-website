@@ -14,6 +14,7 @@ import AboutSvg from "./components/svgcomponents/NavSvgs/AboutSvg";
 import GallerySvg from "./components/svgcomponents/NavSvgs/GallerySvg";
 import ProjectsSvg from "./components/svgcomponents/NavSvgs/ProjectsSvg";
 import CodeProgressSvg from "./components/svgcomponents/NavSvgs/CodeProgressSvg";
+import Button from "./components/Button";
 import './App.css';
 function App() {
   const sectionHeaders = [
@@ -74,6 +75,7 @@ function App() {
     <div>
       <Navbar list = {sectionHeaders}/>
       <Home/>
+      <Button/>
 
       <div className="sections">
         <CodeProgress name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} seconds = {seconds}/>
@@ -86,14 +88,4 @@ function App() {
   )
 }
 
-function Button(){
-    function handleClick(){
-      alert("You clicked the button");
-    }
-    return ( 
-    <button onClick={handleClick} onFocus = {handleClick}>
-      Click me
-    </button>
-  );
-}
 export default App
