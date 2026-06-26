@@ -3,6 +3,7 @@ import GithubSvg from "./svgcomponents/ContactSvgs/GithubSvg";
 import LinkedinSvg from "./svgcomponents/ContactSvgs/LinkedinSvg";
 import MailSvg from "./svgcomponents/ContactSvgs/MailSvg";
 import SlackSvg from "./svgcomponents/ContactSvgs/SlackSvg";
+import ContactForm from "./ContactForm";
 function Contacts ({name, id}){
     const contactMethod = [
         {
@@ -35,19 +36,22 @@ function Contacts ({name, id}){
     
     return (
         <div className="content" id = {id}>
-            <h3 className="header">{name}</h3>
-            <div className = "contacts">
-                {contactMethod.map((item) => {
-                        const Item = item.svg
-                        console.log(item.link)
-                        return (
-                        <a  href={item.link} id="contactBoxes" key = {item.platform}>
-                            <Item url={item.link} color = "white" strokeweight = {1.5} side = {32}/>
-                        </a>
+            <div className = "contactButtons">
+                <h3 className="header">{name}</h3>
+                <div className = "contacts">
+                    {contactMethod.map((item) => {
+                            const Item = item.svg
+                            console.log(item.link)
+                            return (
+                            <a  href={item.link} id="contactBoxes" key = {item.platform}>
+                                <Item url={item.link} color = "white" strokeweight = {1.5} side = {32}/>
+                            </a>
 
-                    );
-                    })}
+                        );
+                        })}
+                </div>
             </div>
+            <ContactForm/>
         </div>
     );
 

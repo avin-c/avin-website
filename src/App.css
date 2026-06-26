@@ -494,8 +494,7 @@ button:hover{
 
 
 #contact{
-    flex-direction: row;
-    align-items:center;
+    flex-direction: column;
 }
 .contacts{
     justify-content: center;
@@ -505,6 +504,7 @@ button:hover{
     flex-grow: 1;
     max-width: 300px;
     flex-wrap: wrap;
+    gap: 10px;
 
 }
 #contactBoxes{
@@ -512,6 +512,23 @@ button:hover{
     padding: 5px;
     justify-content: center;
     border-radius: 25%;
+}
+.contactButtons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+form{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;  
+    font-size: var(--paragraph-size);
+}
+input, textarea{
+    font-size: var(--paragraph-size);
+    padding: 10px;
+    font-family: inherit;
 }
 
 .cursor-blob {
