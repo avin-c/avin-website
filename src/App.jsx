@@ -8,6 +8,7 @@ import Gallery from "./components/Gallery";
 import Projects from "./components/Projects";
 import Contacts from "./components/Contact";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import ContactSvg from "./components/svgcomponents/NavSvgs/ContactSvg";
 import PhotoSvg from "./components/svgcomponents/NavSvgs/PhotoSvg";
 import AboutSvg from "./components/svgcomponents/NavSvgs/AboutSvg";
@@ -76,6 +77,7 @@ function App() {
       <Navbar list = {sectionHeaders}/>
       <Home/>
       <Button/>
+      <Sidebar/>
 
       <div className="sections">
         <CodeProgress name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} seconds = {seconds}/>

@@ -38,7 +38,7 @@ function DropdownMenu({options, color, current, size, onselect}){
         <div ref = {dropdownRef} id = "dropdownBox" >
             <button style={{backgroundColor: color}} className = "button" onClick={handleClick}>
                 {current}
-                <DropdownSvg upDown={isList}/>
+                <DropdownSvg upDown={isList} side = {16}/>
             </button>
                 {isList && (
                     <ul id="options">

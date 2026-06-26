@@ -3,10 +3,10 @@ import CodeProgress from "../CodeProgress";
 const DropdownSvg = ({ upDown, ...props }) => (
     upDown? (
         <svg
-            width={16}
-            height={16}
+            width={props.side}
+            height={props.side}
             fill="white"
-            viewBox="-10 0 32 32"
+            viewBox="-5 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
             transform="matrix(-1,0,0,-1,0,0)"
             {...props}
@@ -17,10 +17,10 @@ const DropdownSvg = ({ upDown, ...props }) => (
     )
     :(
         <svg
-            width={16}
-            height={16}
+            width={props.side}
+            height={props.side}
             fill="white"
-            viewBox="-10 0 32 32"
+            viewBox="-5 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
             transform="matrix(-1,0,0,1,0,0)"
             {...props}
