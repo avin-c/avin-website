@@ -576,12 +576,11 @@ button:hover{
         transform: scale(400);
     }
 }
-.sidebar {
+#sidebar {
     position: fixed;
     top: 25px;
-    right: 0;
     height: calc(100vh - 25px);
-    width: 200px;
+    width: 350px;
     
     background: var(--secondary-color);
 
@@ -594,26 +593,45 @@ button:hover{
     border-radius: 0px 0 0 15px;
 
     z-index: 3;
+    transition: right 200ms ease;
+
+    box-shadow: 10px 40px 10px 20px var(--dark-text-color);
 }
+.sideCollapse{
+    right: -350px;
+}
+.sideExpand{
+    right: 0px;
+    background-color: var(--accent-color);
+}
+
 
 .sideTitle{
     font-size: var(--heading-size);
-    margin: 5px;
+    margin: 10px;
+    color: var(--accent-color);
 }
 
 .sideButton {
+    --btn-w: 64px;
+    --btn-h: 48px;
+    box-shadow: 5px 10px 10px 0px var(--dark-text-color);
     position: absolute;
     box-sizing: border-box;
-    top: 8px;
-    right: 95%;
-
-    width: 64px;
-    height: 48px;
+    top: calc((var(--btn-w) - var(--btn-h)) / 2);
+    right: calc(100% - (var(--btn-w) - var(--btn-h)) / 2);
+    width: var(--btn-w);
+    height: var(--btn-h);
     display: flex;
     justify-content: center;
     align-items: center;
-
     transform: rotate(90deg);
     background: var(--secondary-color);
     border-radius: 0 0 30px 30px;
+}
+.sideExpand .sideButton{
+    padding-bottom: 10px;
+}
+.sideButton:hover{
+    cursor: pointer;
 }
