@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import DropdownSvg from "./svgcomponents/DropdownSvg";
+import Guestbook from "./Guestbook";
 function Sidebar(){
     const [isHovered, setExpand] = useState(false);
 
@@ -17,8 +18,10 @@ function Sidebar(){
             <div className = "sideButton" onClick={handleCollapse}>
                 <DropdownSvg upDown = {isHovered} side = {48}/>
             </div>
-
-            <h5 className="sideTitle">Fun stuff</h5>
+            <div className="sidebody">
+                <h5 className="sideTitle">Sign my guestbook!</h5>
+                <Guestbook/>
+            </div>
         </div>
     );
 }

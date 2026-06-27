@@ -557,11 +557,17 @@ input:focus,textarea:focus{
     background-color: var(--accent-color);
 
 }
+form span {
+    color: var(--accent-color-color);
+}
 form button {
     grid-column: -1/1;
 }
 form button:hover{
     scale: 101%;
+}
+form button:active{
+    scale: 99%; 
 }
 .cursor-blob {
   position: fixed;
@@ -638,7 +644,7 @@ form button:hover{
 
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
     border-radius: 0px 0 0 15px;
 
     z-index: 3;
@@ -657,10 +663,42 @@ form button:hover{
 
 .sideTitle{
     font-size: var(--heading-size);
-    margin: 10px;
+    margin: 0px;
     color: var(--accent-color);
 }
-
+.sidebarHeader{
+    font-size: var(--subheading-size);
+    margin: 0px;
+}
+.sidebody{
+    display:Flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.guestbookEntry{
+    background-color: var(--primary-color);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px;
+    grid-template-rows:  repeat(2, 30px) auto;
+}
+.guestbookEntry h4{
+    margin: 0px;
+}
+.guestname {
+    grid-column: 1/2;
+}
+.guestdate {
+    grid-column: 1/2;
+    text-align: left;
+}
+.guestsig{
+    grid-column: 2/3;
+    grid-row: 1/3;
+}
+.guestmessage{
+    grid-column: 1/4;
+}
 .sideButton {
     --btn-w: 64px;
     --btn-h: 48px;

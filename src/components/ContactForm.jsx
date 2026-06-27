@@ -9,12 +9,12 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Name<span>*</span></label>
           <input id = "name" name = "name" placeholder='Your name'></input>
         </div>
         <div>
           <label htmlFor="email">
-          Email Address
+          Email Address<span>*</span>
           </label>
           <input
           id="email"
