@@ -23,7 +23,7 @@ export default function GuestbookList() {
   }, []);
   console.log(entries);
   return (
-    <div>
+    <div className = "guestbookdisplay">
         <div>guestbok loaded</div>
       {entries.map((entry) => {
         let timestamp = entry.created_at;

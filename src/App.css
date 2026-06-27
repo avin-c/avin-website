@@ -645,12 +645,15 @@ form button:active{
     display: flex;
     flex-direction: column;
     padding: 20px;
+    padding-right: 0px;
     border-radius: 0px 0 0 15px;
 
     z-index: 3;
     transition: right 200ms ease;
 
     box-shadow: 10px 40px 10px 20px var(--dark-text-color);
+
+    scrollbar-width: none;
 }
 .sideCollapse{
     right: -350px;
@@ -671,16 +674,27 @@ form button:active{
     margin: 0px;
 }
 .sidebody{
+    text-wrap: wrap;
     display:Flex;
     flex-direction: column;
     gap: 15px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.guestbookdisplay{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .guestbookEntry{
     background-color: var(--primary-color);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 15px;
-    grid-template-rows:  repeat(2, 30px) auto;
+    grid-template-rows:  repeat(2, auto) auto;
+    border-radius: 15px 0px 0px 15px;
+    gap: 10px;
+    overflow-wrap: break-word;
 }
 .guestbookEntry h4{
     margin: 0px;
@@ -698,6 +712,11 @@ form button:active{
 }
 .guestmessage{
     grid-column: 1/4;
+}
+.guestbook form {
+    display: flex;
+    flex-direction: column; 
+    margin-right: 20px;
 }
 .sideButton {
     --btn-w: 64px;
