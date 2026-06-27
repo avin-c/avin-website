@@ -247,7 +247,7 @@ button:hover{
     scale: 105%;
 
 }
-.button:active{
+button:active{
     cursor: pointer;
     scale: 95%;
 }
@@ -383,11 +383,11 @@ button:hover{
     border-width: 5px;
     border-style: solid;
     border-color: var(--secondary-color);
+    border-radius: 10px;
 }
 .bodytext{
-    border-width: 5px;
-    border-style: solid;
-    border-color: var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--secondary-color);
     padding: 10px;
     min-width: 200px;
     box-sizing: border-box;
@@ -519,18 +519,50 @@ button:hover{
     gap: 10px;
 }
 form{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;  
     font-size: var(--paragraph-size);
+}
+form > div {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+form label {
+    margin-left: 10px;
 }
 input, textarea{
     font-size: var(--paragraph-size);
     padding: 10px;
     font-family: inherit;
+    background-color: var(--text-color);
+    border-radius: 10px;
+    border-color: var(--prisecond-color);
+    border-style: solid;
+    border-width: 5px;
+    
 }
+.textarea{
+    grid-column: -1/1;
+    resize: none;
+}
+textarea {
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+input:focus,textarea:focus{
+    outline:none;
+    background-color: var(--accent-color);
 
+}
+form button {
+    grid-column: -1/1;
+}
+form button:hover{
+    scale: 101%;
+}
 .cursor-blob {
   position: fixed;
   top: -80px;
