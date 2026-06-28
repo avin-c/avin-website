@@ -681,6 +681,11 @@ form button:active{
     overflow-y: scroll;
     scrollbar-width: none;
 }
+.guestbook {
+    display: flex;
+    flex-direction:column;
+    gap: 10px;
+}
 .guestbookdisplay{
     display: flex;
     flex-direction: column;

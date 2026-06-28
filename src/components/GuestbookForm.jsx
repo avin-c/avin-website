@@ -3,28 +3,52 @@ import { supabase } from "../supabase";
 import {useState, useEffect} from "react";
 import GuestSignature from "./GuestSignature";
 function Guestbook (){
-    function handleSubmit (){
-        alert("submitted");
+    const [name, setName] = useState("");
+    const [message, setMessage] = useState("");
+    async function handleSubmit (e){
+        console.log('sigma');
+        e.preventDefault();
+        const { data, error } = await supabase
+            .from("guestbook")
+            .insert([
+            {
+                name,
+                message,
+            },
+            ]);
+
+        if (error) {
+            console.log(error);
+            return;
+        }
+
+        setName("");
+        setMessage("");
     }
     return (
         <form onSubmit={handleSubmit}>
             <div className = "guestformname">
                 <label htmlFor="name">Name<span>*</span></label>
-                <input id = "name" name = "name" placeholder='Your name'></input>
+                <input 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name"
+                ></input>
             </div>
 
             <div className = "guestmessage">
                 <label htmlFor="message">Message</label>
                 <textarea
-                id="message"
-                name="message"
-                placeholder="Write your message here..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Your message"
                 />
             </div>
+            <GuestSignature/>
             <button type="submit">
             Submit
             </button>
-            <GuestSignature/>
+            
         </form>
     )
 }

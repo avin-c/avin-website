@@ -1,21 +1,58 @@
-import * as React from 'react'
+import React from 'react';
+import { useState, useRef } from 'react';
 import { getStroke } from 'perfect-freehand'
 
 export default function GuestSignature() {
-  const [points, setPoints] = React.useState([])
+  const [strokes, setStroke] = useState([]);
+  const [points, setPoints] = useState([]);
+  const svgRef = useRef(null);
+  function getCoordinates(e){
+    if (!svgRef.current) return [0,0,0]
+    const rect = svgRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const pressure = e.pressure;
 
+    return [
+      x, y, pressure
+    ]
+  }
+
+  
   function handlePointerDown(e) {
-    e.target.setPointerCapture(e.pointerId)
-    setPoints([[e.pageX, e.pageY, e.pressure]])
+    e.target.setPointerCapture(e.pointerId);
+    
+    setPoints([getCoordinates(e)]);
+
   }
 
   function handlePointerMove(e) {
     if (e.buttons !== 1) return
-    setPoints([...points, [e.pageX, e.pageY, e.pressure]])
+
+    setPoints([...points, getCoordinates(e)]);
+  }
+  function handlePointerUp(e){
+    setStroke([...strokes, points]);
   }
 
+  function megaStrokeList(){
+    let getstrokeList = [];
+    for (let  i = 0; i < strokes.length; i++) {
+      getstrokeList.push(getStroke(
+        strokes[i],
+        {
+          size: 6,
+          thinning: 0.5,
+          smoothing: 0.5,
+          streamline: 0.5,
+        }
+      ));
+    }
+    return getstrokeList;
+  }
+  const strokeList = megaStrokeList();
   const stroke = getStroke(points, {
-    size: 16,
+    size: 6,
     thinning: 0.5,
     smoothing: 0.5,
     streamline: 0.5,
@@ -36,16 +73,38 @@ export default function GuestSignature() {
     d.push("Z");
     return d.join(" ");
   }
-
-  const pathData = getSvgPathFromStroke(stroke)
+  function getPathfromConsecutiveStorkes(strokeList){
+    let pathDataList = [];
+    for (let i = 0; i < strokeList.length; i++){
+      pathDataList.push(getSvgPathFromStroke(strokeList[i]));
+    }
+    return pathDataList;
+  }
+  const pathData= getSvgPathFromStroke(stroke)
+  const pathDataList = getPathfromConsecutiveStorkes(strokeList);
 
   return (
     <svg
+      ref={svgRef}
+      width="200"
+      height="100"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
-      style={{ touchAction: 'none' }}
+      onPointerUp = {handlePointerUp}
+      style={{ touchAction: 'none' }} 
     >
-      {points && <path d={pathData} />}
+      
+      {points && pathDataList.map((pathItem, index) => {
+        return(
+          <path 
+            d={pathItem} 
+            key = {pathItem.index}
+            fill = "white"
+            stroke = "none"
+          />
+      
+        )})
+      }
     </svg>
   )
 }
