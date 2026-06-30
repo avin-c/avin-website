@@ -44,6 +44,7 @@ function Guestbook (){
                     placeholder="Your message"
                 />
             </div>
+            <label>Your signature! (or a cool doodle)</label>
             <GuestSignature/>
             <button type="submit">
             Submit
