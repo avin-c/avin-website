@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useRef} from "react";
 const images = import.meta.glob(
-    "../assets/pictures/*.JPG",
+    "../assets/pictures/*.{JPG,jpg}",
     {eager: true}
 );
 
@@ -34,14 +34,29 @@ function Gallery ({name, id}) {
             alt: "Chipmunk picture with little bit of blur"
         },
         moraine:{
-            no: 3,
+            no: 4,
             name: "Moraine Lake",
             alt: "Moraine Lake"
         },
         sunset: {
-            no: 4,
+            no: 5,
             name: "Sunset on the beach",
             alt: "Picture of sunset on a beach"
+        },
+        peacelake:{
+            no: 6,
+            name: "Lake reflection",
+            alt: "Picture of a lake in early autumn with reflection"
+        },
+        seagull: {
+            no: 7,
+            name: "Seagull",
+            alt: "Picture of a seagull standing on top of a beach sign against a bright blue sky"
+        },
+        ski: {
+            no: 8,
+            name: "Ski",
+            alt: "Picture of a ski hill with an orange sky and a gondala cabin"
         }
     }
     const galleryImages = importedImages.map((img) => ({
