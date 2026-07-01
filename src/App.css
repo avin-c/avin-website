@@ -717,6 +717,10 @@ form button:active{
     grid-row: 1/3;
     width: 100px;
 }
+.errorInput{
+    background-color: var(--accent-color-color);
+    color: var(--accent-color);
+}
 .guestmessage{
     grid-column: 1/3;
     grid-row: 3/4;

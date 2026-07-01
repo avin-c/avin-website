@@ -11,6 +11,7 @@ function Guestbook (props){
         console.log('sigma');
         e.preventDefault();
         if (name.trim() === '') {
+            setNameError(true);
             alert('Please fill out the name field.');
             return;
         }
@@ -31,13 +32,15 @@ function Guestbook (props){
 
         setName("");
         setMessage("");
+        setStroke([]);
         props.handleRefresh();
     }
     return (
         <form onSubmit={handleSubmit}>
             <div className = "guestformname">
                 <label htmlFor="name">Name<span>*</span></label>
-                <input 
+                <input  
+                    className={nameError? "errorInput":""}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your name"
