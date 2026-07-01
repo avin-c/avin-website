@@ -146,6 +146,8 @@ function Gallery ({name, id}) {
         <div className = "content" id = {id}> 
             <h3 className="header">{name}</h3>
             <p>Just some cool stuff I've photographed. Lol they're not very good but i just wanted a gallery section haha</p>
+
+            <label>{'<'} drag to scroll {'>'}</label>
                 <div id = "GalleryPhotos" ref={containerRef} onMouseDown={mouseDown} >
                     {infiniteImages.map((item,index) => {
                         return (

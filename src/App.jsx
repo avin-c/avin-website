@@ -19,11 +19,7 @@ import Button from "./components/Button";
 import './App.css';
 function App() {
   const sectionHeaders = [
-    {
-      label: "Code Progress",
-      idName: "codeprogress",
-      icon: CodeProgressSvg
-     },
+    
     {
       label: "About Me",
       idName: "about",
@@ -34,6 +30,11 @@ function App() {
       idName: "gallery",
       icon: GallerySvg
     }, 
+    {
+      label: "Code Progress",
+      idName: "codeprogress",
+      icon: CodeProgressSvg
+     },
     {
       label: "Projects",
       idName: "projects",
@@ -80,9 +81,9 @@ function App() {
       <Sidebar/>
 
       <div className="sections">
-        <CodeProgress name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} seconds = {seconds}/>
-        <About name = {sectionHeaders[1].label} id = {sectionHeaders[1].idName}/>
-        <Gallery name = {sectionHeaders[2].label} id = {sectionHeaders[2].idName}/>
+        <About name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} seconds = {seconds}/>
+        <Gallery name = {sectionHeaders[1].label} id = {sectionHeaders[1].idName}/>
+        <CodeProgress name = {sectionHeaders[2].label} id = {sectionHeaders[2].idName}/>
         <Projects name =  {sectionHeaders[3].label} id =  {sectionHeaders[3].idName} websiteSeconds={seconds}/>
         <Contacts name = {sectionHeaders[4].label} id = {sectionHeaders[4].idName}/>
       </div>
