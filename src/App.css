@@ -695,7 +695,7 @@ form button:active{
 .guestbookEntry{
     background-color: var(--primary-color);
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: auto 100px;
     padding: 15px;
     grid-template-rows:  repeat(2, auto) auto;
     border-radius: 15px 0px 0px 15px;
@@ -715,9 +715,13 @@ form button:active{
 .guestsig{
     grid-column: 2/3;
     grid-row: 1/3;
+    width: 100px;
 }
 .guestmessage{
-    grid-column: 1/4;
+    grid-column: 1/3;
+    grid-row: 3/4;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 .guestSignature{
     display: grid;
