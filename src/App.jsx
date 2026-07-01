@@ -81,9 +81,9 @@ function App() {
       <Sidebar/>
 
       <div className="sections">
-        <About name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} seconds = {seconds}/>
+        <About name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} />
         <Gallery name = {sectionHeaders[1].label} id = {sectionHeaders[1].idName}/>
-        <CodeProgress name = {sectionHeaders[2].label} id = {sectionHeaders[2].idName}/>
+        <CodeProgress name = {sectionHeaders[2].label} id = {sectionHeaders[2].idName} seconds = {seconds}/>
         <Projects name =  {sectionHeaders[3].label} id =  {sectionHeaders[3].idName} websiteSeconds={seconds}/>
         <Contacts name = {sectionHeaders[4].label} id = {sectionHeaders[4].idName}/>
       </div>
