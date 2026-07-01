@@ -165,7 +165,8 @@ p{
     flex-direction: column;
     gap: 20px;
     width: 70%;
-    justify-self: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .header{
@@ -238,7 +239,7 @@ button {
     height: 40px;
     color: var(--text-color);
     border-width: 0px;
-    z-index: 2;
+    z-index: 1;
     transition: 200ms ease;
 }
 
@@ -323,6 +324,7 @@ button:active{
     border-width: 0px;
     box-sizing: border-box;
     text-align: left;
+    justify-content: center;
     color: var(--text-color);
     background-color: var(--secondary-color);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -603,7 +605,7 @@ form button:active{
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically */
     pointer-events: none;
-    z-index: 4;
+    z-index: 5;
 }
 
 #shrekButton { 
