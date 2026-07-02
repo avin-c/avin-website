@@ -1,5 +1,5 @@
 # My personal website
-This is my personal website, a corner of the internet where I will be putting all my stuff! It's primarily just a fun project that I used to learn React, so it is not a professional website by any means.
+This is my personal website, a corner of the internet where I will be putting all my stuff! It's primarily just a fun project that I used to learn React, so it is not a professional website by any means. This project is for #horizons.
 
  My website can be seen on the web, accessed through the domain [avin-c.github.io/avin-website](https://avin-c.github.io/avin-website/), deployed through Github Pages.  
 
@@ -31,7 +31,9 @@ I wanted to make a personal website I have browsed through so many other persona
 
 ## Screenshots
 
-![Homepage, About me and Gallery sections](image-2.png)
-![Code Progress widget and Projects section](image-3.png)
-![Contact me form and guestbook sidebar](image-6.png)
+![Homepage, About me and Gallery sections](./src/assets/image-2.png)
+![Code Progress widget and Projects section](./src/assets/image-3.png)
+![Contact me form and guestbook sidebar](./src/assets/image-6.png)
 
+## License
+MIT License
