@@ -526,6 +526,10 @@ button:active{
     flex-wrap: wrap;
     gap: 10px;
 }
+.pageRing{
+    align-self: center;
+    align-items: center;
+}
 form{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
