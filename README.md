@@ -35,5 +35,9 @@ I wanted to make a personal website I have browsed through so many other persona
 ![Code Progress widget and Projects section](./src/assets/image-3.png)
 ![Contact me form and guestbook sidebar](./src/assets/image-6.png)
 
+## AI Use
+
+AI was used for help developing the draggable infinite gallery section, parts of the navbar, connecting to the Hackatime API, and connecting the database to the guestbook form. I also used AI for debugging advice. 
+
 ## License
 MIT License
