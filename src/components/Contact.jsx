@@ -50,6 +50,8 @@ function Contacts ({name, id}){
                         );
                         })}
                 </div>
+                <pagering-link className = "pageRing" theme="dark"></pagering-link>
+
             </div>
             <ContactForm/>
         </div>
