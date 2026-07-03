@@ -4,6 +4,7 @@ import LinkedinSvg from "./svgcomponents/ContactSvgs/LinkedinSvg";
 import MailSvg from "./svgcomponents/ContactSvgs/MailSvg";
 import SlackSvg from "./svgcomponents/ContactSvgs/SlackSvg";
 import ContactForm from "./ContactForm";
+import Logo from "./Logo";
 function Contacts ({name, id}){
     const contactMethod = [
         {
@@ -51,6 +52,7 @@ function Contacts ({name, id}){
                         })}
                 </div>
                 <pagering-link className = "pageRing" theme="dark"></pagering-link>
+                <Logo/>
 
             </div>
             <ContactForm/>

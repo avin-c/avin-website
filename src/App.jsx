@@ -16,6 +16,7 @@ import GallerySvg from "./components/svgcomponents/NavSvgs/GallerySvg";
 import ProjectsSvg from "./components/svgcomponents/NavSvgs/ProjectsSvg";
 import CodeProgressSvg from "./components/svgcomponents/NavSvgs/CodeProgressSvg";
 import Button from "./components/Button";
+import Logo from "./components/Logo";
 import './App.css';
 function App() {
   const sectionHeaders = [
@@ -80,6 +81,7 @@ function App() {
       <Home/>
       <Button/>
       <Sidebar/>
+      
 
       <div className="sections">
         <About name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} />

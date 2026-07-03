@@ -39,6 +39,10 @@ body {
 }
 a{
     color: var(--accent-color)
+    
+}
+a:hover{
+    cursor: pointer;
 }
 
 p{
@@ -529,6 +533,12 @@ button:active{
 .pageRing{
     align-self: center;
     align-items: center;
+}
+.myButton{
+    align-self: center;
+    align-items: center;
+    display:flex;
+    image-rendering: crisp-edges;
 }
 form{
     display: grid;
