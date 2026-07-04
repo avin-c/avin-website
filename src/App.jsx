@@ -79,8 +79,9 @@ function App() {
       
       <Navbar list = {sectionHeaders}/>
       <Home/>
-      <Button/>
       <Sidebar/>
+      <Button/>
+      
       
 
       <div className="sections">

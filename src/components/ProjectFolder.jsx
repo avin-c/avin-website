@@ -10,7 +10,7 @@ function ProjectFolder (props){
                 <a href={props.link} >{props.projectName}</a>
             </strong>
             <div className = "folderbody">
-                <img src={props.image}></img>
+                <img alt = {props.projectName}src={props.image}></img>
                 <div className="bodytext">
                     <p>{props.description}</p>
                     <div className = "list">

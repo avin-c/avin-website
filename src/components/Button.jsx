@@ -35,7 +35,7 @@ function Button(){
         <button id = "shrekButton" onClick={shrekScare}>
         Surprise!
         </button>
-        <img className={` jumpscare ${shrek ? "shrekAppear" : ""}`}  src = {shrekType}></img>
+        <img alt = "Shrek face"className={` jumpscare ${shrek ? "shrekAppear" : ""}`}  src = {shrekType}></img>
     </div>
   );
 }

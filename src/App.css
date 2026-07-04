@@ -37,6 +37,7 @@ body {
     margin-right: auto;
     
 }
+
 a{
     color: var(--accent-color)
     
@@ -229,7 +230,6 @@ p{
 }
 button {
     box-sizing: border-box;
-    position:inherit;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -243,7 +243,7 @@ button {
     height: 40px;
     color: var(--text-color);
     border-width: 0px;
-    z-index: 1;
+    z-index: 0;
     transition: 200ms ease;
 }
 
@@ -257,14 +257,13 @@ button:active{
     cursor: pointer;
     scale: 95%;
 }
-
 #dropdownBox{
 
     flex: 0 0 30%;
     padding: 0px;
     position: relative;
     width: 100px;
-    z-index: 4;
+    z-index: 1;
 
 }
 #options {
@@ -433,14 +432,14 @@ button:active{
 }
 .activeTab{
     background-color: var(--primary-color);
-    z-index: 4
+    z-index: 3;
 }
 .inActiveTab{
     background-color: var(--dark-text-color);
-    z-index: 3;
+    z-index: 2;
 }
 .tabs{
-    z-index: 2;
+    z-index: 1;
     width: 50%;
     height: 50px;
     display: flex;
@@ -540,6 +539,7 @@ button:active{
     display:flex;
     image-rendering: crisp-edges;
 }
+
 form{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -579,6 +579,7 @@ input:focus,textarea:focus{
     background-color: var(--accent-color);
 
 }
+
 form span {
     color: var(--accent-color-color);
 }
@@ -656,6 +657,7 @@ form button:active{
 #sidebar {
     position: fixed;
     top: 25px;
+    z-index: 10;
     height: calc(100vh - 25px);
     width: var(--sidebarWidth);
     
@@ -670,7 +672,7 @@ form button:active{
     padding-right: 0px;
     border-radius: 0px 0 0 15px;
 
-    z-index: 3;
+    z-index: 4;
     transition: right 200ms ease;
 
     box-shadow: 10px 40px 10px 20px var(--dark-text-color);
@@ -683,6 +685,7 @@ form button:active{
 .sideExpand{
     right: 0px;
     background-color: var(--accent-color);
+    z-index: 90;
 }
 
 
@@ -759,6 +762,7 @@ form button:active{
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
+    box-sizing: border-box;
     background-color: var(--text-color);
     border-color: var(--primary-color);
     grid-column-start: 1;
@@ -809,4 +813,52 @@ form button:active{
 }
 .sideButton:hover{
     cursor: pointer;
+}
+@media (max-width:768px){
+    :root{
+        --sidebarWidth: 85vw;
+    }
+    .sections{
+        width:95%;
+    }
+
+    form{
+        grid-template-columns:1fr;
+    }
+
+    .textarea,
+    form button{
+        grid-column:auto;
+    }
+    
+}
+@media(max-width: 540px){
+    .greeting{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .greeting h1{
+        margin-bottom: 0px;
+    }
+    .guestSignature{
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 150px 50px;
+    }
+    .guestSignatureBox{
+        
+        grid-column: 1/3;
+        grid-row: 1/2;
+        width: 100%;
+    }
+    
+    .guestSigClearButton{
+        grid-row: 2/3;
+        grid-column: 2/3
+    }
+    .guestSigUndoButton{
+        grid-row: 2/3;
+        grid-column: 1/2;
+    }
 }
