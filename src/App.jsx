@@ -77,8 +77,9 @@ function App() {
   return (
     <div>
       
-      <Navbar list = {sectionHeaders}/>
+      
       <Home/>
+      <Navbar list = {sectionHeaders}/>
       <Sidebar/>
       <Button/>
       

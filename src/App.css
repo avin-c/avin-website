@@ -830,6 +830,28 @@ form button:active{
     form button{
         grid-column:auto;
     }
+    #siteNav{
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction:row;
+        width: 95%;
+        z-index: 4;
+        position:static;
+    }
+    #siteNav.navExpand{
+        width: 100%;
+    }
+    .navComponent{
+        position: sticky;
+        top: 0px;
+        z-index: 4;
+    }
+    .navItemLinks{
+        justify-content: center;
+    }
+    .navItemText{
+        display: none;
+    }
     
 }
 @media(max-width: 540px){
