@@ -896,3 +896,7 @@ form button:active{
         margin-top: 60px;
     }
 }
+
+pagering-overlay{
+    position:static;
+}
