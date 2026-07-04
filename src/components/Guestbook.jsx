@@ -34,7 +34,6 @@ function Guestbook (){
     d.push("Z");
     return d.join(" ");
     }
-    console.log("guestbook");
     return(
         <div className = "guestbook">
             <GuestbookForm strokeToPath= {strokeToPath} getSvgPathFromStroke = {getSvgPathFromStroke} handleRefresh = {handleRefresh} refreshKey = {refreshKey} setRefreshKey={setRefreshKey}/>

@@ -36,7 +36,6 @@ function CodeProgress({name, id , seconds}){
     const [dailySeconds, setDaily] = useState(0);
     const now = new Date();
     const startOfToday = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / 1000);
-    console.log("start of today" + startOfToday);
 
    
 
@@ -73,7 +72,6 @@ function CodeProgress({name, id , seconds}){
     }, []);
     
 
-    console.log(dailySeconds);
     const codeMinutes = Math.floor(seconds/60);
     function hoursAppend(seconds){
         const minutes = Math.floor(seconds/60);

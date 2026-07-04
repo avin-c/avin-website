@@ -8,7 +8,6 @@ function Guestbook (props){
     const [message, setMessage] = useState("");
     const [nameError, setNameError] = useState(false);
     async function handleSubmit (e){
-        console.log('sigma');
         e.preventDefault();
         if (name.trim() === '') {
             setNameError(true);
@@ -26,7 +25,7 @@ function Guestbook (props){
             ]);
 
         if (error) {
-            console.log(error);
+            console.log("Supabase guestbook form error.");
             return;
         }
 

@@ -18,7 +18,6 @@ function Sidebar(){
        
         setExpand(true);
     }
-    console.log("sidebar");
     return (
         <div id = "sidebar" className={`${isHovered? "sideExpand":"sideCollapse"}`} onMouseEnter={handleExpand}>
             <div className = "sideButton" onClick={handleCollapse}>

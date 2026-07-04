@@ -21,15 +21,13 @@ function Button(){
         
         audioRef.current.currentTime = 0;
         audioRef.current.play();
-        console.log(audioRef.current.currentTime);
         setShrekType(jumpscareList[Math.floor(Math.random() * jumpscareList.length)]);
         setShrek(true);
         setTimeout(() => {
             setShrek(false);
             audioRef.current.pause();
         }, (1500))
-    }
-    console.log(Math.floor(Math.random()*jumpscareList.length));    
+    }  
     return ( 
     <div className = "background">
         <button id = "shrekButton" onClick={shrekScare}>

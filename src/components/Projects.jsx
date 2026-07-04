@@ -35,7 +35,6 @@ function Projects ({name, id, websiteSeconds}){
         return hours + "h ";
         
     }
-    console.log("website seconds" + websiteSeconds);
     return(
         <div className="content" id = {id}>
             <h3 className="header">

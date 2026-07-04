@@ -31,7 +31,6 @@ function Contacts ({name, id}){
     ]
     const platforms = contactMethod.map(name => name.platform);
     const links = contactMethod.map(methods => methods.link);
-    console.log(links);
 
 
     
@@ -42,7 +41,6 @@ function Contacts ({name, id}){
                 <div className = "contacts">
                     {contactMethod.map((item) => {
                             const Item = item.svg
-                            console.log(item.link)
                             return (
                             <a  href={item.link} id="contactBoxes" key = {item.platform}>
                                 <Item url={item.link} color = "white" strokeweight = {1.5} side = {32}/>

@@ -19,7 +19,7 @@ export default function GuestbookDisplay(props) {
         .order("created_at", { ascending: false });
 
       if (error) {
-        console.log(error);
+        console.log("Supabase guestbook input error.");
         return;
       }
 
@@ -28,8 +28,6 @@ export default function GuestbookDisplay(props) {
 
     fetchEntries();
   }, []);
-  console.log(entries);
-
   return (
     <div className = "guestbookdisplay">
       {entries.map((entry) => {

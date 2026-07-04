@@ -9,7 +9,6 @@ function DropdownMenu({options, color, current, size, onselect}){
     function handleClick (){
         
         setList(!isList);
-        console.log(isList, options);
 
     }
     function handleSelect(item){
@@ -20,9 +19,7 @@ function DropdownMenu({options, color, current, size, onselect}){
     }
     
     useEffect(() => { 
-        console.log("effect ran");
         function handleClickOutside(event) {
-            console.log("document click");
             if (!dropdownRef.current.contains(event.target)) {
                 setList(false);
             }

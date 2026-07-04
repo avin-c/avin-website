@@ -15,8 +15,6 @@ function Gallery ({name, id}) {
             image: module.default
         };
     }); 
-    console.log("imported imagessss");
-    console.log(images);
     const imageData = {     
         boatsunset: {
             no: 1,
@@ -79,13 +77,10 @@ function Gallery ({name, id}) {
     const unitWidth = useRef(0);
     
     function mouseDown(e){
-        console.log("scroll width" + containerRef.current.scrollWidth);
-        console.log("client width" + containerRef.current.clientWidth);
-        
+
         isMouseDrag.current = true;
         initialMouseX.current = e.clientX;
         initialScrollLeft.current = containerRef.current.scrollLeft;
-        console.log("What is the containerRef.current containing?: " + containerRef.current);
         lastX.current = e.clientX;
         lastTime.current = Date.now();
         
@@ -96,7 +91,6 @@ function Gallery ({name, id}) {
 
         containerRef.current.scrollLeft = containerRef.current.scrollLeft - velocity.current * 16;
         velocity.current = velocity.current * 0.9;
-        console.log("Current velocity: " + velocity.current);
         if (containerRef.current.scrollLeft < unitWidth.current){
                     containerRef.current.scrollLeft = containerRef.current.scrollLeft + unitWidth.current;
                 }
@@ -105,7 +99,6 @@ function Gallery ({name, id}) {
         }
         if (Math.abs(velocity.current) > 0.01) {
             requestAnimationFrame(inertia);
-        console.log("animation running");
         updateScroll();
     }
     }
@@ -125,18 +118,13 @@ function Gallery ({name, id}) {
     useEffect(() => {
         
         unitWidth.current = (containerRef.current.scrollWidth)/3;
-        containerRef.current.scrollLeft = unitWidth.current;
-        console.log("effectran");
-        
+        containerRef.current.scrollLeft = unitWidth.current;       
         function handleMouseDrag(e){
             if (isMouseDrag.current == true){
-                console.log("scroll width" + containerRef.current.scrollWidth);
                 const dx = e.clientX - lastX.current;
                 const dt = Date.now() - lastTime.current;
                 velocity.current = dx/dt;
                 containerRef.current.scrollLeft = initialScrollLeft.current - ((e.clientX) - (initialMouseX.current));
-                console.log("scroll left"); 
-                console.log(containerRef.current.scrollLeft);
                 lastX.current = e.clientX;
                 lastTime.current = Date.now();
 
@@ -144,7 +132,6 @@ function Gallery ({name, id}) {
             }
         }
         function mouseUp() {
-            console.log("mouseup");
             isMouseDrag.current = false;
             inertia();
         }

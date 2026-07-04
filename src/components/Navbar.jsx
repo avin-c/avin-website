@@ -36,7 +36,6 @@ function Navbar (props){
     function handleExpand (){
         setExpand(true);
     }
-    console.log("Current Hover State:", isHovered);
     return(
         <div className="navComponent">
             <nav>
