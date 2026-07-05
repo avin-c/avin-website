@@ -176,7 +176,7 @@ p{
 }
 
 .header{
-    color: var(--accent-color);
+    color: var(--text-color);
     text-align: left;
     margin: 0 0;
     padding: 0px;
@@ -694,7 +694,7 @@ form button:active{
 .sideTitle{
     font-size: var(--heading-size);
     margin: 0px;
-    color: var(--accent-color);
+    color: var(--text-color);
 }
 .sidebarHeader{
     font-size: var(--subheading-size);
