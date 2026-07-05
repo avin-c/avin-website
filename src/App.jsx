@@ -15,6 +15,7 @@ import AboutSvg from "./components/svgcomponents/NavSvgs/AboutSvg";
 import GallerySvg from "./components/svgcomponents/NavSvgs/GallerySvg";
 import ProjectsSvg from "./components/svgcomponents/NavSvgs/ProjectsSvg";
 import CodeProgressSvg from "./components/svgcomponents/NavSvgs/CodeProgressSvg";
+import ColorSvg from "./components/svgcomponents/NavSvgs/ColorSvg";
 import Button from "./components/Button";
 import Logo from "./components/Logo";
 import ThemeBuilder from "./components/ThemeBuilder";
@@ -50,7 +51,7 @@ function App() {
     {
       label: "Theme Builder",
       idName: "theme",
-      icon: ContactSvg
+      icon: ColorSvg
     }
   ];
   const [seconds, setSeconds] = useState(35*3600);
