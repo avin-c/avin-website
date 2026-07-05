@@ -17,6 +17,7 @@ import ProjectsSvg from "./components/svgcomponents/NavSvgs/ProjectsSvg";
 import CodeProgressSvg from "./components/svgcomponents/NavSvgs/CodeProgressSvg";
 import Button from "./components/Button";
 import Logo from "./components/Logo";
+import ThemeBuilder from "./components/ThemeBuilder";
 import './App.css';
 function App() {
   const sectionHeaders = [
@@ -44,6 +45,11 @@ function App() {
     {
       label: "Contact me!",
       idName: "contact",
+      icon: ContactSvg
+    },
+    {
+      label: "Theme Builder",
+      idName: "theme",
       icon: ContactSvg
     }
   ];
@@ -91,6 +97,7 @@ function App() {
         <CodeProgress name = {sectionHeaders[2].label} id = {sectionHeaders[2].idName} seconds = {seconds}/>
         <Projects name =  {sectionHeaders[3].label} id =  {sectionHeaders[3].idName} websiteSeconds={seconds}/>
         <Contacts name = {sectionHeaders[4].label} id = {sectionHeaders[4].idName}/>
+        <ThemeBuilder name = {sectionHeaders[5].label} id = {sectionHeaders[5].idName}/>
       </div>
     </div>
   )

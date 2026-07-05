@@ -5,7 +5,7 @@
     --text-color: white;
     --dark-text-color: #271f32;
     --accent-color: #CBDF90;
-    --accent-color-color:  #F19455 ;
+    --accent-color-color:  #F19455;
 
     
     --hightlight-color: #4e8b94;
@@ -166,6 +166,7 @@ p{
 }
 
 .sections{
+    
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -243,7 +244,7 @@ button {
     height: 40px;
     color: var(--text-color);
     border-width: 0px;
-    z-index: 0;
+    z-index: auto;
     transition: 200ms ease;
 }
 
@@ -328,6 +329,7 @@ button:active{
     box-sizing: border-box;
     text-align: left;
     justify-content: center;
+    scroll-margin-top: 100px;
     color: var(--text-color);
     background-color: var(--secondary-color);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -350,7 +352,7 @@ button:active{
     justify-content: center;
     gap: 10px;
     anchor-name: --myAnchor;
-    z-index: 2;
+    z-index: 1;
 }
 .projectTitle{
     text-align: center;
@@ -409,7 +411,7 @@ button:active{
     border-top-right-radius: 15px;
     display: flex;
     height: inherit;
-    z-index: 3;
+    z-index: 1;
     justify-content: center;    
     align-items: center;
     margin-left: -10px;
@@ -432,11 +434,11 @@ button:active{
 }
 .activeTab{
     background-color: var(--primary-color);
-    z-index: 3;
+    z-index: 2;
 }
 .inActiveTab{
     background-color: var(--dark-text-color);
-    z-index: 2;
+    z-index: 1;
 }
 .tabs{
     z-index: 1;
@@ -898,5 +900,7 @@ form button:active{
 }
 
 pagering-overlay{
+    display: block;
     position:static;
+    z-index: 100;
 }
