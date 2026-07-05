@@ -73,19 +73,26 @@ function ThemeBuilder(props){
         return rgbArray;
         
     }
-    function hexToRG(primaryColor, secondaryColor){
-        primaryColor = primaryColor.replace("#", "");
-        secondaryColor = secondaryColor.replace("#", "");
-        let rgbPrimary = ["","",""];
-        let rgbSecondary = ["","",""];
-
-        for (let i = 0; i < primaryColor.length; i++){
-            rgbPrimary[i] = rgbPrimary[i*2] + rgbPrimary[i*2+1];
-            rgbSecondary[i] = rgbSecondary[i*2] + rgbSecondary[i*2+1];
-        }
-        return(rgbPrimary);
+    function findAvg (num1, num2){
+        return Math.round((num1+num2)/2);
     }
-    
+    function findMiddle(hex1, hex2){
+        let rgb1 = hextoRGB(hex1);
+        let rgb2 = hextoRGB(hex2);
+        let middleRGB = ["","",""];
+        for (let i = 0; i<3; i++){
+            middleRGB[i] = findAvg(rgb1[i], rgb2[i]);
+        }
+        
+        for (let i =0; i<3; i++){
+            middleRGB[i] = middleRGB[i].toString(16).padStart(2, "0");
+        }
+
+        let middlehex = "#" + middleRGB.join("");
+
+        return middlehex;
+
+    }
 
     useEffect(() => {
         console.log("use effect color link");
@@ -102,7 +109,7 @@ function ThemeBuilder(props){
         document.documentElement.style.setProperty(`--accent-color`, `${colorArray[2]}`);//setting accent color
         document.documentElement.style.setProperty(`--accent-accent-color`, `${colorArray[3]}`);//setting 2nd accent color
 
-        console.log(hextoRGB(colorArray[0]));
+        console.log(findMiddle(colorArray[0], colorArray[1]));
 
         console.log("updated css variables with " + colorArray);
     }, [lastValidColorLink]);
