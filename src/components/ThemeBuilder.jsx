@@ -184,13 +184,15 @@ function ThemeBuilder(props){
     return(
         <div id = {props.id} className = "content">
             <h3 className = "header">Theme Builder</h3>
-            <p>{"(No guarantee of accessability/contrast)"}</p>
+            <p>Insert a <a href="https://coolors.co/322642-54426b-cbdf90-f19455">coolors.co</a> palette link to customize your viewing experience! (No guarantee of accessability/contrast)</p>
             <input
                 value = {colorLink}
                 placeholder="Paste coolors color palette here"
                 onChange={(e) => setColorLink(e.target.value)}
             ></input>
-            <div>isValid: {isLinkValid(colorLink).toString()}</div>
+            
+            <div>{isLinkValid(colorLink) ? "": "Please enter a valid link"}</div>
+            
             <div className="colorDisplay"></div>
         </div>
     );
