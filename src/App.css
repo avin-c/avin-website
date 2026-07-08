@@ -52,6 +52,17 @@ p{
     margin-bottom: 0;
 }
 
+.boidsbackground {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vw;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 
 #siteNav {
     top: 25%; /* shifts it down */

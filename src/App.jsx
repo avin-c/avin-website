@@ -20,6 +20,7 @@ import Button from "./components/Button";
 import Logo from "./components/Logo";
 import ThemeBuilder from "./components/ThemeBuilder";
 import './App.css';
+import Background from "./components/Background";
 function App() {
   const sectionHeaders = [
     
@@ -84,7 +85,7 @@ function App() {
   return (
     <div>
       
-      
+      <Background color = "#FFFFFF"/>
       <Home/>
       <Navbar list = {sectionHeaders}/>
       <Sidebar/>
