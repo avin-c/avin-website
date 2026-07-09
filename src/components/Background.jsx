@@ -53,7 +53,10 @@ function Background (props){
                 currentFish.sprite.y = currentFish.position.y;
             }
             app.ticker.add((ticker) => {
-                let maxSpeed = 15; //max speed of fish velo
+                let maxSpeed = 4; //max speed of fish velo
+                let seperation = 50;
+                let seperationIndex = 1.5;
+
                 let mouseX = app.renderer.events.pointer.global.x; //mouse position
                 let mouseY = app.renderer.events.pointer.global.y;
                 for (let i = 0; i < props.count; i++){
@@ -62,10 +65,28 @@ function Background (props){
                     fish.acceleration.x = (mouseX - fish.position.x)/100;
                     fish.acceleration.y = (mouseY - fish.position.y)/100;
 
-                    if (Math.abs(fish.velocity.x) < maxSpeed){
+                    let steeringX = 0;
+                    let steeringY = 0;
+                    for (let j = 0; j < fishArray.length; j++) {
+                        if (j != i){
+                            let deltaX = fishArray[i].position.x - fishArray[j].position.x;
+                            let deltaY = fishArray[i].position.y - fishArray[j].position.y;
+                            let distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+                            if (distance < seperation){
+                                steeringX += deltaX / distance;
+                                steeringY += deltaY / distance;
+                                steeringX *= seperationIndex;
+                                steeringY *= seperationIndex;
+                            }
+                        }
+                    }
+                    fish.acceleration.x += steeringX;
+                    fish.acceleration.y += steeringY;
+
+                    if (Math.abs(fish.velocity.x) < maxSpeed || Math.abs(fish.velocity.x + fish.acceleration.x) < maxSpeed ){
                         fish.velocity.x += fish.acceleration.x;
                     }
-                    if (Math.abs(fish.velocity.y) < maxSpeed){
+                    if (Math.abs(fish.velocity.y) < maxSpeed || Math.abs(fish.velocity.y + fish.acceleration.y) < maxSpeed){
                         fish.velocity.y += fish.acceleration.y;
                     }
                     fish.velocity.x *= 0.9; //dampen velocity to remove bounceback
@@ -79,8 +100,8 @@ function Background (props){
                     fish.sprite.x = fish.position.x;
                     fish.sprite.y = fish.position.y;
                     
-                    fish.ax = 0;
-                    fish.ay = 0;
+                    fish.acceleration.x = 0;
+                    fish.acceleration.y = 0;
 
                 }
 
