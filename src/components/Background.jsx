@@ -10,6 +10,7 @@ function Background (props){
         let isDestroyed = false;
 
         async function initializePixiJS(){ //all pixijs setup
+            
             await app.init ( 
                 {
                     resizeTo : window,
@@ -27,23 +28,72 @@ function Background (props){
                 containerRef.current.appendChild(app.canvas);
             }
 
-            const fishShape = new Graphics ().poly([
-                -15, -10,
-                15, 0,
-                -15, 10,
-                -5, 0
-            ])
-            .fill({color: props.color, alpha: 0.3});
+            const fishArray = new Array(props.count);
+            for (let i = 0; i < props.count; i++){
+                fishArray[i] = {};
+                let currentFish = fishArray[i];
 
-            fishShape.x = window.innerWidth/2; //set position
-            fishShape.y = window.innerHeight/2;
+                currentFish.velocity = {x: 0, y: 0}; //initialize velo and accel vectors
+                currentFish.acceleration = {x: 0, y: 0};
+                
+                currentFish.sprite = new Graphics ().poly([
+                        -15, -10,
+                        15, 0,
+                        -15, 10,
+                        -5, 0
+                    ])
+                    .fill({color: props.color, alpha: 0.3});
 
-            app.stage.addChild(fishShape);
+                currentFish.position = { //randomize fish spawn location
+                    x: Math.random()*window.innerWidth, 
+                    y: Math.random()*window.innerHeight
+                };
+                currentFish.sprite.rotation = 0;    
+                currentFish.sprite.x = currentFish.position.x;
+                currentFish.sprite.y = currentFish.position.y;
+            }
+            app.ticker.add((ticker) => {
+                let maxSpeed = 15; //max speed of fish velo
+                let mouseX = app.renderer.events.pointer.global.x; //mouse position
+                let mouseY = app.renderer.events.pointer.global.y;
+                for (let i = 0; i < props.count; i++){
+                    let fish = fishArray[i];
 
+                    fish.acceleration.x = (mouseX - fish.position.x)/100;
+                    fish.acceleration.y = (mouseY - fish.position.y)/100;
+
+                    if (Math.abs(fish.velocity.x) < maxSpeed){
+                        fish.velocity.x += fish.acceleration.x;
+                    }
+                    if (Math.abs(fish.velocity.y) < maxSpeed){
+                        fish.velocity.y += fish.acceleration.y;
+                    }
+                    fish.velocity.x *= 0.9; //dampen velocity to remove bounceback
+                    fish.velocity.y *= 0.9;
+
+                    fish.sprite.rotation = Math.atan2(fish.velocity.y, fish.velocity.x);
+                    
+                    fish.position.x += fish.velocity.x;
+                    fish.position.y += fish.velocity.y;
+
+                    fish.sprite.x = fish.position.x;
+                    fish.sprite.y = fish.position.y;
+                    
+                    fish.ax = 0;
+                    fish.ay = 0;
+
+                }
+
+            })
+            for (let i = 0; i < props.count; i++){
+                app.stage.addChild(fishArray[i].sprite);
+            }
+            
+
+
+            
         }
-
-        
-
+    
         initializePixiJS();
 
         return() => {
@@ -52,11 +102,12 @@ function Background (props){
                 app.destroy({ children: true });
             }
         };
-    }, [props.color])
+    }, [props.color, props.count])
 
+    
 
     return (
-        <div ref={containerRef} className="boidsbackground" />
+        <div ref={containerRef} className="boidsbackground"/>
     );
 }
 
