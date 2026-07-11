@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { Application, Graphics } from 'pixi.js';
-import { scale } from "motion";
 
 function Background (props){
     const containerRef = useRef(null);
@@ -82,6 +81,7 @@ function Background (props){
             }
             app.ticker.add((ticker) => {
                 let maxVelocity = 4; //max speed of fish velo
+                let minVelocity = 2;
                 let maxAcceleration = 0.2;
 
 
@@ -104,21 +104,24 @@ function Background (props){
                     //----separation-----
                     let separationForce = {x: 0, y: 0};
                     let separationIndex = 10; //weighting of separation
-                    let separationRadius = 50;
+                    let separationRadius = 30;
                     let separationCount = 0;
 
                     //----cohesion-------
                     let cohesionForce = {x: 0, y: 0};
                     let cohesionIndex = 1; //weighting of cohesion
-                    let cohesionRadius = 30; //size of radius that fish wants to go closer to the average position of
+                    let cohesionRadius = 50; //size of radius that fish wants to go closer to the average position of
                     let totalPositions = {x: 0, y: 0};
                     let cohesionCount = 0;
                     let averagePosition = {x: 0, y: 0};
 
                     //----alignment------
                     let alignmentForce = {x: 0, y: 0};
-                    let alignmentIndex = 0;
-                    let alignmentRadius = 0; //size of fish radius that fish wants to go closer to 
+                    let alignmentIndex = 2;
+                    let alignmentRadius = 50; //size of fish radius that fish wants to go closer to
+                    let totalVelocities = {x: 0, y: 0};
+                    let alignmentCount = 0; 
+                    let averageVelocity = {x: 0, y: 0};
 
                     //iterating over every other fish
                     for (let j = 0; j < fishArray.length; j++) {
@@ -145,6 +148,13 @@ function Background (props){
                                 totalPositions.y += fishArray[j].position.y - fish.position.y;
                                 cohesionCount++;
                             }
+
+                            //alignment vector
+                            if (distance < alignmentRadius){
+                                totalVelocities.x += fishArray[j].velocity.x;
+                                totalVelocities.y += fishArray[j].velocity.y;
+                                alignmentCount++;
+                            }
                             
                         }
                     }
@@ -159,9 +169,17 @@ function Background (props){
                         averagePosition.x = totalPositions.x / cohesionCount;
                         averagePosition.y = totalPositions.y / cohesionCount;
                     }
-                    
                     cohesionForce.x = averagePosition.x;
                     cohesionForce.y = averagePosition.y;
+
+                    //alignment: calculate average velocity
+                    if (alignmentCount > 0){
+                        averageVelocity.x = totalVelocities.x / alignmentCount;
+                        averageVelocity.y = totalVelocities.y / alignmentCount;
+                    }
+                    alignmentForce.x = averageVelocity.x /*target*/- fish.velocity.x;
+                    alignmentForce.y = averageVelocity.y /*target*/- fish.velocity.y;
+                    
                     
                     //adding boid steering logic to acceleration
                     normalizeVector(mouseForce);
@@ -193,8 +211,15 @@ function Background (props){
                         fish.velocity.x = fish.velocity.x / ratio;
                         fish.velocity.y = fish.velocity.y / ratio;
                     }
+                    if (totalVelocity < minVelocity){
+                        let ratio = totalVelocity / minVelocity;
+                        fish.velocity.x = fish.velocity.x / ratio;
+                        fish.velocity.y = fish.velocity.y / ratio;
+                    }
                     if (magnitude(fish.velocity.x, fish.velocity.y) > 0.01){
-                        fish.sprite.rotation += (Math.atan2(fish.velocity.y, fish.velocity.x) - fish.sprite.rotation)*0.25;
+                        let angleDiff = Math.atan2(fish.velocity.y, fish.velocity.x) - fish.sprite.rotation;
+                        angleDiff = Math.atan2(Math.sin(angleDiff), Math.cos(angleDiff));
+                        fish.sprite.rotation += angleDiff * 0.25;
                     }
                     //position part
                     fish.position.x += fish.velocity.x;
