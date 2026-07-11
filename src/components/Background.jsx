@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useRef } from "react";
-import { Application, Graphics } from 'pixi.js';
+import { Application, Graphics, Ticker} from 'pixi.js';
 
 function Background (props){
     const containerRef = useRef(null);
@@ -32,7 +32,12 @@ function Background (props){
             mouse.x = e.clientX;
             mouse.y = e.clientY;
         };
+        const handleVisibility = () => {
+            if (!app.renderer) return; // guard: not initialized yet
+            document.hidden ? app.ticker.stop() : app.ticker.resume();
+        }
         window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("visibilitychange", handleVisibility)
 
         async function initializePixiJS(){ //all pixijs setup
             
@@ -80,6 +85,7 @@ function Background (props){
                 currentFish.sprite.y = currentFish.position.y;
             }
             app.ticker.add((ticker) => {
+                const dt = ticker.deltaTime;
                 let maxVelocity = 4; //max speed of fish velo
                 let minVelocity = 2;
                 let maxAcceleration = 0.2;
@@ -94,7 +100,7 @@ function Background (props){
                     
                     //mouse steering acceleration
                     let mouseForce = {x: 0, y: 0};
-                    let mouseForceIndex = 0; 
+                    let mouseForceIndex = 10; 
                     mouseForce.x = (mouse.x - fish.position.x);
                     mouseForce.y = (mouse.y - fish.position.y);
                     ///////////////////////////////////////////////////////////
@@ -203,8 +209,8 @@ function Background (props){
                     }
 
                     //velocity part
-                    fish.velocity.x += fish.acceleration.x;
-                    fish.velocity.y += fish.acceleration.y;
+                    fish.velocity.x += fish.acceleration.x * dt;
+                    fish.velocity.y += fish.acceleration.y * dt;
                     let totalVelocity = magnitude(fish.velocity.x, fish.velocity.y);
                     if (totalVelocity > maxVelocity){
                         let ratio = totalVelocity / maxVelocity;
@@ -222,8 +228,8 @@ function Background (props){
                         fish.sprite.rotation += angleDiff * 0.25;
                     }
                     //position part
-                    fish.position.x += fish.velocity.x;
-                    fish.position.y += fish.velocity.y;
+                    fish.position.x += fish.velocity.x * dt;
+                    fish.position.y += fish.velocity.y * dt;
                     
                     //screen wrapping
 
@@ -265,6 +271,7 @@ function Background (props){
         return() => {
             isDestroyed = true;
             window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("visiblitychange", handleVisibility);
             if (app.renderer) {
                 app.destroy({ children: true });
             }
