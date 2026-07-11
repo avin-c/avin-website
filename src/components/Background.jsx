@@ -14,8 +14,9 @@ function Background (props){
     useEffect(() => {
         const app =  new Application();
         let isDestroyed = false;
-
-        const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; //prevent top left
+        let screenX = window.innerWidth;
+        let screenY = window.innerHeight;
+        const mouse = { x: screenX / 2, y: screenY / 2 }; //prevent top left
         const handleMouseMove = (e) => {
             mouse.x = e.clientX;
             mouse.y = e.clientY;
@@ -46,7 +47,9 @@ function Background (props){
                 fishArray[i] = {};
                 let currentFish = fishArray[i];
 
-                currentFish.velocity = {x: 0, y: 0}; //initialize velo and accel vectors
+                //random initial velocity
+                let angle = Math.random() * Math.PI * 2
+                currentFish.velocity = {x: Math.cos(angle), y: Math.sin(angle)}; //initialize velo and accel vectors
                 currentFish.acceleration = {x: 0, y: 0};
                 
                 currentFish.sprite = new Graphics ().poly([
@@ -55,11 +58,11 @@ function Background (props){
                         -15, 10,
                         -5, 0
                     ])
-                    .fill({color: props.color, alpha: 0.3});
+                    .fill({color: props.color, alpha: 0.1});
 
                 currentFish.position = { //randomize fish spawn location
-                    x: Math.random()*window.innerWidth, 
-                    y: Math.random()*window.innerHeight
+                    x: Math.random()* screenX, 
+                    y: Math.random()* screenY
                 };
                 currentFish.sprite.rotation = 0;    
                 currentFish.sprite.x = currentFish.position.x;
@@ -91,8 +94,8 @@ function Background (props){
                         if (j != i){
 
                             ///calculate x, y, and total distance 
-                            let deltaX = fishArray[i].position.x - fishArray[j].position.x;
-                            let deltaY = fishArray[i].position.y - fishArray[j].position.y;
+                            let deltaX = fish.position.x - fishArray[j].position.x;
+                            let deltaY = fish.position.y - fishArray[j].position.y;
                             let distance = magnitude(deltaX, deltaY);
 
                             //seperation vector added if distance is within seperation radius
@@ -131,11 +134,29 @@ function Background (props){
                         fish.velocity.x = fish.velocity.x / ratio;
                         fish.velocity.y = fish.velocity.y / ratio;
                     }
-
-                    fish.sprite.rotation = Math.atan2(fish.velocity.y, fish.velocity.x);
+                    if (magnitude(fish.velocity.x, fish.velocity.y) > 0.01){
+                        fish.sprite.rotation = Math.atan2(fish.velocity.y, fish.velocity.x)
+                    }
                     //position part
                     fish.position.x += fish.velocity.x;
                     fish.position.y += fish.velocity.y;
+                    
+                    //screen wrapping
+
+                    let fishLength = 30;
+                    let halfFish = fishLength/2
+                    if (fish.position.x + fishLength < 0){
+                        fish.position.x = screenX + fish.position.x + fishLength;
+                    }
+                    if (fish.position.x - fishLength > screenX){
+                        fish.position.x = fish.position.x - screenX - fishLength;
+                    }
+                    if (fish.position.y + fishLength < 0){
+                        fish.position.y = screenY + fish.position.y + fishLength;
+                    }
+                    if (fish.position.y - fishLength > screenY){
+                        fish.position.y = fish.position.y - screenY - fishLength;
+                    }
 
                     fish.sprite.x = fish.position.x;
                     fish.sprite.y = fish.position.y;
