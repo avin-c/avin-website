@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { Application, Graphics } from 'pixi.js';
+import { scale } from "motion";
 
 function Background (props){
     const containerRef = useRef(null);
@@ -9,7 +10,18 @@ function Background (props){
     function magnitude(x,y){
         return Math.sqrt(Math.pow(x,2)+Math.pow(y,2));
     }
+    function scaleVector(vector, scaleFactor){
+        vector.x *= scaleFactor;
+        vector.y *= scaleFactor;
 
+    }
+    function normalizeVector(vector){
+        let total = magnitude(vector.x, vector.y);
+        if (total != 0){
+            vector.x /= total;
+            vector.y /= total;
+        }
+    }
 
     useEffect(() => {
         const app =  new Application();
@@ -49,7 +61,7 @@ function Background (props){
 
                 //random initial velocity
                 let angle = Math.random() * Math.PI * 2
-                currentFish.velocity = {x: Math.cos(angle), y: Math.sin(angle)}; //initialize velo and accel vectors
+                currentFish.velocity = {x: Math.cos(angle)*4, y: Math.sin(angle)*4}; //initialize velo and accel vectors
                 currentFish.acceleration = {x: 0, y: 0};
                 
                 currentFish.sprite = new Graphics ().poly([
@@ -71,23 +83,42 @@ function Background (props){
             app.ticker.add((ticker) => {
                 let maxVelocity = 4; //max speed of fish velo
                 let maxAcceleration = 0.2;
-                let seperation = 50;
-                let seperationIndex = 100;
+
+
 
                 for (let i = 0; i < props.count; i++){
                     let fish = fishArray[i];    
 
                     //ACCELERATION PART
-
+                    
+                    
                     //mouse steering acceleration
-                    fish.acceleration.x = (mouse.x - fish.position.x)/100;
-                    fish.acceleration.y = (mouse.y - fish.position.y)/100;
+                    let mouseForce = {x: 0, y: 0};
+                    let mouseForceIndex = 0; 
+                    mouseForce.x = (mouse.x - fish.position.x);
+                    mouseForce.y = (mouse.y - fish.position.y);
+                    ///////////////////////////////////////////////////////////
 
-                    //rest of boid's acceleration
-                    let steeringX = 0; //boid x and y vector
-                    let steeringY = 0;
+                    //boid acceleration forces
 
-                    let count = 0;
+                    //----separation-----
+                    let separationForce = {x: 0, y: 0};
+                    let separationIndex = 10; //weighting of separation
+                    let separationRadius = 50;
+                    let separationCount = 0;
+
+                    //----cohesion-------
+                    let cohesionForce = {x: 0, y: 0};
+                    let cohesionIndex = 1; //weighting of cohesion
+                    let cohesionRadius = 30; //size of radius that fish wants to go closer to the average position of
+                    let totalPositions = {x: 0, y: 0};
+                    let cohesionCount = 0;
+                    let averagePosition = {x: 0, y: 0};
+
+                    //----alignment------
+                    let alignmentForce = {x: 0, y: 0};
+                    let alignmentIndex = 0;
+                    let alignmentRadius = 0; //size of fish radius that fish wants to go closer to 
 
                     //iterating over every other fish
                     for (let j = 0; j < fishArray.length; j++) {
@@ -96,29 +127,57 @@ function Background (props){
                             ///calculate x, y, and total distance 
                             let deltaX = fish.position.x - fishArray[j].position.x;
                             let deltaY = fish.position.y - fishArray[j].position.y;
+                            
                             let distance = magnitude(deltaX, deltaY);
 
-                            //seperation vector added if distance is within seperation radius
-                            if (distance < seperation && distance != 0){
-                                count++;
-                                steeringX += deltaX / distance;
-                                steeringY += deltaY / distance;
+                            //separation vector added if distance is within separation radius
+                            if (distance < separationRadius && distance != 0){
+                            
+                                separationForce.x += deltaX / (distance * distance);
+                                separationForce.y += deltaY / (distance * distance);
+
+                                separationCount++; //counts fish in radius 
                             }
+
+                            //cohesion vector, only doing sums
+                            if (distance < cohesionRadius && distance != 0){
+                                totalPositions.x += fishArray[j].position.x - fish.position.x;
+                                totalPositions.y += fishArray[j].position.y - fish.position.y;
+                                cohesionCount++;
+                            }
+                            
                         }
                     }
 
-                    //evens out the steering between 
-                    if (count > 0){
-                        steeringY = (steeringY / count)*seperationIndex;
-                        steeringX = (steeringX / count)*seperationIndex;
+                    //separation: evens out the steering between different fish
+                    if (separationCount > 0){
+                        separationForce.x /= separationCount;
+                        separationForce.y /= separationCount;
+                    }
+                    //cohesion: calculate average position
+                    if (cohesionCount > 0){
+                        averagePosition.x = totalPositions.x / cohesionCount;
+                        averagePosition.y = totalPositions.y / cohesionCount;
                     }
                     
+                    cohesionForce.x = averagePosition.x;
+                    cohesionForce.y = averagePosition.y;
+                    
                     //adding boid steering logic to acceleration
-                    fish.acceleration.x += steeringX; 
-                    fish.acceleration.y += steeringY;
+                    normalizeVector(mouseForce);
+                    normalizeVector(separationForce);
+                    normalizeVector(cohesionForce);
+                    normalizeVector(alignmentForce);
+                    scaleVector(mouseForce, mouseForceIndex);
+                    scaleVector(separationForce, separationIndex);
+                    scaleVector(cohesionForce, cohesionIndex);
+                    scaleVector(alignmentForce, alignmentIndex);
 
-                    let totalAcceleration = magnitude(fish.acceleration.x, fish.acceleration.y);
+                    fish.acceleration.x = mouseForce.x + separationForce.x + cohesionForce.x + alignmentForce.x;
+                    fish.acceleration.y = mouseForce.y + separationForce.y + cohesionForce.y + alignmentForce.y;
+                    
                     //clamping down acceleration
+                    let totalAcceleration = magnitude(fish.acceleration.x, fish.acceleration.y);
                     if (totalAcceleration > maxAcceleration){
                         let ratio = totalAcceleration / maxAcceleration;
                         fish.acceleration.x = fish.acceleration.x / ratio;
@@ -135,7 +194,7 @@ function Background (props){
                         fish.velocity.y = fish.velocity.y / ratio;
                     }
                     if (magnitude(fish.velocity.x, fish.velocity.y) > 0.01){
-                        fish.sprite.rotation = Math.atan2(fish.velocity.y, fish.velocity.x)
+                        fish.sprite.rotation += (Math.atan2(fish.velocity.y, fish.velocity.x) - fish.sprite.rotation)*0.25;
                     }
                     //position part
                     fish.position.x += fish.velocity.x;
