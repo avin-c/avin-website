@@ -85,7 +85,7 @@ function App() {
   return (
     <div>
       
-      <Background color = "#FFFFFF" count = {100}/>
+      <Background color = "#FFFFFF" count = {200}/>
       <Home/>
       <Navbar list = {sectionHeaders}/>
       <Sidebar/>

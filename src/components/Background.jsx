@@ -34,7 +34,12 @@ function Background (props){
         };
         const handleVisibility = () => {
             if (!app.renderer) return; // guard: not initialized yet
-            document.hidden ? app.ticker.stop() : app.ticker.resume();
+            if (window.hidden){
+                app.ticker.stop()
+            }
+            else{
+                app.ticker.resume();
+            }
         }
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("visibilitychange", handleVisibility)
@@ -65,7 +70,7 @@ function Background (props){
 
                 //random initial velocity
                 let angle = Math.random() * Math.PI * 2
-                currentFish.velocity = {x: Math.cos(angle)*4, y: Math.sin(angle)*4}; //initialize velo and accel vectors
+                currentFish.velocity = {x: Math.cos(angle)*2, y: Math.sin(angle)*2}; //initialize velo and accel vectors
                 currentFish.acceleration = {x: 0, y: 0};
                 
                 currentFish.sprite = new Graphics ().poly([
@@ -85,9 +90,11 @@ function Background (props){
                 currentFish.sprite.y = currentFish.position.y;
             }
             app.ticker.add((ticker) => {
+                screenX = app.screen.width;
+                screenY = app.screen.height;
                 const dt = ticker.deltaTime;
-                let maxVelocity = 4; //max speed of fish velo
-                let minVelocity = 2;
+                let maxVelocity = 3; //max speed of fish velo
+                let minVelocity = 1;
                 let maxAcceleration = 0.2;
 
 
@@ -101,8 +108,17 @@ function Background (props){
                     //mouse steering acceleration
                     let mouseForce = {x: 0, y: 0};
                     let mouseForceIndex = 10; 
-                    mouseForce.x = (mouse.x - fish.position.x);
-                    mouseForce.y = (mouse.y - fish.position.y);
+                    let mouseRadius = 100;
+                    
+                    let distanceToMouse = {
+                        x: fish.position.x - mouse.x,
+                        y: fish.position.y - mouse.y}
+                    let totalMouseDistance = magnitude(distanceToMouse.x, distanceToMouse.y);
+
+                    if (totalMouseDistance < mouseRadius){
+                        mouseForce.x = distanceToMouse.x / totalMouseDistance;
+                        mouseForce.y = distanceToMouse.y / totalMouseDistance;
+                    }
                     ///////////////////////////////////////////////////////////
 
                     //boid acceleration forces
@@ -132,6 +148,7 @@ function Background (props){
                     //iterating over every other fish
                     for (let j = 0; j < fishArray.length; j++) {
                         if (j != i){
+
 
                             ///calculate x, y, and total distance 
                             let deltaX = fish.position.x - fishArray[j].position.x;
