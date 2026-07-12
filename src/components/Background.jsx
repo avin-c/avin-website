@@ -38,7 +38,7 @@ function Background (props){
                 app.ticker.stop()
             }
             else{
-                app.ticker.resume();
+                app.ticker.start();
             }
         }
         window.addEventListener("mousemove", handleMouseMove);
@@ -93,9 +93,9 @@ function Background (props){
                 screenX = app.screen.width;
                 screenY = app.screen.height;
                 const dt = ticker.deltaTime;
-                let maxVelocity = 3; //max speed of fish velo
-                let minVelocity = 1;
-                let maxAcceleration = 0.2;
+                let maxVelocity = 5; //max speed of fish velo
+                let minVelocity = 2.5;
+                let maxAcceleration = 1;
 
 
 
@@ -131,7 +131,7 @@ function Background (props){
 
                     //----cohesion-------
                     let cohesionForce = {x: 0, y: 0};
-                    let cohesionIndex = 1; //weighting of cohesion
+                    let cohesionIndex = 0.6; //weighting of cohesion
                     let cohesionRadius = 50; //size of radius that fish wants to go closer to the average position of
                     let totalPositions = {x: 0, y: 0};
                     let cohesionCount = 0;
@@ -188,13 +188,12 @@ function Background (props){
                         separationForce.y /= separationCount;
                     }
                     //cohesion: calculate average position
-                    if (cohesionCount > 0){
+                    if (cohesionCount > 0) {
                         averagePosition.x = totalPositions.x / cohesionCount;
                         averagePosition.y = totalPositions.y / cohesionCount;
+                        cohesionForce.x = averagePosition.x
+                        cohesionForce.y = averagePosition.y
                     }
-                    cohesionForce.x = averagePosition.x;
-                    cohesionForce.y = averagePosition.y;
-
                     //alignment: calculate average velocity
                     if (alignmentCount > 0){
                         averageVelocity.x = totalVelocities.x / alignmentCount;
@@ -226,6 +225,8 @@ function Background (props){
                     }
 
                     //velocity part
+                    //adding some drag
+                    scaleVector(fish.velocity, 0.99);
                     fish.velocity.x += fish.acceleration.x * dt;
                     fish.velocity.y += fish.acceleration.y * dt;
                     let totalVelocity = magnitude(fish.velocity.x, fish.velocity.y);
@@ -288,7 +289,7 @@ function Background (props){
         return() => {
             isDestroyed = true;
             window.removeEventListener("mousemove", handleMouseMove);
-            window.removeEventListener("visiblitychange", handleVisibility);
+            window.removeEventListener("visibilitychange", handleVisibility);
             if (app.renderer) {
                 app.destroy({ children: true });
             }
