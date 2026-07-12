@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
 function BoidControl (props){
+    function setMinMax (value){
+        props.setMinMax({min: value[0], max: value[1]});
+    }
     return (
         <div className="content">
             <h3 className = "header">Boids Simulation</h3>
@@ -26,10 +29,10 @@ function BoidControl (props){
                 <input name = "countrange" type = "range" id = "count"></input>
                 <label></label>
             </div>
-            <div>
-                <label htmlFor = "minmax">Minimum and maximum entity velocity</label>
+            <div className = "rangeInput">
+                <label htmlFor = "minmax" id = "minmaxlabel">Minimum and maximum entity velocity </label>
                 <div id = "twothumb">
-                    <Slider.Root defaultValue={[25, 75]} className="slider-root">
+                    <Slider.Root defaultValue={[25, 75]} className="slider-root" onValueChange={setMinMax}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" />
                         </Slider.Track>

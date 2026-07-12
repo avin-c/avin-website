@@ -6,13 +6,13 @@ import BoidControl from "./BoidControl";
 function BoidSimulation (props){
 
     const [count, setCount] = useState(100);
-    const [minMax, setMinMax] = useState({min: 2, max: 4});
+    const [minMax, setMinMax] = useState([2, 4]);
     const [boid, setBoid] = useState({s: 10, c: 0.6, a: 2});
     const [mouse, setMouse] = useState("repel");
     return(
         <div>
             <Background color = "#FFFFFF" count = {count}/>
-            <BoidControl setCount = {setCount} setMinMax = {setMinMax} setBoid = {setBoid} setMouse = {setMouse}/>
+            <BoidControl setCount = {setCount} minMax = {minMax} setMinMax = {setMinMax} setBoid = {setBoid} setMouse = {setMouse}/>
         </div>
     )
 } 
