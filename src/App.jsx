@@ -105,7 +105,7 @@ function App() {
         <Projects name =  {sectionHeaders[3].label} id =  {sectionHeaders[3].idName} websiteSeconds={seconds}/>
         <Contacts name = {sectionHeaders[4].label} id = {sectionHeaders[4].idName}/>
         <ThemeBuilder name = {sectionHeaders[5].label} id = {sectionHeaders[5].idName}/>
-        <BoidSimulation name = {sectionHeaders[6].label} id = {sectionHeaders[5].idName}/>
+        <BoidSimulation name = {sectionHeaders[6].label} id = {sectionHeaders[6].idName}/>
       </div>
     </div>
   )

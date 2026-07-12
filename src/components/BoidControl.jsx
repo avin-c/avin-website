@@ -24,10 +24,16 @@ function BoidControl (props){
             <h3>Control my custom Boids simulation below:</h3>
 
             {/*Add count, minmax, boid variables, mouse mode */}
-            <div>
+            <div className = "rangeInput">
                 <label htmlFor = "count">Number of entities (above 200 may cause lag)</label>
-                <input name = "countrange" type = "range" id = "count"></input>
-                <label></label>
+                <div  className="rangeInput">
+                    <Slider.Root defaultValue={[50]} className="slider-root" onValueChange={setMinMax}>
+                        <Slider.Track className = "slider-track">
+                            <Slider.Range className="slider-range" id="singleRange"/>
+                        </Slider.Track>
+                        <Slider.Thumb className="slider-thumb"/>
+                    </Slider.Root>
+                </div>
             </div>
             <div className = "rangeInput">
                 <label htmlFor = "minmax" id = "minmaxlabel">Minimum and maximum entity velocity </label>
@@ -40,6 +46,39 @@ function BoidControl (props){
                         <Slider.Thumb className="slider-thumb"/>
                     </Slider.Root>
                 </div>
+            </div>
+            <strong>Boid Forces Strength:</strong>
+            <div className = "triRange">
+                
+                <div className = "rangeInput" id = "separation">
+                    <label>Separation</label>
+                    <Slider.Root orientation="vertical" defaultValue={[50]} className="slider-root" onValueChange={setMinMax}>
+                        <Slider.Track className = "slider-track">
+                            <Slider.Range className="slider-range" id="singleRange"/>
+                        </Slider.Track>
+                        <Slider.Thumb className="slider-thumb"/>
+                    </Slider.Root>
+                </div>
+                <div className = "rangeInput" id = "cohesion">
+                    <label>Cohesion</label>
+                    <Slider.Root orientation="vertical" defaultValue={[50]} className="slider-root" onValueChange={setMinMax}>
+                        <Slider.Track className = "slider-track">
+                            <Slider.Range className="slider-range" id="singleRange"/>
+                        </Slider.Track>
+                        <Slider.Thumb className="slider-thumb"/>
+                    </Slider.Root>
+                </div>
+                <div className = "rangeInput" id = "alignment">
+                    <label>Alignment</label>
+                    <Slider.Root orientation="vertical" defaultValue={[50]} className="slider-root" onValueChange={setMinMax}>
+                        <Slider.Track className = "slider-track">
+                            <Slider.Range className="slider-range" id="singleRange"/>
+                        </Slider.Track>
+                        <Slider.Thumb className="slider-thumb"/>
+                    </Slider.Root>
+                </div>
+                
+
             </div>
 
         </div>

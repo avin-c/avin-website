@@ -831,34 +831,41 @@ form button:active{
 .rangeInput{
     display: flex;
     flex-direction: column; 
-    gap: 10px;
+    gap: 15px;
 }
 .minmaxlabel{
     margin-bottom: 15px;
 }
 .slider-root{
     height: 30px;
-    background: var(--accent-color);
     position: relative;
     display: flex;
     align-items: center;
     user-select: none;
     touch-action: none;
     margin-bottom: 10px;
+    
 }
+
 .slider-track {
     height: 100%;
+    width: calc(auto - 10px);
     background-color: var(--primary-color);
     position: relative;
     flex-grow: 1;
     border-radius: 0px;
+    border-radius: 15px;
+    overflow: hidden;
 }   
 
 .slider-range {
     position: absolute;
 	background-color: var(--accent-color);
-	border-radius: 0px;
+	border-radius: 15px;
 	height: 100%;
+}
+#singleRange{
+    border-radius: 0px;
 }
 
 .slider-thumb {
@@ -880,7 +887,35 @@ form button:active{
 }
 .slider-thumb:active{
     cursor:grab;
-    scale: 90%;
+    scale: 120%;
+}
+.triRange{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 20px;
+}
+.triRange .slider-root {
+    flex-direction: column;
+	height: 200px;
+}
+.triRange .slider-track{
+    width: 30px;
+}
+.triRange .slider-thumb{
+    width: 30px;
+}
+.triRange .slider-range{
+    width: 30px;
+}
+.triRange .rangeInput{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 @media (max-width:768px){
     :root{
