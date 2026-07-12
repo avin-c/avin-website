@@ -21,6 +21,7 @@ import Logo from "./components/Logo";
 import ThemeBuilder from "./components/ThemeBuilder";
 import './App.css';
 import Background from "./components/Background";
+import BoidSimulation from "./components/BoidSimulation";
 function App() {
   const sectionHeaders = [
     
@@ -52,6 +53,11 @@ function App() {
     {
       label: "Theme Builder",
       idName: "theme",
+      icon: ColorSvg
+    },
+    {
+      label: "Boid's Simulation!",
+      idName: "boid",
       icon: ColorSvg
     }
   ];
@@ -85,7 +91,6 @@ function App() {
   return (
     <div>
       
-      <Background color = "#FFFFFF" count = {200}/>
       <Home/>
       <Navbar list = {sectionHeaders}/>
       <Sidebar/>
@@ -100,6 +105,7 @@ function App() {
         <Projects name =  {sectionHeaders[3].label} id =  {sectionHeaders[3].idName} websiteSeconds={seconds}/>
         <Contacts name = {sectionHeaders[4].label} id = {sectionHeaders[4].idName}/>
         <ThemeBuilder name = {sectionHeaders[5].label} id = {sectionHeaders[5].idName}/>
+        <BoidSimulation name = {sectionHeaders[6].label} id = {sectionHeaders[5].idName}/>
       </div>
     </div>
   )
