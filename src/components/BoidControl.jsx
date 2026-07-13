@@ -5,6 +5,9 @@ function BoidControl (props){
     function setMinMax (value){
         props.setMinMax({min: value[0], max: value[1]});
     }
+    function setCount (value){
+        props.setCount(value[0]);
+    }
     return (
         <div className="content">
             <h3 className = "header">Boids Simulation</h3>
@@ -25,9 +28,9 @@ function BoidControl (props){
 
             {/*Add count, minmax, boid variables, mouse mode */}
             <div className = "rangeInput">
-                <label htmlFor = "count">Number of entities (above 200 may cause lag)</label>
+                <label htmlFor = "count">Number of entities (above 200 may cause lag): {props.count}</label>
                 <div  className="rangeInput">
-                    <Slider.Root defaultValue={[50]} className="slider-root" onValueChange={setMinMax}>
+                    <Slider.Root value = {[props.count]} defaultValue={[50]} className="slider-root" onValueChange={setCount} min = {0} max = {500}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" id="singleRange"/>
                         </Slider.Track>
