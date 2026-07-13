@@ -30,7 +30,7 @@ function BoidControl (props){
             <div className = "rangeInput">
                 <label htmlFor = "count">Number of entities (above 200 may cause lag): {props.count}</label>
                 <div  className="rangeInput">
-                    <Slider.Root value = {[props.count]} defaultValue={[50]} className="slider-root" onValueChange={setCount} min = {0} max = {500}>
+                    <Slider.Root value = {[props.count]} defaultValue={[100]} className="slider-root" onValueChange={setCount} min = {0} max = {500}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" id="singleRange"/>
                         </Slider.Track>
@@ -41,7 +41,7 @@ function BoidControl (props){
             <div className = "rangeInput">
                 <label htmlFor = "minmax" id = "minmaxlabel">Minimum and maximum entity velocity </label>
                 <div id = "twothumb">
-                    <Slider.Root defaultValue={[25, 75]} className="slider-root" onValueChange={setMinMax}>
+                    <Slider.Root defaultValue={[2.5, 5]} className="slider-root" onValueChange={setMinMax}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" />
                         </Slider.Track>
@@ -55,7 +55,7 @@ function BoidControl (props){
                 
                 <div className = "rangeInput" id = "separation">
                     <label>Separation</label>
-                    <Slider.Root orientation="vertical" defaultValue={[50]} className="slider-root" onValueChange={setMinMax}>
+                    <Slider.Root orientation="vertical" defaultValue={[10]} className="slider-root" onValueChange={setMinMax}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" id="singleRange"/>
                         </Slider.Track>
@@ -64,7 +64,7 @@ function BoidControl (props){
                 </div>
                 <div className = "rangeInput" id = "cohesion">
                     <label>Cohesion</label>
-                    <Slider.Root orientation="vertical" defaultValue={[50]} className="slider-root" onValueChange={setMinMax}>
+                    <Slider.Root orientation="vertical" defaultValue={[0.6]} className="slider-root" onValueChange={setMinMax}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" id="singleRange"/>
                         </Slider.Track>
@@ -73,7 +73,7 @@ function BoidControl (props){
                 </div>
                 <div className = "rangeInput" id = "alignment">
                     <label>Alignment</label>
-                    <Slider.Root orientation="vertical" defaultValue={[50]} className="slider-root" onValueChange={setMinMax}>
+                    <Slider.Root orientation="vertical" defaultValue={[2]} className="slider-root" onValueChange={setMinMax}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" id="singleRange"/>
                         </Slider.Track>

@@ -11,7 +11,7 @@ function BoidSimulation (props){
     const [mouse, setMouse] = useState("repel");
     return(
         <div id = {props.id}>
-            <Background color = "#FFFFFF" count = {count}/>
+            <Background color = "#FFFFFF" count = {count} minVelocity = {minMax.min} maxVelocity = {minMax.max} seperation = {boid.s} cohesion = {boid.c} alignment = {boid.a} />
             <BoidControl count ={count} setCount = {setCount} minMax = {minMax} setMinMax = {setMinMax} setBoid = {setBoid} setMouse = {setMouse} id = {props.id}/>
         </div>
     )

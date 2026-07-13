@@ -6,6 +6,13 @@
         const containerRef = useRef(null);
         const appRef = useRef(null);
         const fishArrayRef = useRef([]);
+        const settingsRef = useRef({
+            maxVelocity: props.maxVelocity ?? 5,
+            minVelocity: props.minVelocity ?? 2.5,
+            separation: props.separation ?? 10,
+            cohesion: props.cohesion ?? 0.6,
+            alignment: props.alignment ?? 2
+        })
         //creat fish function
         function createFish(screenX, screenY, color){
             let currentFish = {};
@@ -55,7 +62,7 @@
             if (targetFishCount > fishArray.length){
                 let fishDiff = targetFishCount - fishArray.length;
                 for (let i = fishArray.length; i < (targetFishCount); i++){
-                    let fish = createFish(app.screen.width, app.screen.height, props.color);
+                    let fish = createFish(app.screen.width, app.screen.height, color);
                     fishArray.push(fish);
                     app.stage.addChild(fish.sprite);
                 }
@@ -114,15 +121,14 @@
                     containerRef.current.appendChild(app.canvas);
                 }
                 syncFishCount(app, props.count, props.color);
-
-                const fishArray = new Array(props.count);
+                
                 app.ticker.add((ticker) => {
                     screenX = app.screen.width;
                     screenY = app.screen.height;
                     const fishArray = fishArrayRef.current;
                     const dt = ticker.deltaTime;
-                    let maxVelocity = 5; //max speed of fish velo
-                    let minVelocity = 2.5;
+                    let maxVelocity = settingsRef.current.maxVelocity; //max speed of fish velo
+                    let minVelocity = settingsRef.current.minVelocity;
                     let maxAcceleration = 1;
 
 
@@ -153,13 +159,13 @@
 
                         //----separation-----
                         let separationForce = {x: 0, y: 0};
-                        let separationIndex = 10; //weighting of separation
+                        let separationIndex = settingsRef.current.separation; //weighting of separation
                         let separationRadius = 30;
                         let separationCount = 0;
 
                         //----cohesion-------
                         let cohesionForce = {x: 0, y: 0};
-                        let cohesionIndex = 0.6; //weighting of cohesion
+                        let cohesionIndex = settingsRef.current.cohesion; //weighting of cohesion
                         let cohesionRadius = 50; //size of radius that fish wants to go closer to the average position of
                         let totalPositions = {x: 0, y: 0};
                         let cohesionCount = 0;
@@ -167,7 +173,7 @@
 
                         //----alignment------
                         let alignmentForce = {x: 0, y: 0};
-                        let alignmentIndex = 2;
+                        let alignmentIndex = settingsRef.current.alignment; //weighting of alignment
                         let alignmentRadius = 50; //size of fish radius that fish wants to go closer to
                         let totalVelocities = {x: 0, y: 0};
                         let alignmentCount = 0; 
@@ -226,9 +232,10 @@
                         if (alignmentCount > 0){
                             averageVelocity.x = totalVelocities.x / alignmentCount;
                             averageVelocity.y = totalVelocities.y / alignmentCount;
+                            alignmentForce.x = averageVelocity.x /*target*/- fish.velocity.x;
+                            alignmentForce.y = averageVelocity.y /*target*/- fish.velocity.y;
+                        
                         }
-                        alignmentForce.x = averageVelocity.x /*target*/- fish.velocity.x;
-                        alignmentForce.y = averageVelocity.y /*target*/- fish.velocity.y;
                         
                         
                         //adding boid steering logic to acceleration
@@ -303,9 +310,6 @@
                     }
 
                 })
-                for (let i = 0; i < fishArrayRef.length; i++){
-                    app.stage.addChild(fishArray[i].sprite);
-                }
                 
 
 
@@ -332,10 +336,21 @@
             syncFishCount(app, props.count, props.color);
 
         }, [props.count, props.color])
+        useEffect(() => {
+            settingsRef.current = {
+                maxVelocity: props.maxVelocity ?? 5,
+                minVelocity: props.minVelocity ?? 2.5,
+                separation: props.separation ?? 10,
+                cohesion: props.cohesion ?? 0.6,
+                alignment: props.alignment ?? 2
+            }
+        }, [props.maxVelocity, props.minVelocity, props.separation, props.cohesion, props.alignment]);
 
         return (
             <div ref={containerRef} className="boidsbackground"/>
         );
+        //settings update useeffect
+        
     }
 
     export default Background
