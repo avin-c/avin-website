@@ -10,8 +10,8 @@
             maxVelocity: props.maxVelocity ?? 5,
             minVelocity: props.minVelocity ?? 2.5,
             separation: props.separation ?? 10,
-            cohesion: props.cohesion ?? 0.6,
-            alignment: props.alignment ?? 2
+            cohesion: props.cohesion ?? 0.05,
+            alignment: props.alignment ?? 0.05
         })
         //creat fish function
         function createFish(screenX, screenY, color){
@@ -28,7 +28,7 @@
                     -15, 10,
                     -5, 0
                 ])
-                .fill({color: props.color, alpha: 0.1});
+                .fill({color: color, alpha: 0.1});
 
             currentFish.position = { //randomize fish spawn location
                 x: Math.random()* screenX, 
@@ -129,7 +129,7 @@
                     const dt = ticker.deltaTime;
                     let maxVelocity = settingsRef.current.maxVelocity; //max speed of fish velo
                     let minVelocity = settingsRef.current.minVelocity;
-                    let maxAcceleration = 1;
+                    let maxAcceleration = 2;
 
 
 
@@ -160,7 +160,7 @@
                         //----separation-----
                         let separationForce = {x: 0, y: 0};
                         let separationIndex = settingsRef.current.separation; //weighting of separation
-                        let separationRadius = 30;
+                        let separationRadius = 50;
                         let separationCount = 0;
 
                         //----cohesion-------
@@ -217,10 +217,7 @@
                         }
 
                         //separation: evens out the steering between different fish
-                        if (separationCount > 0){
-                            separationForce.x /= separationCount;
-                            separationForce.y /= separationCount;
-                        }
+
                         //cohesion: calculate average position
                         if (cohesionCount > 0) {
                             averagePosition.x = totalPositions.x / cohesionCount;
@@ -341,8 +338,8 @@
                 maxVelocity: props.maxVelocity ?? 5,
                 minVelocity: props.minVelocity ?? 2.5,
                 separation: props.separation ?? 10,
-                cohesion: props.cohesion ?? 0.6,
-                alignment: props.alignment ?? 2
+                cohesion: props.cohesion ?? 0.05,
+                alignment: props.alignment ?? 0.05
             }
         }, [props.maxVelocity, props.minVelocity, props.separation, props.cohesion, props.alignment]);
 
