@@ -9,9 +9,9 @@
         const settingsRef = useRef({
             maxVelocity: props.maxVelocity ?? 5,
             minVelocity: props.minVelocity ?? 2.5,
-            separation: props.separation ?? 10,
-            cohesion: props.cohesion ?? 0.05,
-            alignment: props.alignment ?? 0.05
+            separation: props.separation ?? 5,
+            cohesion: props.cohesion ?? 0.6,
+            alignment: props.alignment ?? 2
         })
         //creat fish function
         function createFish(screenX, screenY, color){
@@ -129,7 +129,7 @@
                     const dt = ticker.deltaTime;
                     let maxVelocity = settingsRef.current.maxVelocity; //max speed of fish velo
                     let minVelocity = settingsRef.current.minVelocity;
-                    let maxAcceleration = 2;
+                    let maxAcceleration = 1;
 
 
 
@@ -160,7 +160,7 @@
                         //----separation-----
                         let separationForce = {x: 0, y: 0};
                         let separationIndex = settingsRef.current.separation; //weighting of separation
-                        let separationRadius = 50;
+                        let separationRadius = 30;
                         let separationCount = 0;
 
                         //----cohesion-------
@@ -217,6 +217,10 @@
                         }
 
                         //separation: evens out the steering between different fish
+                        if (separationCount > 0){
+                            separationForce.x /= separationCount;
+                            separationForce.y /= separationCount;
+                        }
 
                         //cohesion: calculate average position
                         if (cohesionCount > 0) {
@@ -338,8 +342,8 @@
                 maxVelocity: props.maxVelocity ?? 5,
                 minVelocity: props.minVelocity ?? 2.5,
                 separation: props.separation ?? 10,
-                cohesion: props.cohesion ?? 0.05,
-                alignment: props.alignment ?? 0.05
+                cohesion: props.cohesion ?? 0.6,
+                alignment: props.alignment ?? 2
             }
         }, [props.maxVelocity, props.minVelocity, props.separation, props.cohesion, props.alignment]);
 

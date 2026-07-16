@@ -5,10 +5,9 @@ import BoidControl from "./BoidControl";
 
 function BoidSimulation (props){
 
-    const [count, setCount] = useState(100);
-    const [minMax, setMinMax] = useState({min: 2, max:4});
-    const [boid, setBoid] = useState({s: 10, c: 0.6, a: 2});
-    const [separationIndex, setSeparationIndex] = useState(10);
+    const [count, setCount] = useState(200);
+    const [minMax, setMinMax] = useState({min: 6, max:10});
+    const [separationIndex, setSeparationIndex] = useState(5);
     const [cohesionIndex, setCohesionIndex] = useState(0.6);
     const [alignmentIndex, setAlignmentIndex] = useState(2);
     const [mouse, setMouse] = useState("repel");
@@ -16,7 +15,7 @@ function BoidSimulation (props){
         console.log(separationIndex);
     }, [separationIndex])
     return(
-        <div id = {props.id}>
+        <div id = {props.id} >
             <Background color = "#FFFFFF" count = {count} minVelocity = {minMax.min} maxVelocity = {minMax.max} separation = {separationIndex} cohesion = {cohesionIndex} alignment = {alignmentIndex} />
             <BoidControl count ={count} setCount = {setCount} minMax = {minMax} setMinMax = {setMinMax} setSeparation = {setSeparationIndex} separationIndex = {separationIndex} setCohesion = {setCohesionIndex} cohesionIndex = {cohesionIndex} setAlignment = {setAlignmentIndex} alignmentIndex = {alignmentIndex} setMouse = {setMouse} id = {props.id}/>
         </div>
