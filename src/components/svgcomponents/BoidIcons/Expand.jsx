@@ -3,7 +3,7 @@ const Expand = (props) => (
   <svg
     width={props.side}
     height={props.side}
-    viewBox="0 0 24 24"
+    viewBox="4 4 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}

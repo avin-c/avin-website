@@ -104,7 +104,7 @@
             };
             const handleVisibility = () => {
                 if (!app.renderer) return; // guard: not initialized yet
-                if (window.hidden){
+                if (document.hidden){
                     app.ticker.stop()
                 }
                 else{
@@ -112,7 +112,7 @@
                 }
             }
             window.addEventListener("mousemove", handleMouseMove);
-            window.addEventListener("visibilitychange", handleVisibility)
+            document.addEventListener("visibilitychange", handleVisibility)
 
             async function initializePixiJS(){ //all pixijs setup
                 
@@ -141,7 +141,7 @@
                     const dt = ticker.deltaTime;
                     let maxVelocity = settingsRef.current.maxVelocity; //max speed of fish velo
                     let minVelocity = settingsRef.current.minVelocity;
-                    let maxAcceleration = 1;
+                    let maxAcceleration = 1.5;
 
 
 
@@ -290,8 +290,12 @@
                         }
                         if (totalVelocity < minVelocity){
                             let ratio = totalVelocity / minVelocity;
+                            if (ratio == 0){
+                                ratio == 0.01;
+                            }
                             fish.velocity.x = fish.velocity.x / ratio;
                             fish.velocity.y = fish.velocity.y / ratio;
+                            
                         }
                         if (magnitude(fish.velocity.x, fish.velocity.y) > 0.01){
                             let angleDiff = Math.atan2(fish.velocity.y, fish.velocity.x) - fish.sprite.rotation;
@@ -340,7 +344,7 @@
             return() => {
                 isDestroyed = true;
                 window.removeEventListener("mousemove", handleMouseMove);
-                window.removeEventListener("visibilitychange", handleVisibility);
+                document.removeEventListener("visibilitychange", handleVisibility);
                 if (app.renderer) {
                     app.destroy({ children: true }, {removeView: true});
                 }

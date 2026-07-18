@@ -51,7 +51,7 @@ function BoidControl (props){
             <div className = "rangeInput">
                 <label htmlFor = "count">Number of entities: {props.count}</label>
                 <div  className="rangeInput">
-                    <Slider.Root value = {[props.count]} defaultValue={[200]} className="slider-root" onValueChange={setCount} min = {0} max = {500}>
+                    <Slider.Root value = {[props.count]} className="slider-root" onValueChange={setCount} min = {0} max = {500}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" id="singleRange"/>
                         </Slider.Track>
@@ -62,7 +62,7 @@ function BoidControl (props){
             <div className = "rangeInput">
                 <label htmlFor = "minmax" id = "minmaxlabel">Minimum and maximum entity velocity </label>
                 <div id = "twothumb">
-                    <Slider.Root value = {[props.minMax.min, props.minMax.max]} max = {20}  className="slider-root" onValueChange={setMinMax}>
+                    <Slider.Root  value = {[props.minMax.min, props.minMax.max]} max = {20} minStepsBetweenThumbs={1} className="slider-root" onValueChange={setMinMax}>
                         <Slider.Track className = "slider-track">
                             <Slider.Range className="slider-range" />
                         </Slider.Track>
@@ -79,7 +79,7 @@ function BoidControl (props){
                         <div className = "rangeInput" id = "separation">
                             <p>{Math.floor(props.separationIndex*10)/10}</p>
                             <label>Separation: </label>
-                            <Slider.Root  value = {[props.separationIndex]} orientation="vertical" step = {0.1} defaultValue={[5]} max = {15}className="slider-root" onValueChange={setSeparation}>
+                            <Slider.Root  value = {[props.separationIndex]} orientation="vertical" step = {0.1} max = {15}className="slider-root" onValueChange={setSeparation}>
                                 <Slider.Track className = "slider-track">
                                     <Slider.Range className="slider-range" id="singleRange"/>
                                 </Slider.Track>
@@ -89,7 +89,7 @@ function BoidControl (props){
                         <div className = "rangeInput" id = "cohesion">
                             <p>{Math.floor(props.cohesionIndex*10)/10}</p>
                             <label>Cohesion: </label>
-                            <Slider.Root value = {[props.cohesionIndex]}orientation="vertical" step = {0.01} defaultValue={[0.6]}  max = {5} className="slider-root" onValueChange={setCohesion}>
+                            <Slider.Root value = {[props.cohesionIndex]}orientation="vertical" step = {0.01} max = {5} className="slider-root" onValueChange={setCohesion}>
                                 <Slider.Track className = "slider-track">
                                     <Slider.Range className="slider-range" id="singleRange"/>
                                 </Slider.Track>
@@ -99,7 +99,7 @@ function BoidControl (props){
                         <div className = "rangeInput" id = "alignment">
                             <p>{Math.floor(props.alignmentIndex*10)/10}</p>
                             <label>Alignment: </label>
-                            <Slider.Root value = {[props.alignmentIndex]} orientation="vertical" step = {0.01} defaultValue={[2]} max = {10} className="slider-root" onValueChange={setAlignment}>
+                            <Slider.Root value = {[props.alignmentIndex]} orientation="vertical" step = {0.01} max = {10} className="slider-root" onValueChange={setAlignment}>
                                 <Slider.Track className = "slider-track">
                                     <Slider.Range className="slider-range" id="singleRange"/>
                                 </Slider.Track>
@@ -109,18 +109,21 @@ function BoidControl (props){
                     </div>
                 </div>
                 <div className = "miscControls">
-                    <p>Mouse behavior: </p>
+                    <strong>Mouse behavior: </strong>
                     <ToggleGroup.Root className = "ToggleGroup" type = "single" value = {props.mouse} onValueChange = {setMouse}>
                         
                         <ToggleGroup.Item className = "ToggleGroupItem" value = "attract">
                             <Magnet color = "#FFFFFF" side = {32}/>
+                            <p>Attract</p>
                         </ToggleGroup.Item>
                         <ToggleGroup.Item className = "ToggleGroupItem" value = "none">
                             <None color = "#FFFFFF" side = {32}/>
+                            <p>None</p>
                         </ToggleGroup.Item>
                         
                         <ToggleGroup.Item className = "ToggleGroupItem" value = "repel">
                             <Expand color = "#FFFFFF" side = {32}/>
+                            <p>Repel</p>
                         </ToggleGroup.Item>
 
                     </ToggleGroup.Root> 
