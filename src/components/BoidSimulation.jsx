@@ -17,7 +17,14 @@ function BoidSimulation (props){
     }, [separationIndex, mouse])
     return(
         <div id = {props.id} >
-            <Background color = "#FFFFFF" count = {count} minVelocity = {minMax.min} maxVelocity = {minMax.max} separation = {separationIndex} cohesion = {cohesionIndex} alignment = {alignmentIndex} />
+            <Background color = "#FFFFFF" 
+                count = {count} 
+                minVelocity = {minMax.min} 
+                maxVelocity = {minMax.max} 
+                separation = {separationIndex} 
+                cohesion = {cohesionIndex} 
+                alignment = {alignmentIndex}
+                mouse = {mouse} />
             <BoidControl count ={count} 
                 setCount = {setCount} 
                 minMax = {minMax} 

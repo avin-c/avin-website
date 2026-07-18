@@ -11,7 +11,8 @@
             minVelocity: props.minVelocity ?? 2,
             separation: props.separation ?? 5,
             cohesion: props.cohesion ?? 0.6,
-            alignment: props.alignment ?? 2
+            alignment: props.alignment ?? 2,
+            mouseMode: mouseMultiplier() ?? 0,
         })
         //creat fish function
         function createFish(screenX, screenY, color){
@@ -74,6 +75,17 @@
                     app.stage.removeChild(fish.sprite);
                     fish.sprite.destroy(); 
                 }
+            }
+        }
+        function mouseMultiplier (){
+            if (props.mouse == "repel")
+                return -1;
+            
+            else if (props.mouse == "attract")
+                return 1;
+            
+            else {
+                return 0;
             }
         }
         //useeffect setup 
@@ -141,18 +153,23 @@
                         
                         //mouse steering acceleration
                         let mouseForce = {x: 0, y: 0};
-                        let mouseForceIndex = 10; 
-                        let mouseRadius = 100;
-                        
+                        let mouseForceIndex = 5 * settingsRef.current.mouseMode; // now follow attract/repel/none
+                        let mouseRadius = 300;
+                        let mouseDeadzone = 10; // once this close, let separation/cohesion take over instead
+
                         let distanceToMouse = {
-                            x: fish.position.x - mouse.x,
-                            y: fish.position.y - mouse.y}
+                            x: mouse.x - fish.position.x,
+                            y: mouse.y - fish.position.y
+                        };
                         let totalMouseDistance = magnitude(distanceToMouse.x, distanceToMouse.y);
 
-                        if (totalMouseDistance < mouseRadius){
-                            mouseForce.x = distanceToMouse.x / totalMouseDistance;
-                            mouseForce.y = distanceToMouse.y / totalMouseDistance;
+                        if (totalMouseDistance < mouseRadius && totalMouseDistance > mouseDeadzone){
+                            // falloff: force fades out as fish approaches, instead of staying full-strength to distance 0
+                            let falloff = (totalMouseDistance - mouseDeadzone) / (mouseRadius - mouseDeadzone);
+                            mouseForce.x = (distanceToMouse.x / totalMouseDistance) * falloff;
+                            mouseForce.y = (distanceToMouse.y / totalMouseDistance) * falloff;
                         }
+
                         ///////////////////////////////////////////////////////////
 
                         //boid acceleration forces
@@ -240,7 +257,6 @@
                         
                         
                         //adding boid steering logic to acceleration
-                        normalizeVector(mouseForce);
                         normalizeVector(separationForce);
                         normalizeVector(cohesionForce);
                         normalizeVector(alignmentForce);
@@ -249,6 +265,7 @@
                         scaleVector(cohesionForce, cohesionIndex);
                         scaleVector(alignmentForce, alignmentIndex);
 
+                        
                         fish.acceleration.x = mouseForce.x + separationForce.x + cohesionForce.x + alignmentForce.x;
                         fish.acceleration.y = mouseForce.y + separationForce.y + cohesionForce.y + alignmentForce.y;
                         
@@ -343,9 +360,11 @@
                 minVelocity: props.minVelocity ?? 2,
                 separation: props.separation ?? 10,
                 cohesion: props.cohesion ?? 0.6,
-                alignment: props.alignment ?? 2
+                alignment: props.alignment ?? 2,
+                mouseMode: mouseMultiplier() ?? 0,
             }
-        }, [props.maxVelocity, props.minVelocity, props.separation, props.cohesion, props.alignment]);
+            console.log(settingsRef.current);
+        }, [props.maxVelocity, props.minVelocity, props.separation, props.cohesion, props.alignment, props.mouse]);
 
         return (
             <div ref={containerRef} className="boidsbackground"/>
