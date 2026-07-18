@@ -6,18 +6,31 @@ import BoidControl from "./BoidControl";
 function BoidSimulation (props){
 
     const [count, setCount] = useState(200);
-    const [minMax, setMinMax] = useState({min: 6, max:10});
+    const [minMax, setMinMax] = useState({min: 2.5, max:5});
     const [separationIndex, setSeparationIndex] = useState(5);
     const [cohesionIndex, setCohesionIndex] = useState(0.6);
     const [alignmentIndex, setAlignmentIndex] = useState(2);
     const [mouse, setMouse] = useState("repel");
     useEffect(() => {
         console.log(separationIndex);
-    }, [separationIndex])
+        console.log(mouse);
+    }, [separationIndex, mouse])
     return(
         <div id = {props.id} >
             <Background color = "#FFFFFF" count = {count} minVelocity = {minMax.min} maxVelocity = {minMax.max} separation = {separationIndex} cohesion = {cohesionIndex} alignment = {alignmentIndex} />
-            <BoidControl count ={count} setCount = {setCount} minMax = {minMax} setMinMax = {setMinMax} setSeparation = {setSeparationIndex} separationIndex = {separationIndex} setCohesion = {setCohesionIndex} cohesionIndex = {cohesionIndex} setAlignment = {setAlignmentIndex} alignmentIndex = {alignmentIndex} setMouse = {setMouse} id = {props.id}/>
+            <BoidControl count ={count} 
+                setCount = {setCount} 
+                minMax = {minMax} 
+                setMinMax = {setMinMax}
+                 setSeparation = {setSeparationIndex} 
+                 separationIndex = {separationIndex} 
+                 setCohesion = {setCohesionIndex} 
+                 cohesionIndex = {cohesionIndex} 
+                 setAlignment = {setAlignmentIndex} 
+                 alignmentIndex = {alignmentIndex} 
+                 setMouse = {setMouse} 
+                 mouse = {mouse}
+                 id = {props.id}/>
         </div>
     )
 } 

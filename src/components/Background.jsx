@@ -7,8 +7,8 @@
         const appRef = useRef(null);
         const fishArrayRef = useRef([]);
         const settingsRef = useRef({
-            maxVelocity: props.maxVelocity ?? 5,
-            minVelocity: props.minVelocity ?? 2.5,
+            maxVelocity: props.maxVelocity ?? 4,
+            minVelocity: props.minVelocity ?? 2,
             separation: props.separation ?? 5,
             cohesion: props.cohesion ?? 0.6,
             alignment: props.alignment ?? 2
@@ -339,8 +339,8 @@
         }, [props.count, props.color])
         useEffect(() => {
             settingsRef.current = {
-                maxVelocity: props.maxVelocity ?? 5,
-                minVelocity: props.minVelocity ?? 2.5,
+                maxVelocity: props.maxVelocity ?? 4,
+                minVelocity: props.minVelocity ?? 2,
                 separation: props.separation ?? 10,
                 cohesion: props.cohesion ?? 0.6,
                 alignment: props.alignment ?? 2

@@ -2,8 +2,8 @@ import * as React from "react";
 const Magnet = (props) => (
   <svg
     fill={props.color}
-    width={props.color}
-    height={props.color}
+    width={props.side}
+    height={props.side}
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     {...props}

@@ -12,6 +12,7 @@
   "dependencies": {
     "@formspree/react": "^3.0.0",
     "@radix-ui/react-slider": "^1.4.3",
+    "@radix-ui/react-toggle-group": "^1.1.15",
     "@supabase/supabase-js": "^2.108.2",
     "motion": "^12.40.0",
     "perfect-freehand": "^1.2.3",
