@@ -22,6 +22,7 @@ import ThemeBuilder from "./components/ThemeBuilder";
 import './App.css';
 import Background from "./components/Background";
 import BoidSimulation from "./components/BoidSimulation";
+import BoidSvg from "./components/svgcomponents/BoidIcons/Boid";
 function App() {
   const sectionHeaders = [
     
@@ -56,9 +57,9 @@ function App() {
       icon: ColorSvg
     },
     {
-      label: "Boid's Simulation!",
+      label: "Boids Simulation",
       idName: "boid",
-      icon: ColorSvg
+      icon: BoidSvg
     }
   ];
   const [seconds, setSeconds] = useState(35*3600);
