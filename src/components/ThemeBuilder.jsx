@@ -1,9 +1,17 @@
 import React from "react";
 import { useState, useEffect} from "react";
+import { ColorPicker, useColorState } from 'react-beautiful-color';
 function ThemeBuilder(props){
     const [colorLink, setColorLink] = useState("");
     
     const [lastValidColorLink, setLastValidColorLink] = useState("https://coolors.co/322642-54426b-cbdf90-f19455");
+    const [colors, setColors] = useState([
+        "#322642",
+        "#54426b",
+        "#cbdf90",
+        "#f19455"
+    ]);
+    const [{ colorInput, colorState }, setColor] = useColorState({ type: 'hex', value: '#3b82f6' });
 
     function isLinkValid (url){
         console.log(url);
@@ -181,9 +189,55 @@ function ThemeBuilder(props){
 
         console.log("updated css variables with " + colorArray);
     }, [lastValidColorLink]);
+
+    useEffect(() => {
+    document.documentElement.style.setProperty("--primary-color", colors[0]);
+    document.documentElement.style.setProperty("--secondary-color", colors[1]);
+    document.documentElement.style.setProperty("--accent-color", colors[2]);
+    document.documentElement.style.setProperty("--accent-color-color", colors[3]);
+}, [colors]);
     return(
         <div id = {props.id} className = "content">
             <h3 className = "header">Theme Builder</h3>
+            <div className = "colorDisplay">
+            <ColorPicker color={colorInput} onChange={setColor} className = "colorPicker">
+                <ColorPicker.Saturation className="saturationPicker" />
+                    <div className="flex items-center gap-3 p-3 pt-0">
+                        <ColorPicker.EyeDropper />
+                        <div className="colorSliderContainer">
+                            <ColorPicker.Hue className="huePicker" />
+                            <ColorPicker.Alpha className="alphaPicker" />
+                        </div>
+                    </div>
+            </ColorPicker>
+                {colors.map((item, index) => {
+                    console.log(item);
+                    return (
+                        <div key = {index} className = "colorDisplayButtons">
+                            <label
+                                htmlFor={`color-${index}`}
+                                style = {{backgroundColor: item}}
+                                className = "colorButton"
+                            ></label>
+                            <input
+                            className="hiddenColor"
+                            type = "color"
+                            
+                            value = {item}
+                            id = {`color-${index}`}
+                            onChange={(e) => {
+                                let newColors = [...colors];
+                                newColors[index] = e.target.value;
+                                setColors(newColors);
+                            }}
+                            ></input>
+                        </div>
+                    );
+                    })
+                    
+                }
+            </div>
+
             <p>Insert a <a href="https://coolors.co/322642-54426b-cbdf90-f19455">coolors.co</a> palette link to customize your viewing experience! (No guarantee of accessability/contrast)</p>
             <input
                 value = {colorLink}
