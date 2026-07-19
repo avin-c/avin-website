@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useCallback} from "react";
-import { ColorPicker, useColorState } from 'react-beautiful-color';
+import { ColorPicker, hexToHsl, useColorState, } from 'react-beautiful-color';
 import 'react-beautiful-color/dist/react-beautiful-color.css';
 
 function ThemeBuilder(props){
@@ -45,6 +45,7 @@ function ThemeBuilder(props){
                 if (isvalid == true){
                    return true;
                 }
+                return false
 
                 
             }
@@ -218,7 +219,16 @@ function ThemeBuilder(props){
         document.documentElement.style.setProperty("--accent-color-color", colors[3]);
         document.documentElement.style.setProperty('--prisecond-color', `${findMiddle(colors[0], colors[1])}`); //calculate prisecond color
         document.documentElement.style.setProperty(`--dark-text-color`, `${lowerBrightness(colors[0])}`); //calculate dark text color by hex > rgb > hsl, lower l, hsl > rgb > hex
-
+        document.documentElement.style.setProperty(`--text-color`, `${"#FFFFFF"}`);
+        let hslSecondary = hexToHsl(colors[1]);
+        if (hslSecondary.l > 80){
+            document.documentElement.style.setProperty(`--text-color`, `${lowerBrightness(colors[0])}`);
+            document.documentElement.style.setProperty(`--dark-text-color`, `${"#FFFFFF"}`);
+        }
+        if (hslSecondary.l < 20){
+            document.documentElement.style.setProperty(`--dark-text-color`, `${"#FFFFFF"}`);
+            document.documentElement.style.setProperty(`--text-color`, `${"#FFFFFF"}`);
+        }
 
     }, [colors]);
     useEffect(() => {
@@ -262,7 +272,6 @@ function ThemeBuilder(props){
                 >
                     <ColorPicker.Saturation className="saturationPicker" />
                         <div className="colorPickerClass">
-                            <ColorPicker.EyeDropper className = "eyeDropper"/>
                             <div className="colorSliderContainer">
                                 <ColorPicker.Hue className="color-slider" />
                             </div>

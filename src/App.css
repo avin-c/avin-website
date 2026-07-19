@@ -567,6 +567,7 @@ input, textarea{
     padding: 10px;
     font-family: inherit;
     background-color: var(--text-color);
+    color: var(--dark-text-color);
     border-radius: 10px;
     border-color: var(--prisecond-color);
     border-style: solid;
@@ -584,7 +585,6 @@ textarea {
 }
 input:focus,textarea:focus{
     outline:none;
-    background-color: var(--accent-color);
 
 }
 
