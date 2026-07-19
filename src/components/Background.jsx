@@ -138,7 +138,7 @@
                     screenX = app.screen.width;
                     screenY = app.screen.height;
                     const fishArray = fishArrayRef.current;
-                    const dt = ticker.deltaTime;
+                    const dt = ticker.deltaMS / 1000;
                     let maxVelocity = settingsRef.current.maxVelocity; //max speed of fish velo
                     let minVelocity = settingsRef.current.minVelocity;
                     let maxAcceleration = 1.5;
@@ -280,8 +280,8 @@
                         //velocity part
                         //adding some drag
                         scaleVector(fish.velocity, 0.99);
-                        fish.velocity.x += fish.acceleration.x * dt;
-                        fish.velocity.y += fish.acceleration.y * dt;
+                        fish.velocity.x += fish.acceleration.x * dt *60;
+                        fish.velocity.y += fish.acceleration.y * dt *60;
                         let totalVelocity = magnitude(fish.velocity.x, fish.velocity.y);
                         if (totalVelocity > maxVelocity){
                             let ratio = totalVelocity / maxVelocity;
@@ -303,8 +303,8 @@
                             fish.sprite.rotation += angleDiff * 0.25;
                         }
                         //position part
-                        fish.position.x += fish.velocity.x * dt;
-                        fish.position.y += fish.velocity.y * dt;
+                        fish.position.x += fish.velocity.x * dt *60;
+                        fish.position.y += fish.velocity.y * dt *60;
                         
                         //screen wrapping
 
