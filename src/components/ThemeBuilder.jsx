@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect} from "react";
+import { useState, useEffect, useCallback} from "react";
 import { ColorPicker, useColorState } from 'react-beautiful-color';
 import 'react-beautiful-color/dist/react-beautiful-color.css';
 
@@ -16,8 +16,13 @@ function ThemeBuilder(props){
     const [selectedColor, setSelectedColor] = useState(0);
     const [{ colorInput, colorState }, setColor] = useColorState({ type: 'hex', value: colors[selectedColor]});
 
-    
-
+    function setNewColor (newColor){
+        setColor(newColor);
+        let newColors = [...colors];
+        newColors[selectedColor] = hsvaToHex(newColor.colorInput.h, newColor.colorInput.s, newColor.colorInput.v, newColor.colorInput.a);
+        setColors(newColors);
+    }
+    const handleColorChange = useCallback(setNewColor, [selectedColor]);
     function isLinkValid (url){
         console.log(url);
         if (url.startsWith("https://coolors.co/")){
@@ -230,33 +235,29 @@ function ThemeBuilder(props){
                 
                     {colors.map((item, index) => {
                         console.log(item);
+                        let selected = selectedColor == index; //shorthand for if statement asking if selected color == index
+                        console.log("selected?");
+                        console.log(selected);
                         return (
                             <label
                                 htmlFor={`color-${index}`}
                                 key = {index}
                                 id = {`color-${index}`}
                                 style = {{backgroundColor: item}}
-                                className = "colorButton"
+                                className = {`colorButton ${selected? "selectedButton" : ""}`}
                                 onClick={() => setSelectedColor(index)}
                             ></label>
                             
                         );
+
                         })
                         
                     }
                 </div>
                 <ColorPicker 
                     color={colorInput} 
-                    onChange={(newColor) => {
-                        setColor(newColor);
-                        let newColors = [...colors];
-                        newColors[selectedColor] = hsvaToHex(newColor.colorInput.h, newColor.colorInput.s, newColor.colorInput.v, newColor.colorInput.a);
-                        setColors(newColors);
-                        console.log("new color");
-                        console.log(newColor);
-                        console.log("new colors");
-                        console.log(newColors);
-                    }} 
+                    
+                    onChange={handleColorChange}
                     className = "colorPicker"
                 >
                     <ColorPicker.Saturation className="saturationPicker" />

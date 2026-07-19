@@ -828,6 +828,25 @@ input[type="color"] {
     height: 100%;
     display: block;
     flex-grow: 1;
+    transition: scale 200ms ease;
+
+}
+.colorButton:hover{
+    cursor: pointer;
+    scale: 105%;
+    
+    z-index: 1;
+}
+.colorButton:active{
+    scale: 100%;
+}
+.selectedButton {
+    width: 25%;
+    scale: 100%;
+    box-shadow: none;
+}   
+.selectedButton:hover {
+    scale: 100%;
 }
 .colorPicker {
     display: flex;
@@ -1122,6 +1141,13 @@ input[type="color"] {
     #sidebar{
         top: 85px;
     }
+    .boidmouselayout{
+        flex-direction: column;
+    }
+    .miscControls{
+        height: 200px;
+    }
+    
 }
 @media(max-width: 1000px){
     .greeting{
