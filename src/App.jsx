@@ -23,43 +23,57 @@ import './App.css';
 import Background from "./components/Background";
 import BoidSimulation from "./components/BoidSimulation";
 import BoidSvg from "./components/svgcomponents/BoidIcons/Boid";
+import Links from "./components/Links";
 function App() {
   const sectionHeaders = [
     
     {
       label: "About Me",
       idName: "about",
-      icon: AboutSvg
+      icon: AboutSvg,
+      component: About
     },
     {
       label: "Gallery",
       idName: "gallery",
-      icon: GallerySvg
+      icon: GallerySvg,
+      component: Gallery
     }, 
     {
       label: "Code Progress",
       idName: "codeprogress",
-      icon: CodeProgressSvg
+      icon: CodeProgressSvg,
+      component: CodeProgress
      },
     {
       label: "Projects",
       idName: "projects",
-      icon: ProjectsSvg
+      icon: ProjectsSvg,
+      component: Projects
     }, 
     {
       label: "Contact me!",
       idName: "contact",
-      icon: ContactSvg
+      icon: ContactSvg,
+      component: Contacts
     },
     {
       label: "Theme Builder",
       idName: "theme",
-      icon: ColorSvg
+      icon: ColorSvg,
+      component: ThemeBuilder
     },
     {
       label: "Boids Simulation",
       idName: "boid",
-      icon: BoidSvg
+      icon: BoidSvg,
+      component: BoidSimulation
+    },
+    {
+      label: "Links",
+      idName: "links",
+      icon: BoidSvg,
+      component: Links
     }
   ];
   const [seconds, setSeconds] = useState(35*3600);
@@ -100,13 +114,13 @@ function App() {
       
 
       <div className="sections">
-        <About name = {sectionHeaders[0].label} id = {sectionHeaders[0].idName} />
-        <Gallery name = {sectionHeaders[1].label} id = {sectionHeaders[1].idName}/>
-        <CodeProgress name = {sectionHeaders[2].label} id = {sectionHeaders[2].idName} seconds = {seconds}/>
-        <Projects name =  {sectionHeaders[3].label} id =  {sectionHeaders[3].idName} websiteSeconds={seconds}/>
-        <Contacts name = {sectionHeaders[4].label} id = {sectionHeaders[4].idName}/>
-        <ThemeBuilder name = {sectionHeaders[5].label} id = {sectionHeaders[5].idName}/>
-        <BoidSimulation name = {sectionHeaders[6].label} id = {sectionHeaders[6].idName}/>
+        {sectionHeaders.map((sectionName) => {
+          let Component = sectionName.component;
+          return (
+              <Component name = {sectionName.label} id = {sectionName.idName} seconds = {seconds}/>
+          );
+        })
+        }  
       </div>
     </div>
   )

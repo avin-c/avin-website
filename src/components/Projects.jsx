@@ -4,13 +4,13 @@ import ProjectNav from "./ProjectNav";
 import { useState } from "react";
 import rcairplane from "../assets/rcairplane.jpg"
 import mywebsite from "../assets/mywebsite.gif"
-function Projects ({name, id, websiteSeconds}){
+function Projects ({name, id, seconds}){
     const [currentTab, setTab] = useState(0);
 
     const projectsList = [
         {
             index: 0,
-            hours: hoursAppend(websiteSeconds),
+            hours: hoursAppend(seconds),
             link: "https://avin-c.github.io/avin-website",
             description: "Learning React for the first time so I decided to make this website! Take a look around and explore! It will continously be a work in progress so feel free to suggest any features or changes.",
             projectName: "This Website!", 
