@@ -4,14 +4,16 @@ import { ColorPicker, hexToHsl, useColorState, } from 'react-beautiful-color';
 import 'react-beautiful-color/dist/react-beautiful-color.css';
 
 function ThemeBuilder(props){
+    const colorCount = 5;
     const [colorLink, setColorLink] = useState("");
     
-    const [lastValidColorLink, setLastValidColorLink] = useState("https://coolors.co/322642-54426b-cbdf90-f19455");
+    const [lastValidColorLink, setLastValidColorLink] = useState("https://coolors.co/322642-54426b-cbdf90-f19455-ffffff");
     const [colors, setColors] = useState([
         "#322642",
         "#54426b",
         "#cbdf90",
-        "#f19455"
+        "#f19455",
+        "#ffffff"
     ]);
     const [selectedColor, setSelectedColor] = useState(0);
     const [{ colorInput, colorState }, setColor] = useColorState({ type: 'hex', value: colors[selectedColor]});
@@ -30,7 +32,7 @@ function ThemeBuilder(props){
             colorArray = colorArray.replace(/\/$/, "");
             colorArray = colorArray.split('-');
 
-            if (colorArray.length == 4){
+            if (colorArray.length == colorCount){
                 let isvalid = true;
                 
                 for (let i = 0; i < colorArray.length; i++){
@@ -214,14 +216,14 @@ function ThemeBuilder(props){
         document.documentElement.style.setProperty("--accent-color-color", colors[3]);
         document.documentElement.style.setProperty('--prisecond-color', `${findMiddle(colors[0], colors[1])}`); //calculate prisecond color
         document.documentElement.style.setProperty(`--dark-text-color`, `${lowerBrightness(colors[0])}`); //calculate dark text color by hex > rgb > hsl, lower l, hsl > rgb > hex
-        document.documentElement.style.setProperty(`--text-color`, `${"#FFFFFF"}`);
+        document.documentElement.style.setProperty(`--text-color`, `${colors[4]}`);
         let hslSecondary = hexToHsl(colors[1]);
         if (hslSecondary.l > 80){
             document.documentElement.style.setProperty(`--text-color`, `${lowerBrightness(colors[0])}`);
             document.documentElement.style.setProperty(`--dark-text-color`, `${"#FFFFFF"}`);
         }
         if (hslSecondary.l < 20){
-            document.documentElement.style.setProperty(`--dark-text-color`, `${"#FFFFFF"}`);
+            document.documentElement.style.setProperty(`--dark-text-color`, `${lowerBrightness(colors[0])}`);
             document.documentElement.style.setProperty(`--text-color`, `${"#FFFFFF"}`);
         }
 
