@@ -78,6 +78,15 @@ function App() {
     }
   ];
   const [seconds, setSeconds] = useState(35*3600);
+  const [appColors, setAppColors] = useState({
+    primary: "#322642",
+    primarysecondary: "#433457",
+    secondary: "#54426B",
+    text: "#ffffff",
+    darktext: "#271f32",
+    accent1: "#CBDF90",
+    accent2: "#F19455"
+  })
       
   useEffect(() => {
       let timeoutId;
@@ -104,12 +113,22 @@ function App() {
 
       return () => clearTimeout(timeoutId);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--primary-color", appColors.primary);
+    document.documentElement.style.setProperty("--secondary-color", appColors.secondary);
+    document.documentElement.style.setProperty("--accent-color", appColors.accent1);
+    document.documentElement.style.setProperty("--accent-color-color", appColors.accent2);
+    document.documentElement.style.setProperty('--prisecond-color', appColors.primarysecondary); //calculate prisecond color
+    document.documentElement.style.setProperty(`--dark-text-color`, appColors.darktext); //calculate dark text color by hex > rgb > hsl, lower l, hsl > rgb > hex
+    document.documentElement.style.setProperty(`--text-color`, appColors.text);
+  }, [appColors])
   return (
     <div>
       
       <Home/>
-      <Navbar list = {sectionHeaders}/>
-      <Sidebar/>
+      <Navbar list = {sectionHeaders} iconColor = {appColors.text}/>
+      <Sidebar iconColor = {appColors.text}/>
       <Button/>
       
       
@@ -118,7 +137,15 @@ function App() {
         {sectionHeaders.map((sectionName) => {
           let Component = sectionName.component;
           return (
-              <Component key = {sectionName.label} name = {sectionName.label} id = {sectionName.idName} seconds = {seconds}/>
+              <Component 
+                key = {sectionName.label} 
+                name = {sectionName.label} 
+                id = {sectionName.idName} 
+                seconds = {(sectionName.idName === "codeprogress"|| sectionName.idName === "projects")? seconds : undefined} 
+                appColors = {sectionName.idName === "theme" ? appColors : undefined}
+                setAppColors = {sectionName.idName === "theme" ? setAppColors : undefined} 
+                iconColor = {appColors.text} 
+              />
           );
         })
         }  

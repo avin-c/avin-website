@@ -45,7 +45,7 @@ function Navbar (props){
                     return (
                             <li className={`navItems ${activePage === item.idName ? "active" : ""}`} key = {item.label}>
                                 <a className= "navItemLinks" href={"#" + item.idName}>
-                                    <Icon className = "navIcons" side = {32} color = "#FFF"/>
+                                    <Icon className = "navIcons" side = {32} color = {props.iconColor}/>
                                     <span className = "navItemText">{item.label}</span>
                                 </a>
                             </li>

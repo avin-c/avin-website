@@ -5,7 +5,7 @@ import MailSvg from "./svgcomponents/ContactSvgs/MailSvg";
 import SlackSvg from "./svgcomponents/ContactSvgs/SlackSvg";
 import ContactForm from "./ContactForm";
 import Logo from "./Logo";
-function Contacts ({name, id}){
+function Contacts ({name, id, iconColor}){
     const contactMethod = [
         {
             platform: "Github",
@@ -43,7 +43,7 @@ function Contacts ({name, id}){
                             const Item = item.svg
                             return (
                             <a  href={item.link} id="contactBoxes" key = {item.platform}>
-                                <Item url={item.link} color = "white" strokeweight = {1.5} side = {32}/>
+                                <Item url={item.link} color = {iconColor} strokeweight = {1.5} side = {32}/>
                             </a>
 
                         );

@@ -59,7 +59,7 @@ const letters = [
 ];
 
 
-    export default function SignatureAnimated() {
+    export default function SignatureAnimated(props) {
     return (
         <svg className = "signature" viewBox="300 100 800 600 " alt="Avin Chiu">
         {letters.map((letter, index) => 

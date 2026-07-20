@@ -33,7 +33,9 @@ function BoidSimulation (props){
                  alignmentIndex = {alignmentIndex} 
                  setMouse = {setMouse} 
                  mouse = {mouse}
-                 id = {props.id}/>
+                 id = {props.id}
+                 iconColor = {props.iconColor}
+                 />
         </div>
     )
 } 

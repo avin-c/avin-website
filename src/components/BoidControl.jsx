@@ -109,16 +109,16 @@ function BoidControl (props){
                     <ToggleGroup.Root className = "ToggleGroup" type = "single" value = {props.mouse} onValueChange = {setMouse}>
                         
                         <ToggleGroup.Item className = "ToggleGroupItem" value = "attract">
-                            <Magnet color = "#FFFFFF" side = {32}/>
+                            <Magnet color = {props.iconColor} side = {32}/>
                             <p>Attract</p>
                         </ToggleGroup.Item>
                         <ToggleGroup.Item className = "ToggleGroupItem" value = "none">
-                            <None color = "#FFFFFF" side = {32}/>
+                            <None color = {props.iconColor} side = {32}/>
                             <p>None</p>
                         </ToggleGroup.Item>
                         
                         <ToggleGroup.Item className = "ToggleGroupItem" value = "repel">
-                            <Expand color = "#FFFFFF" side = {32}/>
+                            <Expand color = {props.iconColor} side = {32}/>
                             <p>Repel</p>
                         </ToggleGroup.Item>
 

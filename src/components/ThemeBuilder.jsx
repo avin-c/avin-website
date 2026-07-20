@@ -18,12 +18,16 @@ function ThemeBuilder(props){
     const [selectedColor, setSelectedColor] = useState(0);
     const [{ colorInput, colorState }, setColor] = useColorState({ type: 'hex', value: colors[selectedColor]});
 
-    function setNewColor (newColor){
-        setColor(newColor);
-        let newColors = [...colors];
-        newColors[selectedColor] = hsvaToHex(newColor.colorInput.h, newColor.colorInput.s, newColor.colorInput.v, newColor.colorInput.a);
-        setColors(newColors);
-    }
+    function setNewColor(newColor) {
+    const hex = hsvaToHex(newColor.colorInput.h, newColor.colorInput.s, newColor.colorInput.v, newColor.colorInput.a);
+    if (hex.toLowerCase() === colors[selectedColor].toLowerCase()) return; // breaks the echo loop
+    setColor(newColor);
+    setColors(prev => {
+        const next = [...prev];
+        next[selectedColor] = hex;
+        return next;
+    });
+}
     const handleColorChange = useCallback(setNewColor, [selectedColor]);
     function isLinkValid (url){
         if (url.startsWith("https://coolors.co/")){
@@ -210,22 +214,26 @@ function ThemeBuilder(props){
     }, [lastValidColorLink]);
 
     useEffect(() => {
-        document.documentElement.style.setProperty("--primary-color", colors[0]);
-        document.documentElement.style.setProperty("--secondary-color", colors[1]);
-        document.documentElement.style.setProperty("--accent-color", colors[2]);
-        document.documentElement.style.setProperty("--accent-color-color", colors[3]);
-        document.documentElement.style.setProperty('--prisecond-color', `${findMiddle(colors[0], colors[1])}`); //calculate prisecond color
-        document.documentElement.style.setProperty(`--dark-text-color`, `${lowerBrightness(colors[0])}`); //calculate dark text color by hex > rgb > hsl, lower l, hsl > rgb > hex
-        document.documentElement.style.setProperty(`--text-color`, `${colors[4]}`);
+        
+        let calcDarkText = lowerBrightness(colors[0]);
+        
+        let priSecond = findMiddle(colors[0], colors[1]);
         let hslSecondary = hexToHsl(colors[1]);
+        
         if (hslSecondary.l > 80){
-            document.documentElement.style.setProperty(`--text-color`, `${lowerBrightness(colors[0])}`);
-            document.documentElement.style.setProperty(`--dark-text-color`, `${"#FFFFFF"}`);
+            let tempLightColor = "#FFFFFF";
+            calcDarkText = tempLightColor;
         }
-        if (hslSecondary.l < 20){
-            document.documentElement.style.setProperty(`--dark-text-color`, `${lowerBrightness(colors[0])}`);
-            document.documentElement.style.setProperty(`--text-color`, `${"#FFFFFF"}`);
-        }
+        
+        props.setAppColors({
+            primary: colors[0],
+            primarysecondary: priSecond,
+            secondary: colors[1],
+            text: colors[4],
+            darktext: calcDarkText,
+            accent1: colors[2],
+            accent2: colors[3],
+        })
 
     }, [colors]);
     useEffect(() => {
