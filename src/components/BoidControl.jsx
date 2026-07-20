@@ -32,7 +32,7 @@ function BoidControl (props){
                 used to simulate the movement of flocking animals, like birds and fish.
                 It adheres to three simple rules: 
             </p>
-                <ul>
+                <ul className = "boidList">
                     <li>separation - moving to avoid nearby entities</li>
                     <li>cohesion - moving towards the average position of neighbor entities</li>
                     <li>alignment - accelerating towards the average velocity of neighbor entities</li>
