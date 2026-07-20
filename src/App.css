@@ -25,7 +25,7 @@
 
 html {
     font-size: var(--paragraph-size);
-    font-family: sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: var(--primary-color);  
     scrollbar-color: var(--secondary-color);
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
@@ -186,6 +186,7 @@ label:hover {
     padding: 0px;
     text-wrap: wrap;
     font-size: var(--heading-size);
+    font-weight: 550;
 }
 
 
@@ -1064,7 +1065,17 @@ input[type="color"] {
 .ToggleGroupItem:focus {
 	position: relative;
 }
-
+#commitInfo {
+    text-align: right;
+}
+.edgeAlign {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+footer.content {
+    border-radius: 15px 15px 0px 0px;
+}
 @media (max-width:768px){
     :root{
         --sidebarWidth: 85vw;

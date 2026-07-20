@@ -24,6 +24,7 @@ import Background from "./components/Background";
 import BoidSimulation from "./components/BoidSimulation";
 import BoidSvg from "./components/svgcomponents/BoidIcons/Boid";
 import Links from "./components/Links";
+import Footer from "./components/Footer"
 function App() {
   const sectionHeaders = [
     
@@ -117,11 +118,14 @@ function App() {
         {sectionHeaders.map((sectionName) => {
           let Component = sectionName.component;
           return (
-              <Component name = {sectionName.label} id = {sectionName.idName} seconds = {seconds}/>
+              <Component key = {sectionName.label} name = {sectionName.label} id = {sectionName.idName} seconds = {seconds}/>
           );
         })
         }  
+
+      <Footer/>
       </div>
+      
     </div>
   )
 }
