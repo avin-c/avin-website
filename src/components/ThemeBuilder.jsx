@@ -24,16 +24,13 @@ function ThemeBuilder(props){
     }
     const handleColorChange = useCallback(setNewColor, [selectedColor]);
     function isLinkValid (url){
-        console.log(url);
         if (url.startsWith("https://coolors.co/")){
             let colorArray = url.replace("https://coolors.co/", "");
             colorArray = colorArray.split("?")[0];
             colorArray = colorArray.replace(/\/$/, "");
             colorArray = colorArray.split('-');
-            console.log(colorArray.length);
 
             if (colorArray.length == 4){
-                console.log("second condition passed");
                 let isvalid = true;
                 
                 for (let i = 0; i < colorArray.length; i++){
@@ -77,7 +74,6 @@ function ThemeBuilder(props){
         colorArray = colorArray.split('-');
 
         colorArray = colorArray.map((item) => ("#"+item));
-        console.log(colorArray);
         return colorArray;
     }
     function hextoRGB(hex){
@@ -188,20 +184,19 @@ function ThemeBuilder(props){
     function lowerBrightness (hex){
         let rgb = hextoRGB(hex);
         let hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-        console.log("hsl" + hsl)
         let lowerBrightnessHSL = hsl;
         lowerBrightnessHSL[2] = 0.15;
-        console.log("newhsl" + lowerBrightnessHSL);
+
+        
         let lowerBrightnessRGB = hslToRgb(lowerBrightnessHSL[0], lowerBrightnessHSL[1], lowerBrightnessHSL[2]);
-        console.log("new rgb" + lowerBrightnessRGB);
+
         let lowerBrightnessHex = rgbtoHex(lowerBrightnessRGB);
-        console.log("new hex " + lowerBrightnessHex);
+
         return lowerBrightnessHex;
         
         
     }
     useEffect(() => {
-        console.log("use effect color link");
         if (isLinkValid(colorLink) == true){
             setLastValidColorLink(colorLink);
         }
@@ -244,10 +239,8 @@ function ThemeBuilder(props){
                 <div className = "colorDisplay">
                 
                     {colors.map((item, index) => {
-                        console.log(item);
                         let selected = selectedColor == index; //shorthand for if statement asking if selected color == index
-                        console.log("selected?");
-                        console.log(selected);
+
                         return (
                             <label
                                 htmlFor={`color-${index}`}

@@ -90,7 +90,6 @@
         }
         //useeffect setup 
         useEffect(() => {
-            console.log("Coutn: " + props.count);
             const app =  new Application();
             appRef.current = app;
 

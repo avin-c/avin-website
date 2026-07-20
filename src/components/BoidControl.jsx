@@ -25,10 +25,6 @@ function BoidControl (props){
     function setMouse(value){
         props.setMouse(value);
     }
-    useEffect(() => {
-        console.log(props.separationIndex);
-    }, [props.separationIndex]);
-    
     return (
         <div className="content">
             <h3 className = "header">Boids Simulation</h3>
