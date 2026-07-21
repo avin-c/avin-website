@@ -70,12 +70,12 @@ function App() {
       icon: BoidSvg,
       component: BoidSimulation
     },
-    {
+    /*{
       label: "Links",
       idName: "links",
       icon: BoidSvg,
       component: Links
-    }
+    }*/
   ];
   const [seconds, setSeconds] = useState(35*3600);
   const [appColors, setAppColors] = useState({
