@@ -19,8 +19,8 @@ function Sidebar(props){
         setExpand(true);
     }
     return (
-        <div id = "sidebar" className={`${isHovered? "sideExpand":"sideCollapse"}`} >
-            <div className = "sideButton" onClick={handleCollapse} onMouseEnter={handleExpand}>
+        <div id = "sidebar" className={`${isHovered? "sideExpand":"sideCollapse"}`} onMouseLeave = {handleCollapse}>
+            <div className = "sideButton" onMouseEnter={handleExpand} >
                 <GuestbookSvg color = {props.iconColor} side = {36}/>
             </div>
             <div className="sidebody">
