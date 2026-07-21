@@ -99,7 +99,7 @@ function CodeProgress({name, id , seconds}){
             return percent;
         }
         else{
-            return calculatePercentage(den, den, decimals)
+            return 100;
         }
 
 
