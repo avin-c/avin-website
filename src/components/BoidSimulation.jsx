@@ -1,5 +1,5 @@
 import React from "react";
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef, useMemo} from "react";
 import Background from "./Background";
 import BoidControl from "./BoidControl";
 
@@ -39,4 +39,4 @@ function BoidSimulation (props){
         </div>
     )
 } 
-export default BoidSimulation
+export default React.memo(BoidSimulation);

@@ -88,6 +88,7 @@ function App() {
     accent2: "#F19455"
   })
       
+  const [textColor, setTextColor] = useState("#ffffff");
   useEffect(() => {
       let timeoutId;
 
@@ -127,8 +128,8 @@ function App() {
     <div>
       
       <Home/>
-      <Navbar list = {sectionHeaders} iconColor = {appColors.text}/>
-      <Sidebar iconColor = {appColors.text}/>
+      <Navbar list = {sectionHeaders} iconColor = {textColor}/>
+      <Sidebar iconColor = {textColor}/>
       <Button/>
       
       
@@ -144,7 +145,9 @@ function App() {
                 seconds = {(sectionName.idName === "codeprogress"|| sectionName.idName === "projects")? seconds : undefined} 
                 appColors = {sectionName.idName === "theme" ? appColors : undefined}
                 setAppColors = {sectionName.idName === "theme" ? setAppColors : undefined} 
-                iconColor = {appColors.text} 
+                textColor = {sectionName.idName === "theme" ? textColor : undefined}
+                setTextColor = {sectionName.idName === "theme" ? setTextColor : undefined} 
+                iconColor = {textColor} 
               />
           );
         })

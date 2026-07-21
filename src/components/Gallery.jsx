@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef} from "react";
+import { useEffect, useRef, useMemo} from "react";
 const images = import.meta.glob(
     "../assets/pictures/*.{JPG,jpg}",
     {eager: true}
@@ -168,4 +168,4 @@ function Gallery ({name, id}) {
     );
 }
 
-export default Gallery
+export default React.memo(Gallery);
