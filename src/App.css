@@ -674,16 +674,14 @@ form button:active{
 
     box-sizing: border-box;
     color: var(--text-color);
-
+    
     display: flex;
     flex-direction: column;
-    padding: 20px;
     padding-right: 0px;
     border-radius: 0px 0 0 15px;
     transition: right 200ms ease;
 
-    box-shadow: 10px 40px 10px 20px var(--dark-text-color);
-
+    
     scrollbar-width: none;
 }
 .sideCollapse{
@@ -693,6 +691,7 @@ form button:active{
     right: 0px;
     background-color: var(--accent-color);
     z-index: 90;
+    box-shadow: 10px 40px 10px 20px var(--dark-text-color);
 }
 
 
@@ -712,26 +711,37 @@ form button:active{
     gap: 15px;
     overflow-y: scroll;
     scrollbar-width: none;
+    padding: 10px;
+    padding-right: 0px;
 }
 .guestbook {
     display: flex;
     flex-direction:column;
-    gap: 10px;
+    gap: 30px;
 }
 .guestbookdisplay{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-left: 10px;
 }
 .guestbookEntry{
     background-color: var(--primary-color);
     display: grid;
     grid-template-columns: auto 100px;
-    padding: 15px;
+    padding: 10px;
     grid-template-rows:  repeat(2, auto) auto;
     border-radius: 15px 0px 0px 15px;
     gap: 10px;
     overflow-wrap: break-word;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+
+
+.guestbookEntry:hover {
+    transform: scaleX(102%);
+    transform-origin: right;
 }
 .guestbookEntry h4{
     margin: 0px;
@@ -758,6 +768,7 @@ form button:active{
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
+
 .guestSignature{
     display: grid;
     grid-template-rows: auto auto;
@@ -797,6 +808,7 @@ form button:active{
     display: flex;
     flex-direction: column; 
     margin-right: 20px;
+    padding-left: 10px;
 }
 .colorLayout {
     display: flex;
@@ -882,11 +894,11 @@ input[type="color"] {
 .sideButton {
     --btn-w: 72px;
     --btn-h: 72px;
-    box-shadow: -5 10px 10px 0px var(--dark-text-color);
+    box-shadow: 0px 5px 15px 5px var(--dark-text-color);
     position: absolute;
     box-sizing: border-box;
     top: calc((var(--btn-w) - var(--btn-h)) / 2);
-    right: calc(100% - (var(--btn-w) - var(--btn-h)) / 2);
+    right: calc( 100% - (var(--btn-w) - var(--btn-h)) / 2) ;
     width: var(--btn-w);
     height: var(--btn-h);
     display: flex;
@@ -894,6 +906,9 @@ input[type="color"] {
     align-items: center;
     background: var(--secondary-color);
     border-radius: 30px 0 0 30px;
+}
+.sideExpand .sideButton{
+    box-shadow: -10px 10px 10px 0px var(--dark-text-color);
 }
 .sideButton:hover{
     cursor: pointer;
