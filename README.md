@@ -41,3 +41,15 @@ AI was used for help developing the draggable infinite gallery section, parts of
 
 ## License
 MIT License
+
+## Updates
+Reship on 7/21/2026: 
+- Added theme builder section with coolors link support and individual color selection with color picker
+- Added boids background with mouse interaction and screen wrapping
+- Added boids background control section with various range sliders controlling entity count, velocity, boid force weights, and a toggle group controlling mouse behavior mode. 
+- Added footer section showing copyright info and latest commit info from Github API
+- Added better support for mobile viewing with dynamic layouts 
+- Cleaned up lots of unnecessary code and fixed accessability
+- Streamlined rendering of boids, theme builder, and gallery 
+- UI improvements and bug fixes 
+- More error handling for guestbook supabase inputs
