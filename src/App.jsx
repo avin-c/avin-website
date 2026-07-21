@@ -1,4 +1,3 @@
-import {Sprite} from "./assets/watermelon";
 import { useState ,useEffect } from 'react';
 import Home from "./components/Home";
 import About from "./components/About";
@@ -19,12 +18,13 @@ import ColorSvg from "./components/svgcomponents/NavSvgs/ColorSvg";
 import Button from "./components/Button";
 import Logo from "./components/Logo";
 import ThemeBuilder from "./components/ThemeBuilder";
-import './App.css';
 import Background from "./components/Background";
 import BoidSimulation from "./components/BoidSimulation";
 import BoidSvg from "./components/svgcomponents/BoidIcons/Boid";
 import Links from "./components/Links";
 import Footer from "./components/Footer"
+
+import './App.css';
 function App() {
   const sectionHeaders = [
     
@@ -70,12 +70,6 @@ function App() {
       icon: BoidSvg,
       component: BoidSimulation
     },
-    /*{
-      label: "Links",
-      idName: "links",
-      icon: BoidSvg,
-      component: Links
-    }*/
   ];
   const [seconds, setSeconds] = useState(35*3600);
   const [appColors, setAppColors] = useState({

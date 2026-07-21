@@ -2,7 +2,7 @@ import React from "react";
 import { supabase } from "../supabase";
 import {useState, useEffect} from "react";
 import GuestSignature from "./GuestSignature";
-function Guestbook (props){
+function GuestbookForm (props){
     const [strokes, setStroke] = useState([]);
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
@@ -78,4 +78,4 @@ function Guestbook (props){
     )
 }
 
-export default Guestbook
+export default GuestbookForm

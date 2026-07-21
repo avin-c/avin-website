@@ -1,12 +1,9 @@
-import { code } from "motion/react-client";
 import { useState , useEffect } from "react";
 import DropdownMenu from "./Dropdown";
-import { time } from "motion";
 
 function CodeProgress({name, id , seconds}){
 
-    
-    
+
     const [current, setCurrent] = useState("Europa");
 
     const goals = [
