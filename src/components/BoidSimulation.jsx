@@ -10,7 +10,7 @@ function BoidSimulation (props){
     const [separationIndex, setSeparationIndex] = useState(5);
     const [cohesionIndex, setCohesionIndex] = useState(0.6);
     const [alignmentIndex, setAlignmentIndex] = useState(2);
-    const [mouse, setMouse] = useState("repel");
+    const [mouse, setMouse] = useState("none");
     return(
         <div id = {props.id} >
             <Background color = "#FFFFFF" 
