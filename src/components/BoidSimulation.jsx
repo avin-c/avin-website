@@ -12,7 +12,7 @@ function BoidSimulation (props){
     const [alignmentIndex, setAlignmentIndex] = useState(2);
     const [mouse, setMouse] = useState("none");
     return(
-        <div id = {props.id} >
+        <div id = {props.id} className="content" >
             <Background color = "#FFFFFF" 
                 count = {count} 
                 minVelocity = {minMax.min} 

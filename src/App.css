@@ -912,6 +912,11 @@ input[type="color"] {
 .sideButton:hover{
     cursor: pointer;
 }
+.boidSection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 li {
     list-style-type: disc;
 }

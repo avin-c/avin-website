@@ -26,7 +26,7 @@ function BoidControl (props){
         props.setMouse(value);
     }
     return (
-        <div className="content">
+        <div className = "boidSection">
             <h3 className = "header">Boids Simulation</h3>
             <p>Boids is an artificial life simulation developed by Craig Reynolds, 
                 used to simulate the movement of flocking animals, like birds and fish.
