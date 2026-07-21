@@ -1,10 +1,13 @@
 import React from "react";
-import { useState, useEffect, useCallback} from "react";
-import { ColorPicker, hexToHsl, useColorState, } from 'react-beautiful-color';
+import { useState, useEffect, useCallback, useRef} from "react";
+import { ColorPicker, hexToHsl, useColorState, hexToRgb, rgbToHsl, hslToHex, rgbToHex} from 'react-beautiful-color';
 import 'react-beautiful-color/dist/react-beautiful-color.css';
 
 function ThemeBuilder(props){
+    const requestAnimationFrameRef = useRef(null);
     const colorCount = 5;
+    const LIGHT_THRESHOLD = 80;
+    const DARK_LIGHT_VALUE = 15;
     const [colorLink, setColorLink] = useState("");
     
     const [lastValidColorLink, setLastValidColorLink] = useState("https://coolors.co/322642-54426b-cbdf90-f19455-ffffff");
@@ -19,15 +22,17 @@ function ThemeBuilder(props){
     const [{ colorInput, colorState }, setColor] = useColorState({ type: 'hex', value: colors[selectedColor]});
 
     function setNewColor(newColor) {
-    const hex = hsvaToHex(newColor.colorInput.h, newColor.colorInput.s, newColor.colorInput.v, newColor.colorInput.a);
-    if (hex.toLowerCase() === colors[selectedColor].toLowerCase()) return; // breaks the echo loop
-    setColor(newColor);
-    setColors(prev => {
-        const next = [...prev];
-        next[selectedColor] = hex;
-        return next;
-    });
-}
+
+        const  hex = hsvaToHex(newColor.colorInput.h, newColor.colorInput.s, newColor.colorInput.v, newColor.colorInput.a);
+
+        if (hex.toLowerCase() === colors[selectedColor].toLowerCase()) return; // breaks the echo loop
+        setColor(newColor);
+        setColors(prev => {
+            const next = [...prev];
+            next[selectedColor] = hex;
+            return next;
+        });
+    }
     const handleColorChange = useCallback(setNewColor, [selectedColor]);
     function isLinkValid (url){
         if (url.startsWith("https://coolors.co/")){
@@ -82,89 +87,21 @@ function ThemeBuilder(props){
         colorArray = colorArray.map((item) => ("#"+item));
         return colorArray;
     }
-    function hextoRGB(hex){
-        hex = hex.replace("#", "");
-        let rgbArray = ["","",""];
-        let hexArray = hex.split("");
-
-        for (let i = 0;i<rgbArray.length;i++){
-            rgbArray[i] = hexArray[i*2] + hexArray[i*2+1];
-            rgbArray[i] = Number("0x" + rgbArray[i]);
-        }
-        return rgbArray;
-        
-    }
-    function rgbtoHex(rgb){
-        for (let i =0; i<3; i++){
-            rgb[i] = Math.round(rgb[i]);
-        }
-        for (let i =0; i<3; i++){
-            rgb[i] = rgb[i].toString(16).padStart(2, "0");
-        }
-        return "#" + rgb.join("");
-    }
     function findAvg (num1, num2){
         return Math.round((num1+num2)/2);
     }
     function findMiddle(hex1, hex2){
-        let rgb1 = hextoRGB(hex1);
-        let rgb2 = hextoRGB(hex2);
-        let middleRGB = ["","",""];
-        for (let i = 0; i<3; i++){
-            middleRGB[i] = findAvg(rgb1[i], rgb2[i]);
-        }
+        let rgb1 = hexToRgb(hex1);
+        let rgb2 = hexToRgb(hex2);
+        let middleRGB = {r: 0, g: 0, b: 0};
+    
+        middleRGB.r = findAvg(rgb1.r, rgb2.r);
+        middleRGB.g = findAvg(rgb1.g, rgb2.g);
+        middleRGB.b = findAvg(rgb1.b, rgb2.b);
         
-        let middlehex = rgbtoHex(middleRGB);
-        return middlehex;
+        let middleHex = rgbToHex(middleRGB)
+        return middleHex;
 
-    }
-    function rgbToHsl(r, g, b) {
-        r /= 255, g /= 255, b /= 255;
-
-        var max = Math.max(r, g, b), min = Math.min(r, g, b);
-        var h, s, l = (max + min) / 2;
-
-        if (max == min) {
-            h = s = 0; // achromatic
-        } else {
-            var d = max - min;
-            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-            switch (max) {
-            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-            case g: h = (b - r) / d + 2; break;
-            case b: h = (r - g) / d + 4; break;
-            }
-
-            h /= 6;
-        }
-
-        return [ h, s, l ];
-    }
-    function hslToRgb(h, s, l) {
-        var r, g, b;
-
-        if (s == 0) {
-            r = g = b = l; // achromatic
-        } else {
-            function hue2rgb(p, q, t) {
-            if (t < 0) t += 1;
-            if (t > 1) t -= 1;
-            if (t < 1/6) return p + (q - p) * 6 * t;
-            if (t < 1/2) return q;
-            if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-            return p;
-            }
-
-            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-            var p = 2 * l - q;
-
-            r = hue2rgb(p, q, h + 1/3);
-            g = hue2rgb(p, q, h);
-            b = hue2rgb(p, q, h - 1/3);
-        }
-
-        return [ r * 255, g * 255, b * 255 ];
     }
     function hsvaToHex(h, s, v, a = 1) {
         s /= 100;
@@ -188,18 +125,11 @@ function ThemeBuilder(props){
             .join("");
     }
     function lowerBrightness (hex){
-        let rgb = hextoRGB(hex);
-        let hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+        let hsl = hexToHsl(hex);
         let lowerBrightnessHSL = hsl;
-        lowerBrightnessHSL[2] = 0.15;
-
-        
-        let lowerBrightnessRGB = hslToRgb(lowerBrightnessHSL[0], lowerBrightnessHSL[1], lowerBrightnessHSL[2]);
-
-        let lowerBrightnessHex = rgbtoHex(lowerBrightnessRGB);
-
+        lowerBrightnessHSL.l = DARK_LIGHT_VALUE;
+        let lowerBrightnessHex = hslToHex(lowerBrightnessHSL);
         return lowerBrightnessHex;
-        
         
     }
     useEffect(() => {
@@ -214,28 +144,29 @@ function ThemeBuilder(props){
     }, [lastValidColorLink]);
 
     useEffect(() => {
-        
-        let calcDarkText = lowerBrightness(colors[0]);
-        
-        let priSecond = findMiddle(colors[0], colors[1]);
-        let hslSecondary = hexToHsl(colors[1]);
-        
-        if (hslSecondary.l > 80){
-            let tempLightColor = "#FFFFFF";
-            calcDarkText = tempLightColor;
-        }
-        
-        props.setAppColors({
-            primary: colors[0],
-            primarysecondary: priSecond,
-            secondary: colors[1],
-            text: colors[4],
-            darktext: calcDarkText,
-            accent1: colors[2],
-            accent2: colors[3],
-        })
+        if (requestAnimationFrameRef.current) cancelAnimationFrame(requestAnimationFrameRef.current);
+        requestAnimationFrameRef.current = requestAnimationFrame(() => {
+            let calcDarkText = lowerBrightness(colors[0]);
+            let priSecond = findMiddle(colors[0], colors[1]);
+            let hslSecondary = hexToHsl(colors[1]);
+            if (hslSecondary.l > LIGHT_THRESHOLD) calcDarkText = "#FFFFFF";
 
+            props.setAppColors({
+                primary: colors[0],
+                primarysecondary: priSecond,
+                secondary: colors[1],
+                text: colors[4],
+                darktext: calcDarkText,
+                accent1: colors[2],
+                accent2: colors[3],
+            });
+        });
+        return () => cancelAnimationFrame(requestAnimationFrameRef.current);
     }, [colors]);
+
+    useEffect(() => {
+        props.setTextColor(colors[4]);
+    }, [colors[4]])
     useEffect(() => {
         setColor({
             type: "hex",
