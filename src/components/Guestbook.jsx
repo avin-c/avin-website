@@ -37,7 +37,7 @@ function Guestbook (){
     return(
         <div className = "guestbook">
             <GuestbookForm strokeToPath= {strokeToPath} getSvgPathFromStroke = {getSvgPathFromStroke} handleRefresh = {handleRefresh} refreshKey = {refreshKey} setRefreshKey={setRefreshKey}/>
-            <GuestbookDisplay strokeToPath= {strokeToPath} getSvgPathFromStroke = {getSvgPathFromStroke} key = {refreshKey}/>
+            <GuestbookDisplay strokeToPath= {strokeToPath} getSvgPathFromStroke = {getSvgPathFromStroke} refreshKey = {refreshKey}/>
         </div>
     );
 }

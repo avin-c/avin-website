@@ -24,7 +24,7 @@ function Sidebar(props){
                 <GuestbookSvg color = {props.iconColor} side = {36}/>
             </div>
             <div className="sidebody">
-                <h5 className="sideTitle">Sign my guestbook!</h5>
+                <h3 className="header">Sign my guestbook!</h3>
                 <Guestbook/>
             </div>
         </div>

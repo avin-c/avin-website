@@ -7,11 +7,12 @@ function Guestbook (props){
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
     const [nameError, setNameError] = useState(false);
+    const [submitError, setSubmitError] = useState("");
     async function handleSubmit (e){
         e.preventDefault();
         if (name.trim() === '') {
             setNameError(true);
-            alert('Please fill out the name field.');
+            
             return;
         }
         const { data, error } = await supabase
@@ -26,24 +27,34 @@ function Guestbook (props){
 
         if (error) {
             console.log("Supabase guestbook form error.");
+            setSubmitError("Something went wrong while submitting your entry. Please try again.");
             return;
         }
 
         setName("");
         setMessage("");
         setStroke([]);
+        setNameError(false);
+        setSubmitError("");
         props.handleRefresh();
     }
     return (
         <form onSubmit={handleSubmit}>
             <div className = "guestformname">
+    
                 <label htmlFor="name">Name<span>*</span></label>
                 <input  
                     className={nameError? "errorInput":""}
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => {
+                        setName(e.target.value);
+                        setNameError(false);
+                    }}
                     placeholder="Your name"
                 ></input>
+                {nameError && (
+                    <label>Please enter a name</label>)
+                }
             </div>
 
             <div className = "guestmessage">
@@ -59,6 +70,9 @@ function Guestbook (props){
             <button type="submit" >
             Submit
             </button>
+            {submitError && (
+                <p className="errorMessage">{submitError}</p>
+            )}
             
         </form>
     )

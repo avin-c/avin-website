@@ -16,6 +16,7 @@
     --paragraph-size: 18px;
 
     --sidebarWidth: 500px;
+
 }
 
 ::selection {
@@ -191,10 +192,8 @@ label:hover {
 
 
 #progressStats { 
-    display: flex;
-    flex-direction: row;
-    flex-wrap:wrap;   
-    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     color: var(--dark-text-color);
     border-radius: 15px;
@@ -207,15 +206,14 @@ label:hover {
     display: flex;
 
     justify-content: center;
-    min-width: 100px;
-    width: 25%;
-    height: 70px;
+    width: 100%;
+    height: 100%;
     align-items: center;
     border-radius: 5px;
     margin: 0px;
     padding: 20px;
     min-height: 2rem;
-
+    text-align: center;
     font-size: var(--paragraph-size);
     font-weight: 700;
     background-color: var(--accent-color);
@@ -695,11 +693,7 @@ form button:active{
 }
 
 
-.sideTitle{
-    font-size: var(--heading-size);
-    margin: 0px;
-    color: var(--text-color);
-}
+
 .sidebarHeader{
     font-size: var(--subheading-size);
     margin: 0px;
@@ -713,6 +707,9 @@ form button:active{
     scrollbar-width: none;
     padding: 10px;
     padding-right: 0px;
+}
+.sidebody h3{
+    margin-left: 10px;
 }
 .guestbook {
     display: flex;
@@ -729,12 +726,12 @@ form button:active{
     background-color: var(--primary-color);
     display: grid;
     grid-template-columns: auto 100px;
-    padding: 10px;
+    padding: 20px;
     grid-template-rows:  repeat(2, auto) auto;
     border-radius: 15px 0px 0px 15px;
     gap: 10px;
     overflow-wrap: break-word;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
 
 }
 
@@ -748,10 +745,12 @@ form button:active{
 }
 .guestname {
     grid-column: 1/2;
+    font-weight: 600;
 }
 .guestdate {
     grid-column: 1/2;
     text-align: left;
+    opacity: 0.5;
 }
 .guestsig{
     grid-column: 2/3;
